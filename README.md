@@ -1,4 +1,4 @@
-khrapovs.github.io
+Pythonic FinMetrix
 ==================
 
 My Blog
