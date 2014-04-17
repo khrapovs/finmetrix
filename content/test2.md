@@ -11,3 +11,5 @@ This will be turned into :abbr:`HTML (HyperText Markup Language)`.
 {% youtube _dm_2G-rIOs 560 315 %}
 
 {% include_code test.py "test title" %}
+
+{% notebook Implied_Volatility_Bisection.ipynb %}
