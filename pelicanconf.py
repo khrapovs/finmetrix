@@ -15,7 +15,7 @@ ARTICLE_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
 ARTICLE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
 
 # Theme and plugins
-THEME = '../pelican-themes/basic/'
+THEME = '../pelican-themes/gum/'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
