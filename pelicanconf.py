@@ -22,7 +22,7 @@ CODE_DIR = 'downloads/code'
 NOTEBOOK_DIR = 'downloads/notebooks'
 
 # Theme and plugins
-THEME = '../pelican-themes/zurb-F5-basic/'
+THEME = '../pelican-themes/bootlex/'
 # Plugins
 PLUGIN_PATH = '../pelican-plugins/'
 PLUGINS = ['liquid_tags.img', 'liquid_tags.video',
