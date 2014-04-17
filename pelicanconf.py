@@ -30,14 +30,18 @@ MENUITEMS = (('About', 'https://sites.google.com/site/khrapovs'),
 # Blogroll
 LINKS =  (('Pelican', 'http://getpelican.com/'),
           ('Python.org', 'http://python.org/'),
-          ('Jinja2', 'http://jinja.pocoo.org/'),
-          ('You can modify those links in your config file', '#'),)
+          ('Jinja2', 'http://jinja.pocoo.org/'),)
+GITHUB_URL = 'http://github.com/khrapovs/'
 
 # Social widget
 SOCIAL = (('You can add links in your config file', '#'),
           ('Another social link', '#'),)
 
 DEFAULT_PAGINATION = 10
+
+# Delete the output directory, and all of its contents, before generating new files.
+#This can be useful in preventing older, unnecessary files from persisting in your output.
+DELETE_OUTPUT_DIRECTORY = True
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
