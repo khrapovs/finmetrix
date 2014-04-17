@@ -9,3 +9,5 @@ Test title
 :summary: Summary of the post
 
 This will be turned into :abbr:`HTML (HyperText Markup Language)`.
+
+{% youtube http://youtu.be/_dm_2G-rIOs [width] [height] %}
