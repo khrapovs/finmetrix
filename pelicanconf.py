@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = u'Stanislav Khrapov'
 SITENAME = u'Pythonic FinMetrix'
 SITEURL = 'http://khrapovs.github.io/finmetrix'
+GITHUB_URL = 'http://github.com/khrapovs/'
 
 # Times and dates
 DEFAULT_DATE_FORMAT = '%b %d, %Y'
@@ -31,10 +32,10 @@ MENUITEMS = (('About', 'https://sites.google.com/site/khrapovs'),
 # LINKS =  (('Pelican', 'http://getpelican.com/'),
 #           ('Python.org', 'http://python.org/'),
 #           ('Jinja2', 'http://jinja.pocoo.org/'),)
-GITHUB_URL = 'http://github.com/khrapovs/'
 
 # Social widget
-SOCIAL = (('Twitter', 'https://twitter.com/khrapovs'),
+SOCIAL = (('LinkedIn', 'http://www.linkedin.com/in/khrapovs'),
+		  ('Twitter', 'https://twitter.com/khrapovs'),
           ('Google+', 'https://www.google.com/+StanislavKhrapov'),)
 TWITTER_USER = 'khrapovs'
 GOOGLE_PLUS_USER = 'StanislavKhrapov'
@@ -47,3 +48,7 @@ DELETE_OUTPUT_DIRECTORY = True
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
+
+# RSS/Atom feeds
+FEED_RSS = 'feeds/all.rss.xml'
+CATEGORY_FEED_RSS = 'feeds/%s.rss.xml'
