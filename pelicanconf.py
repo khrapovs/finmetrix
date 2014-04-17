@@ -28,14 +28,16 @@ MENUITEMS = (('About', 'https://sites.google.com/site/khrapovs'),
              ('Contact', 'mailto:khrapovs@gmail.com'))
 
 # Blogroll
-LINKS =  (('Pelican', 'http://getpelican.com/'),
-          ('Python.org', 'http://python.org/'),
-          ('Jinja2', 'http://jinja.pocoo.org/'),)
+# LINKS =  (('Pelican', 'http://getpelican.com/'),
+#           ('Python.org', 'http://python.org/'),
+#           ('Jinja2', 'http://jinja.pocoo.org/'),)
 GITHUB_URL = 'http://github.com/khrapovs/'
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+SOCIAL = (('Twitter', 'https://twitter.com/khrapovs'),
+          ('Google+', 'https://www.google.com/+StanislavKhrapov'),)
+TWITTER_USER = 'khrapovs'
+GOOGLE_PLUS_USER = 'StanislavKhrapov'
 
 DEFAULT_PAGINATION = 10
 
