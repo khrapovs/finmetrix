@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pythonic FinMetrix</title><link>http://khrapovs.github.io/finmetrix/</link><description></description><atom:link href="http://khrapovs.github.io/finmetrix/feeds/cat1.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 16 Apr 2014 22:20:00 +0400</lastBuildDate><item><title>Test title 2</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/16/my-test-post/</link><description>&lt;p&gt;This will be turned into :abbr:&lt;code&gt;HTML (HyperText Markup Language)&lt;/code&gt;.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pythonic FinMetrix</title><link>http://khrapovs.github.io/finmetrix/</link><description></description><atom:link href="http://khrapovs.github.io/finmetrix/feeds/cat1.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 16 Apr 2014 22:20:00 +0400</lastBuildDate><item><title>Test title 2</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/16/my-test-post2/</link><description>&lt;p&gt;This will be turned into :abbr:&lt;code&gt;HTML (HyperText Markup Language)&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;iframe width='640' height='390' src='http://www.youtube.com/embed/_dm_2G' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen&gt;&lt;/iframe&gt;&lt;/p&gt;
 &lt;figure class='code'&gt;
 &lt;figcaption&gt;&lt;span&gt;"test title" test.py&lt;/span&gt; &lt;a href='/downloads/code/test.py'&gt;download&lt;/a&gt;&lt;/figcaption&gt;
@@ -8,7 +8,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;/figure&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stas Khrapov</dc:creator><pubDate>Wed, 16 Apr 2014 22:20:00 +0400</pubDate><guid>tag:khrapovs.github.io/finmetrix,2014-04-16:blog/2014/04/16/my-test-post/</guid><category>tag1</category><category>tag2</category></item><item><title>Test title</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/16/my-test-post/</link><description>&lt;p&gt;This will be turned into &lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;.&lt;/p&gt;
+&lt;/figure&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stas Khrapov</dc:creator><pubDate>Wed, 16 Apr 2014 22:20:00 +0400</pubDate><guid>tag:khrapovs.github.io/finmetrix,2014-04-16:blog/2014/04/16/my-test-post2/</guid><category>tag1</category><category>tag2</category></item><item><title>Test title</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/16/my-test-post/</link><description>&lt;p&gt;This will be turned into &lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;.&lt;/p&gt;
 &lt;p&gt;{% youtube _dm_2G-rIOs 560 315 %}&lt;/p&gt;
 &lt;p&gt;{% include_code test.py &amp;quot;test title&amp;quot; %}&lt;/p&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stas Khrapov</dc:creator><pubDate>Wed, 16 Apr 2014 22:10:00 +0400</pubDate><guid>tag:khrapovs.github.io/finmetrix,2014-04-16:blog/2014/04/16/my-test-post/</guid><category>tag1</category><category>tag2</category></item></channel></rss>
