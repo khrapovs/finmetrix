@@ -40,7 +40,7 @@ SOCIAL = (('You can add links in your config file', '#'),
 DEFAULT_PAGINATION = 10
 
 # Delete the output directory, and all of its contents, before generating new files.
-#This can be useful in preventing older, unnecessary files from persisting in your output.
+# This can be useful in preventing older, unnecessary files from persisting in your output.
 DELETE_OUTPUT_DIRECTORY = True
 
 # Uncomment following line if you want document-relative URLs when developing
