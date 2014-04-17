@@ -4,10 +4,11 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Stanislav Khrapov'
 SITENAME = u'Pythonic FinMetrix'
-SITEURL = ''
+SITEURL = 'http://khrapovs.github.io/finmetrix'
 
+# Times and dates
+DEFAULT_DATE_FORMAT = '%b %d, %Y'
 TIMEZONE = 'Europe/Moscow'
-
 DEFAULT_LANG = u'en'
 
 # Set the article URL
@@ -21,6 +22,10 @@ THEME = '../pelican-themes/gum/'
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
+
+# Title menu options
+MENUITEMS = (('About', 'https://sites.google.com/site/khrapovs'),
+             ('Contact', 'mailto:khrapovs@gmail.com'))
 
 # Blogroll
 LINKS =  (('Pelican', 'http://getpelican.com/'),
