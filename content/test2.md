@@ -1,4 +1,4 @@
-Ttitle: Test title 2
+Title: Test title 2
 date: 2014-04-16 22:20
 Tags: tag1, tag2
 Category: cat1
