@@ -16,6 +16,11 @@ DEFAULT_LANG = u'en'
 ARTICLE_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
 ARTICLE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
 
+# Paths
+STATIC_PATHS = ['images', 'figures', 'downloads']
+CODE_DIR = 'downloads/code'
+NOTEBOOK_DIR = 'downloads/notebooks'
+
 # Theme and plugins
 THEME = '../pelican-themes/gum/'
 # Plugins
