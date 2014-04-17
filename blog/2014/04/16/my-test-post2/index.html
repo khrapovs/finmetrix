@@ -74,6 +74,7 @@
 <figcaption><span>"test title" test.py</span> <a href='/downloads/code/test.py'>download</a></figcaption>
 
 <div class="highlight"><pre><span class="n">import</span> <span class="n">numpy</span> <span class="n">as</span> <span class="n">np</span>
+<span class="n">import</span> <span class="n">matplotlib</span><span class="p">.</span><span class="n">pylab</span> <span class="n">as</span> <span class="n">plt</span>
 </pre></div>
 
 
@@ -95,7 +96,10 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Author:<br> Stanislav Khrapov<br> <a href="mailto:khrapovs@gmail.com">khrapovs@gmail.com</a><br> http://sites.google.com/site/khrapovs/<br></p>
+<p>Author:<br>
+Stanislav Khrapov<br>
+<a href="mailto:khrapovs@gmail.com">khrapovs@gmail.com</a><br>
+<a href="http://sites.google.com/site/khrapovs/">http://sites.google.com/site/khrapovs/</a><br></p>
 </div>
 </div>
 </div>
@@ -347,8 +351,12 @@ FxEJECp0EZEAoUIXEQkQKnQRkQChQhcRCRAqdBGRAPH/jmDU/seiv8EAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-Black-Scholes formula
-<p>
+<p>Black-Scholes formula<p>
+\begin{eqnarray*}
+BS\left(S,K,\sigma,r,T\right) &amp; = &amp; S\Phi\left(d_{1}\right)-e^{-rT}K\Phi\left(d_{2}\right),\\
+d_{1} &amp; = &amp; \frac{\log\left(S/K\right)+rT}{\sigma\sqrt{T}}+\frac{1}{2}\sigma\sqrt{T},\\
+d_{2} &amp; = &amp; d_{1}-\sigma\sqrt{T}.
+\end{eqnarray*}</p>
 </div>
 </div>
 </div>
@@ -534,8 +542,13 @@ Implied volatility: 0.1500
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-Denote<br><span class="math">\(F=Se^{rT}\)</span> as forward price, and<br><span class="math">\(X=\log\left(K/F\right)\)</span> as log-forward moneyness.<br> Also normalize the option price by the spot. This gives us the following standardized BS formula which depends only on three inputs versus five in the original version.
-<p>
+<p>Denote<br>$F=Se^{rT}$ as forward price, and<br>$X=\log\left(K/F\right)$ as log-forward moneyness.<br>
+Also normalize the option price by the spot. This gives us the following standardized BS formula which depends only on three inputs versus five in the original version.<p></p>
+<p>\begin{eqnarray*}
+\tilde{BS}\left(\sigma,X,T\right) &amp; = &amp; \Phi\left(d_{1}\right)-e^{X}\Phi\left(d_{2}\right),\\
+d_{1} &amp; = &amp; -\frac{X}{\sigma\sqrt{T}}+\frac{1}{2}\sigma\sqrt{T},\\
+d_{2} &amp; = &amp; d_{1}-\sigma\sqrt{T}.
+\end{eqnarray*}</p>
 </div>
 </div>
 </div>
@@ -907,8 +920,8 @@ Numpy vectorize:
 
 <h4>Tags</h4>
 	<ul>
-	    <li class="tag-4"><a href="http://khrapovs.github.io/finmetrix/tag/tag1.html">tag1</a></li>
 	    <li class="tag-4"><a href="http://khrapovs.github.io/finmetrix/tag/tag2.html">tag2</a></li>
+	    <li class="tag-4"><a href="http://khrapovs.github.io/finmetrix/tag/tag1.html">tag1</a></li>
 </ul>
 
 
