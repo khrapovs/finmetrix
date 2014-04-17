@@ -6,7 +6,7 @@ AUTHOR = u'Stanislav Khrapov'
 SITENAME = u'Pythonic FinMetrix'
 SITEURL = ''
 
-TIMEZONE = 'Europe/Paris'
+TIMEZONE = 'Europe/Moscow'
 
 DEFAULT_LANG = u'en'
 
