@@ -2,7 +2,7 @@ Title: Test title 2
 date: 2014-04-16 22:20
 Tags: tag1, tag2
 Category: cat1
-Slug: my-test-post
+Slug: my-test-post2
 Author: Stas Khrapov
 Summary: Summary of the post
 
