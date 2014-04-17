@@ -10,4 +10,4 @@ Test title
 
 This will be turned into :abbr:`HTML (HyperText Markup Language)`.
 
-{% youtube http://youtu.be/_dm_2G-rIOs [width] [height] %}
+{% youtube _dm_2G-rIOs [560] [315] %}
