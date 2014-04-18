@@ -23,7 +23,10 @@ CODE_DIR = 'downloads/code'
 NOTEBOOK_DIR = 'downloads/notebooks'
 
 # Theme and plugins
-THEME = '../pelican-octopress-theme/'
+#THEME = '../pelican-octopress-theme/'
+#THEME = '../pure-single/'
+#THEME = '../pelican-themes/blueidea/'
+THEME = '../pelican-themes/crowsfoot/'
 # Plugins
 PLUGIN_PATH = '../pelican-plugins/'
 PLUGINS = ['liquid_tags.img', 'liquid_tags.video',
@@ -69,10 +72,10 @@ DEFAULT_PAGINATION = 10
 
 # Delete the output directory, and all of its contents, before generating new files.
 # This can be useful in preventing older, unnecessary files from persisting in your output.
-#DELETE_OUTPUT_DIRECTORY = True
+DELETE_OUTPUT_DIRECTORY = True
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+RELATIVE_URLS = True
 
 # RSS/Atom feeds
 FEED_RSS = 'feeds/all.rss.xml'
