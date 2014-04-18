@@ -1714,9 +1714,6 @@ init_mathjax();
 <ul class="main-navigation">
     <li><a href="https://sites.google.com/site/khrapovs">About</a></li>
     <li><a href="mailto:khrapovs@gmail.com">Contact</a></li>
-    <li class="active">
-    <a href="../../../../../category/cat1.html">Cat1</a>
-    </li>
 </ul></nav>
   <div id="main">
     <div id="content">
@@ -1727,7 +1724,7 @@ init_mathjax();
       <p class="meta"><time datetime="2014-04-16T22:20:00" pubdate>Apr 16, 2014</time></p>
 </header>
 
-  <div class="entry-content"><p>This will be turned into :abbr:<code>HTML (HyperText Markup Language)</code>.</p>
+  <div class="entry-content"><p>This will be turned into <code>HTML (HyperText Markup Language)</code>.</p>
 <p><iframe width='640' height='390' src='http://www.youtube.com/embed/_dm_2G' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></p>
 <figure class='code'>
 <figcaption><span>"test title" test.py</span> <a href='/downloads/code/test.py'>download</a></figcaption>
@@ -2567,6 +2564,7 @@ Numpy vectorize:
     <a class="category" href="../../../../../tag/tag2.html">tag2</a>
   </span>
 </p><div class="sharing">
+  <div class="g-plusone" data-size="medium"></div>
 </div>    </footer>
   </article>
 
@@ -2594,6 +2592,33 @@ Numpy vectorize:
     <a href="../../../../../tag/tag1.html">tag1</a>,    <a href="../../../../../tag/tag2.html">tag2</a>  </section>
 
 
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = '../../../../../theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'khrapovs',
+              count: 5,
+              skip_forks: false,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="../../../../../theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
     <section>
         <h1>Social</h1>
         <ul>
@@ -2604,14 +2629,18 @@ Numpy vectorize:
         </ul>
     </section>
 
-<section>
-    <p>Follow <a href="http://twitter.com/khrapovs">@khrapovs</a></p>
-</section>
 </aside>    </div>
   </div>
   <footer role="contentinfo"><p>
       Copyright &copy; 2014 - Stanislav Khrapov -
   <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
 </p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
 </body>
 </html>
