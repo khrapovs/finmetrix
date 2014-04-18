@@ -1,15 +1,8 @@
-Title: Test title 2
-date: 2014-04-16 22:20
-Tags: tag1, tag2
-Category: cat1
-Slug: my-test-post2
-Author: Stas Khrapov
-Summary: Summary of the post
-
-This will be turned into `HTML (HyperText Markup Language)`.
-
-{% youtube _dm_2G-rIOs 560 315 %}
-
-{% include_code test.py "test title" %}
+Title: Implied Volatility via Bisection method
+date: 2014-04-18 14:00
+tags: Black-Scholes, implied volatility
+comments: true
+slug: imp-vol-bisection
+summary: In this post I will show how to find implied volatilities from Black-Scholes formula using bisection method.
 
 {% notebook Implied_Volatility_Bisection.ipynb %}

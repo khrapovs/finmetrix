@@ -19,6 +19,8 @@ DEFAULT_LANG = u'en'
 ARTICLE_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
 ARTICLE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
 
+DIRECT_TEMPLATES = ('index', 'archives', 'tags')
+
 # Paths
 STATIC_PATHS = ['images', 'figures', 'downloads', 'favicon.ico']
 CODE_DIR = 'downloads/code'
@@ -49,11 +51,6 @@ if not os.path.exists('_nb_header.html'):
 else:
     EXTRA_HEADER = open('_nb_header.html').read().decode('utf-8')
 
-# Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
-
 # Title menu options
 MENUITEMS = (('About', 'https://sites.google.com/site/khrapovs'),
              ('Contact', 'mailto:khrapovs@gmail.com'))
@@ -74,7 +71,7 @@ GOOGLE_PLUS_ONE = True
 GOOGLE_PLUS_HIDDEN = False
 FACEBOOK_LIKE = False
 #TWITTER_USER = 'khrapovs'
-#TWITTER_TWEET_BUTTON = True
+TWITTER_TWEET_BUTTON = True
 #TWITTER_LATEST_TWEETS = True
 #TWITTER_FOLLOW_BUTTON = False
 #TWITTER_TWEET_COUNT = 3
@@ -94,3 +91,7 @@ RELATIVE_URLS = True
 # RSS/Atom feeds
 FEED_RSS = 'feeds/all.rss.xml'
 CATEGORY_FEED_RSS = 'feeds/%s.rss.xml'
+# Feed generation is usually not desired when developing
+FEED_ALL_ATOM = None
+CATEGORY_FEED_ATOM = None
+TRANSLATION_FEED_ATOM = None
