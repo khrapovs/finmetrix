@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Stanislav Khrapov'
 SITENAME = u'Pythonic FinMetrix'
-SITEURL = 'http://khrapovs.github.io/finmetrix'
+SITEURL = '' # change in publishconf.py
 GITHUB_URL = 'http://github.com/khrapovs/'
 
 # Times and dates
