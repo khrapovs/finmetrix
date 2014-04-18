@@ -6,7 +6,9 @@ import os
 AUTHOR = u'Stanislav Khrapov'
 SITENAME = u'Pythonic FinMetrix'
 SITEURL = 'http://khrapovs.github.io/finmetrix'
+
 GITHUB_URL = 'http://github.com/khrapovs/'
+GITHUB_USER = 'khrapovs'
 
 # Times and dates
 DEFAULT_DATE_FORMAT = '%b %d, %Y'
@@ -18,7 +20,7 @@ ARTICLE_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
 ARTICLE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
 
 # Paths
-STATIC_PATHS = ['images', 'figures', 'downloads']
+STATIC_PATHS = ['images', 'figures', 'downloads', 'favicon.ico']
 CODE_DIR = 'downloads/code'
 NOTEBOOK_DIR = 'downloads/notebooks'
 
@@ -65,10 +67,22 @@ MENUITEMS = (('About', 'https://sites.google.com/site/khrapovs'),
 SOCIAL = (('LinkedIn', 'http://www.linkedin.com/in/khrapovs'),
 		  ('Twitter', 'https://twitter.com/khrapovs'),
           ('Google+', 'https://www.google.com/+StanislavKhrapov'),)
-TWITTER_USER = 'khrapovs'
+
+# Sharing
 GOOGLE_PLUS_USER = 'StanislavKhrapov'
+GOOGLE_PLUS_ONE = True
+GOOGLE_PLUS_HIDDEN = False
+FACEBOOK_LIKE = False
+#TWITTER_USER = 'khrapovs'
+#TWITTER_TWEET_BUTTON = True
+#TWITTER_LATEST_TWEETS = True
+#TWITTER_FOLLOW_BUTTON = False
+#TWITTER_TWEET_COUNT = 3
+#TWITTER_SHOW_REPLIES = 'false'
+#TWITTER_SHOW_FOLLOWER_COUNT = False
 
 DEFAULT_PAGINATION = 10
+DISPLAY_PAGES_ON_MENU = False
 
 # Delete the output directory, and all of its contents, before generating new files.
 # This can be useful in preventing older, unnecessary files from persisting in your output.

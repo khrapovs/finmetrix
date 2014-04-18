@@ -6,7 +6,7 @@ Slug: my-test-post2
 Author: Stas Khrapov
 Summary: Summary of the post
 
-This will be turned into :abbr:`HTML (HyperText Markup Language)`.
+This will be turned into `HTML (HyperText Markup Language)`.
 
 {% youtube _dm_2G-rIOs 560 315 %}
 
