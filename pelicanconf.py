@@ -23,10 +23,10 @@ CODE_DIR = 'downloads/code'
 NOTEBOOK_DIR = 'downloads/notebooks'
 
 # Theme and plugins
-#THEME = '../pelican-octopress-theme/'
+THEME = '../pelican-octopress-theme/'
 #THEME = '../pure-single/'
 #THEME = '../pelican-themes/blueidea/'
-THEME = '../pelican-themes/fresh/'
+#THEME = '../pelican-themes/maggner-pelican/'
 # Plugins
 PLUGIN_PATH = '../pelican-plugins/'
 PLUGINS = ['liquid_tags.img', 'liquid_tags.video',
