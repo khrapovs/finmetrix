@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Stanislav Khrapov'
 SITENAME = u'Pythonic FinMetrix'
-SITEURL = '' # change in publishconf.py
+SITEURL = 'http://khrapovs.github.io/finmetrix'
 GITHUB_URL = 'http://github.com/khrapovs/'
 
 # Times and dates
@@ -54,7 +54,7 @@ DEFAULT_PAGINATION = 10
 
 # Delete the output directory, and all of its contents, before generating new files.
 # This can be useful in preventing older, unnecessary files from persisting in your output.
-DELETE_OUTPUT_DIRECTORY = True
+#DELETE_OUTPUT_DIRECTORY = True
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True

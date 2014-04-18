@@ -8,10 +8,11 @@ from __future__ import unicode_literals
 import os
 import sys
 sys.path.append(os.curdir)
+#sys.path.append('.')
 from pelicanconf import *
 
 SITEURL = 'http://khrapovs.github.com/finmetrix'
-RELATIVE_URLS = False
+RELATIVE_URLS = True
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'

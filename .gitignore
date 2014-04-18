@@ -1,5 +1,6 @@
 *~
 *.pyc
+*.pid
 output
 token.txt
 _build
