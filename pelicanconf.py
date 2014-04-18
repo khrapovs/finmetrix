@@ -26,7 +26,7 @@ NOTEBOOK_DIR = 'downloads/notebooks'
 #THEME = '../pelican-octopress-theme/'
 #THEME = '../pure-single/'
 #THEME = '../pelican-themes/blueidea/'
-THEME = '../pelican-themes/crowsfoot/'
+THEME = '../pelican-themes/fresh/'
 # Plugins
 PLUGIN_PATH = '../pelican-plugins/'
 PLUGINS = ['liquid_tags.img', 'liquid_tags.video',
