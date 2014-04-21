@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Pythonic FinMetrix - term structure</title>
+  <title>Pythonic FinMetrix - Vasicek</title>
   <meta name="author" content="Stanislav Khrapov">
 
   <link href="http://khrapovs.github.io/finmetrix/feeds/all.rss.xml" type="application/rss+xml" rel="alternate"
@@ -1763,14 +1763,27 @@ init_mathjax();
   		<article>
 <header>
       <h1 class="entry-title">
-        <a href="../blog/2014/04/21/analyze-yields/">Descriptive analysis of the interest rate term structure</a>
+        <a href="../blog/2014/04/21/fitting-term-structure/">Fitting term structure of interest rates</a>
       </h1>
-      <p class="meta"><time datetime="2014-04-21T15:00:00" pubdate>Apr 21, 2014</time></p>
+      <p class="meta"><time datetime="2014-04-21T18:30:00" pubdate>Apr 21, 2014</time></p>
 </header>
 
-  <div class="entry-content"><p>Simple example of pandas workflow to import interest rate data from archived csv file, plotting it, and filling the gaps to get the balanced panel of yields.</p></div>
+  <div class="entry-content"><p>Here I show how to estimate Cox-Ingersoll-Ross model on a time series of short interest rates, and then how to calibrate risk price parameter necessary for pricing bonds at any maturity.</p></div>
   <footer>
-    <a rel="full-article" href="../blog/2014/04/21/analyze-yields/">Read On &crarr;</a>
+    <a rel="full-article" href="../blog/2014/04/21/fitting-term-structure/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="../blog/2014/04/21/diffusion-estimation/">Estimation of Simple Diffusion Models with OLS, MLE, SML, GMM</a>
+      </h1>
+      <p class="meta"><time datetime="2014-04-21T18:00:00" pubdate>Apr 21, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>The following code is the example of adapting methodology of <a href = "http://onlinelibrary.wiley.com/doi/10.1111/1468-0262.00164/abstract">Duffie, D., Pan, J., &amp; Singleton, K. J. (2000). Transform Analysis and Asset Pricing for Affine Jump-Diffusions. Econometrica, 68(6), 1343–1376.</a> to the Vasicek model of interest rates.</p></div>
+  <footer>
+    <a rel="full-article" href="../blog/2014/04/21/diffusion-estimation/">Read On &crarr;</a>
   </footer>
   		</article>
 <div class="pagination">
@@ -1782,7 +1795,10 @@ init_mathjax();
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="../blog/2014/04/21/analyze-yields/">Descriptive analysis of the interest rate term structure</a>
+          <a href="../blog/2014/04/21/fitting-term-structure/">Fitting term structure of interest rates</a>
+      </li>
+      <li class="post">
+          <a href="../blog/2014/04/21/diffusion-estimation/">Estimation of Simple Diffusion Models with OLS, MLE, SML, GMM</a>
       </li>
     </ul>
   </section>

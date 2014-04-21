@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Pythonic FinMetrix - term structure</title>
+  <title>Replication of VIX</title>
   <meta name="author" content="Stanislav Khrapov">
 
   <link href="http://khrapovs.github.io/finmetrix/feeds/all.rss.xml" type="application/rss+xml" rel="alternate"
@@ -1729,12 +1729,12 @@ init_mathjax();
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="../favicon.ico" rel="icon">
-  <link href="../theme/css/main.css" media="screen, projection"
+  <link href="../../../../../favicon.ico" rel="icon">
+  <link href="../../../../../theme/css/main.css" media="screen, projection"
         rel="stylesheet" type="text/css">
-  <script src="../theme/js/modernizr-2.0.js"></script>
-  <script src="../theme/js/ender.js"></script>
-  <script src="../theme/js/octopress.js" type="text/javascript"></script>
+  <script src="../../../../../theme/js/modernizr-2.0.js"></script>
+  <script src="../../../../../theme/js/ender.js"></script>
+  <script src="../../../../../theme/js/octopress.js" type="text/javascript"></script>
 
   <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
         rel="stylesheet" type="text/css">
@@ -1744,7 +1744,7 @@ init_mathjax();
 
 <body>
   <header role="banner"><hgroup>
-  <h1><a href="../">Pythonic FinMetrix</a></h1>
+  <h1><a href="../../../../../">Pythonic FinMetrix</a></h1>
 </hgroup></header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
   <li><a href="http://khrapovs.github.io/finmetrix/feeds/all.rss.xml" rel="subscribe-rss">RSS</a></li>
@@ -1759,30 +1759,897 @@ init_mathjax();
 </ul></nav>
   <div id="main">
     <div id="content">
-<div class="blog-index">
-  		<article>
+<div>
+  <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">
-        <a href="../blog/2014/04/21/analyze-yields/">Descriptive analysis of the interest rate term structure</a>
-      </h1>
-      <p class="meta"><time datetime="2014-04-21T15:00:00" pubdate>Apr 21, 2014</time></p>
+      <h1 class="entry-title">Replication of VIX</h1>
+      <p class="meta"><time datetime="2014-04-21T17:00:00" pubdate>Apr 21, 2014</time></p>
 </header>
 
-  <div class="entry-content"><p>Simple example of pandas workflow to import interest rate data from archived csv file, plotting it, and filling the gaps to get the balanced panel of yields.</p></div>
-  <footer>
-    <a rel="full-article" href="../blog/2014/04/21/analyze-yields/">Read On &crarr;</a>
-  </footer>
-  		</article>
-<div class="pagination">
+  <div class="entry-content"><p>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2>
+</div>
 
-  <br />
-</div></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This notebook shows how to reproduce the VIX given the data in CBOE White Paper (<a href='http://www.cboe.com/micro/vix/vixwhite.pdf'>http://www.cboe.com/micro/vix/vixwhite.pdf</a>). The code works for any option data set, not only one day as in the White Paper. The option data for this example is exactly the same as in the Appendix 1 of the White Paper.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Given are the prices <span class="math">\(C_{i}\)</span>, <span class="math">\(i\in\left\{ 0,\ldots,n\right\}\)</span>, of a series of European call options on the index with fixed maturity date <span class="math">\(T\)</span> and exercise prices <span class="math">\(K_{i}\)</span>, <span class="math">\(i\in\left\{ 0,\ldots,n\right\}\)</span>, as well as the prices <span class="math">\(P_{i}\)</span>, <span class="math">\(i\in\left\{ 0,\ldots,n\right\}\)</span>, of a series of European put options on the index with the same maturity date <span class="math">\(T\)</span> and exercise prices <span class="math">\(K_{i}\)</span>. Let further hold <span class="math">\(K_{i}&lt;K_{i+1}\)</span> for all <span class="math">\(i\in\left\{ 0,\ldots,n-1\right\}\)</span>.</p>
+<p>The VIX itself is <span class="math">\[VIX=100\cdot\sqrt{V^{2}},\]</span> where <span class="math">\(V\)</span> is explained below.</p>
+<p>Since there are days when there no options with precisely 30 days to expiration, we have to interpolate between near-term index and next-term index: <span class="math">\[V^{2}=\left[T_{1}\sigma_{1}^{2}\left(\frac{N_{T_{2}}-N_{30}}{N_{T_{2}}-N_{T_{1}}}\right)+T_{2}\sigma_{2}^{2}\left(\frac{N_{30}-N_{T_{1}}}{N_{T_{2}}-N_{T_{1}}}\right)\right]\frac{365}{30}\]</span> with each <span class="math">\(\sigma_{i}^{2}\)</span> computed according to <span class="math">\[\sigma^{2}=\frac{2}{T}\sum_{i=0}^{n}\frac{\Delta K_{i}}{K_{i}^{2}}e^{rT}M_{i}-\frac{1}{T}\left(\frac{F}{K_{*}}-1\right)^{2},\]</span> where the distance between strikes is <span class="math">\[\Delta K_{i}  =   \begin{cases}
+K_{1}-K_{0}, &amp; i=0\\
+\frac{1}{2}\left(K_{i+1}-K_{i-1}\right), &amp; i=1,\ldots,n-1\\
+K_{n}-K_{n-1}, &amp; i=n
+\end{cases}\]</span> the out-of-the-money option premium is <span class="math">\[M_{i} =   \begin{cases}
+P_{i}, &amp; K_{i}&lt;K_{*}\\
+\frac{1}{2}\left(P_{i}+C_{i}\right), &amp; K_{i}=K_{*}\\
+C_{i}, &amp; K_{i}&gt;K_{*}
+\end{cases}\]</span> at-the-money strike price is <span class="math">\[K_{*} =   \max\left\{ K_{i}&lt;F\right\},\]</span> forward price extracted from put-call parity: <span class="math">\[F =   K_{j}+e^{rT}\left|C_{j}-P_{j}\right|,\]</span> with <span class="math">\[j=\min\left\{ \left|C_{i}-P_{i}\right|\right\},\]</span> and finally <span class="math">\(r\)</span> is the constant risk-free short rate appropriate for maturity <span class="math">\(T\)</span>.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Import-modules">Import modules<a class="anchor-link" href="#Import-modules">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[1]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">ps</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Import-yields">Import yields<a class="anchor-link" href="#Import-yields">&#182;</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the white paper it is assumed that the risk-free rate is 0.38% for both near- and nex-term options. The date chosen for computation is Jan 1, 2009 with options expiring in 9 and 37 days.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[2]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">ff</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;yields.csv&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">ff</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">line</span><span class="p">,</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="n">yields</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;yields.csv&#39;</span><span class="p">,</span> <span class="n">converters</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;Date&#39;</span> <span class="p">:</span> <span class="n">f</span><span class="p">})</span>
+<span class="n">yields</span> <span class="o">=</span> <span class="n">yields</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])</span>
+
+<span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">yields</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Date,Days,Rate
+20090101,9,0.38
+20090101,37,0.38 
+                 Rate
+Date       Days      
+2009-01-01 9     0.38
+           37    0.38
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Import-options">Import options<a class="anchor-link" href="#Import-options">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[3]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">ff</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;options.csv&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">ff</span><span class="o">.</span><span class="n">readline</span><span class="p">(),</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c"># Function to parse dates of &#39;20090101&#39; format</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="n">raw_options</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;options.csv&#39;</span><span class="p">,</span> <span class="n">converters</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;Expiration&#39;</span> <span class="p">:</span> <span class="n">f</span><span class="p">})</span>
+
+<span class="c"># Function to convert days to internal timedelta format</span>
+<span class="n">f_delta</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">raw_options</span><span class="p">[</span><span class="s">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_options</span><span class="p">[</span><span class="s">&#39;Expiration&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">raw_options</span><span class="p">[</span><span class="s">&#39;Days&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">f_delta</span><span class="p">)</span>
+<span class="c"># Convert integer strikes to float! Otherwise it may lead to accumulation of errors.</span>
+<span class="n">raw_options</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_options</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">raw_options</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">raw_options</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Expiration,Days,Strike,Call Bid,Call Ask,Put Bid,Put Ask
+20090110,9,200,717.6,722.8,0,0.05
+20090110,9,250,667.6,672.9,0,0.05
+20090110,9,300,617.9,622.9,0,0.05
+20090110,9,350,567.9,572.9,0,0.05
+
+Expiration    datetime64[ns]
+Days                   int64
+Strike               float64
+Call Bid             float64
+Call Ask             float64
+Put Bid              float64
+Put Ask              float64
+Date          datetime64[ns]
+dtype: object
+
+           Expiration  Days  Strike  Call Bid  Call Ask  Put Bid  Put Ask  \
+0 2009-01-10 00:00:00     9     200     717.6     722.8        0     0.05   
+1 2009-01-10 00:00:00     9     250     667.6     672.9        0     0.05   
+2 2009-01-10 00:00:00     9     300     617.9     622.9        0     0.05   
+3 2009-01-10 00:00:00     9     350     567.9     572.9        0     0.05   
+4 2009-01-10 00:00:00     9     375     542.9     547.9        0     0.10   
+
+                 Date  
+0 2009-01-01 00:00:00  
+1 2009-01-01 00:00:00  
+2 2009-01-01 00:00:00  
+3 2009-01-01 00:00:00  
+4 2009-01-01 00:00:00  
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Do-some-cleaning-and-indexing">Do some cleaning and indexing<a class="anchor-link" href="#Do-some-cleaning-and-indexing">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[4]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Since VIX is computed for the date of option quotations, we do not really need Expiration</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">raw_options</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">,</span><span class="s">&#39;Strike&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s">&#39;Expiration&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># Do some renaming and separate calls from puts</span>
+<span class="n">calls</span> <span class="o">=</span> <span class="n">options</span><span class="p">[[</span><span class="s">&#39;Call Bid&#39;</span><span class="p">,</span><span class="s">&#39;Call Ask&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;Call Bid&#39;</span> <span class="p">:</span> <span class="s">&#39;Bid&#39;</span><span class="p">,</span> <span class="s">&#39;Call Ask&#39;</span> <span class="p">:</span> <span class="s">&#39;Ask&#39;</span><span class="p">})</span>
+<span class="n">puts</span> <span class="o">=</span> <span class="n">options</span><span class="p">[[</span><span class="s">&#39;Put Bid&#39;</span><span class="p">,</span><span class="s">&#39;Put Ask&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;Put Bid&#39;</span> <span class="p">:</span> <span class="s">&#39;Bid&#39;</span><span class="p">,</span> <span class="s">&#39;Put Ask&#39;</span> <span class="p">:</span> <span class="s">&#39;Ask&#39;</span><span class="p">})</span>
+
+<span class="c"># Add a column indicating the type of the option</span>
+<span class="n">calls</span><span class="p">[</span><span class="s">&#39;CP&#39;</span><span class="p">],</span> <span class="n">puts</span><span class="p">[</span><span class="s">&#39;CP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;P&#39;</span>
+
+<span class="c"># Merge calls and puts</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">calls</span><span class="p">,</span> <span class="n">puts</span><span class="p">])</span>
+
+<span class="c"># Reindex and sort</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">,</span><span class="s">&#39;CP&#39;</span><span class="p">,</span><span class="s">&#39;Strike&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="n">options</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+                             Bid    Ask
+Date       Days CP Strike              
+2009-01-01 9    C  200     717.6  722.8
+                   250     667.6  672.9
+                   300     617.9  622.9
+                   350     567.9  572.9
+                   375     542.9  547.9
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Compute-bid/ask-average">Compute bid/ask average<a class="anchor-link" href="#Compute-bid/ask-average">&#182;</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This step is used further to filter out in-the-money options.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[5]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">options</span><span class="p">[</span><span class="s">&#39;Premium&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;Bid&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;Ask&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">options2</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;Bid&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">][</span><span class="s">&#39;Premium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s">&#39;CP&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">options2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+CP                           C   P
+Date       Days Strike            
+2009-01-01 9    200     720.20 NaN
+                250     670.25 NaN
+                300     620.40 NaN
+                350     570.40 NaN
+                375     545.40 NaN
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Determine-minimum-difference">Determine minimum difference<a class="anchor-link" href="#Determine-minimum-difference">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[6]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Find the absolute difference</span>
+<span class="n">options2</span><span class="p">[</span><span class="s">&#39;CPdiff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">options2</span><span class="p">[</span><span class="s">&#39;C&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">options2</span><span class="p">[</span><span class="s">&#39;P&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+<span class="c"># Mark the minimum for each date/term</span>
+<span class="n">options2</span><span class="p">[</span><span class="s">&#39;min&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">options2</span><span class="p">[</span><span class="s">&#39;CPdiff&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">==</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+<span class="k">print</span> <span class="n">options2</span><span class="o">.</span><span class="n">ix</span><span class="p">[(</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2009</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="mi">9</span><span class="p">,</span><span class="mi">910</span><span class="p">):(</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2009</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="mi">9</span><span class="p">,</span><span class="mi">930</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+CP                          C      P  CPdiff  min
+Date       Days Strike                           
+2009-01-01 9    910     42.55  31.70   10.85    0
+                915     40.05  33.55    6.50    0
+                920     37.15  36.65    0.50    1
+                925     33.30  37.70    4.40    0
+                930     32.45  40.15    7.70    0
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Compute-forward-price">Compute forward price<a class="anchor-link" href="#Compute-forward-price">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[7]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Leave only at-the-money optons</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">options2</span><span class="p">[</span><span class="n">options2</span><span class="p">[</span><span class="s">&#39;min&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="c"># Merge with risk-free rate</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">yields</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span> <span class="n">how</span> <span class="o">=</span> <span class="s">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c"># Compute the implied forward</span>
+<span class="n">df</span><span class="p">[</span><span class="s">&#39;Forward&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;CPdiff&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&#39;Rate&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;Days&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">36500</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s">&#39;Forward&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span>
+<span class="n">forward</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])[[</span><span class="s">&#39;Forward&#39;</span><span class="p">]]</span>
+
+<span class="k">print</span> <span class="n">forward</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+                    Forward
+Date       Days            
+2009-01-01 9     920.500047
+           37    921.000385
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Compute-at-the-money-strike">Compute at-the-money strike<a class="anchor-link" href="#Compute-at-the-money-strike">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[8]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Merge options with implied forward price</span>
+<span class="n">left</span> <span class="o">=</span> <span class="n">options2</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">forward</span><span class="p">,</span> <span class="n">left_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="c"># Compute at-the-money strike</span>
+<span class="n">mid_strike</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;Forward&#39;</span><span class="p">]][</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">mid_strike</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">&#39;Mid Strike&#39;</span> <span class="p">:</span> <span class="n">mid_strike</span><span class="p">})</span>
+
+<span class="k">print</span> <span class="n">mid_strike</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+                 Mid Strike
+Date       Days            
+2009-01-01 9            920
+           37           920
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Separate-out-of-the-money-calls-and-puts">Separate out-of-the-money calls and puts<a class="anchor-link" href="#Separate-out-of-the-money-calls-and-puts">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[9]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Go back to original data and reindex it</span>
+<span class="n">left</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s">&#39;Premium&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c"># Merge with at-the-money strike</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">mid_strike</span><span class="p">,</span> <span class="n">left_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="c"># Separate out-of-the-money calls and puts</span>
+<span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;Mid Strike&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&#39;CP&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;P&#39;</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;Mid Strike&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&#39;CP&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">puts</span><span class="p">,</span> <span class="n">calls</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">P</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">C</span><span class="p">]</span>
+
+<span class="k">print</span> <span class="n">puts</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">calls</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+                CP  Strike   Bid   Ask  Mid Strike
+Date       Days                                   
+2009-01-01 37    P     900  50.2  55.4         920
+           37    P     905  52.2  57.2         920
+           37    P     910  54.0  59.5         920
+           37    P     915  56.3  61.5         920
+           37    P     920  57.8  63.3         920
+                CP  Strike   Bid   Ask  Mid Strike
+Date       Days                                   
+2009-01-01 9     C     920  35.2  39.1         920
+           9     C     925  31.4  35.2         920
+           9     C     930  31.0  33.9         920
+           9     C     935  26.0  31.5         920
+           9     C     940  26.0  29.0         920
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Remove-all-quotes-after-two-consequtive-zero-bids">Remove all quotes after two consequtive zero bids<a class="anchor-link" href="#Remove-all-quotes-after-two-consequtive-zero-bids">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[10]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Indicator of zero bid</span>
+<span class="n">calls</span><span class="p">[</span><span class="s">&#39;zero_bid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">calls</span><span class="p">[</span><span class="s">&#39;Bid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="c"># Accumulate number of zero bids starting at-the-money</span>
+<span class="n">calls</span><span class="p">[</span><span class="s">&#39;zero_bid_accum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calls</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])[</span><span class="s">&#39;zero_bid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="c"># Sort puts in reverse order inside date/term</span>
+<span class="n">puts</span> <span class="o">=</span> <span class="n">puts</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s">&#39;Strike&#39;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+<span class="c"># Indicator of zero bid</span>
+<span class="n">puts</span><span class="p">[</span><span class="s">&#39;zero_bid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">puts</span><span class="p">[</span><span class="s">&#39;Bid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="c"># Accumulate number of zero bids starting at-the-money</span>
+<span class="n">puts</span><span class="p">[</span><span class="s">&#39;zero_bid_accum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">puts</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])[</span><span class="s">&#39;zero_bid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="n">calls</span><span class="p">[(</span><span class="n">calls</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">1210</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">calls</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1240</span><span class="p">)]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2009</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="mi">9</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+                CP  Strike   Bid   Ask  Mid Strike  zero_bid  zero_bid_accum
+Date       Days                                                             
+2009-01-01 9     C    1210  0.05  0.50         920         0               0
+           9     C    1215  0.05  0.50         920         0               0
+           9     C    1220  0.05  1.00         920         0               0
+           9     C    1225  0.00  1.00         920         1               1
+           9     C    1230  0.00  1.00         920         1               2
+           9     C    1235  0.00  0.75         920         1               3
+           9     C    1240  0.00  0.50         920         1               4
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[11]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Merge puts and cals</span>
+<span class="n">options3</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">calls</span><span class="p">,</span> <span class="n">puts</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="c"># Throw away bad stuff</span>
+<span class="n">options3</span> <span class="o">=</span> <span class="n">options3</span><span class="p">[(</span><span class="n">options3</span><span class="p">[</span><span class="s">&#39;zero_bid_accum&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">options3</span><span class="p">[</span><span class="s">&#39;Bid&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)]</span>
+
+<span class="c"># Compute option premium as bid/ask average</span>
+<span class="n">options3</span><span class="p">[</span><span class="s">&#39;Premium&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">options3</span><span class="p">[</span><span class="s">&#39;Bid&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">options3</span><span class="p">[</span><span class="s">&#39;Ask&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">options3</span> <span class="o">=</span> <span class="n">options3</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">,</span><span class="s">&#39;CP&#39;</span><span class="p">,</span><span class="s">&#39;Strike&#39;</span><span class="p">])[</span><span class="s">&#39;Premium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s">&#39;CP&#39;</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">options3</span><span class="o">.</span><span class="n">ix</span><span class="p">[(</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2009</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="mi">9</span><span class="p">,</span><span class="mi">1210</span><span class="p">):(</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2009</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="mi">9</span><span class="p">,)]</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+CP                          C   P
+Date       Days Strike           
+2009-01-01 9    1210    0.275 NaN
+                1215    0.275 NaN
+                1220    0.525 NaN
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Compute-out-of-the-money-option-price">Compute out-of-the-money option price<a class="anchor-link" href="#Compute-out-of-the-money-option-price">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[12]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Merge wth at-the-money strike price</span>
+<span class="n">left</span> <span class="o">=</span> <span class="n">options3</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">mid_strike</span><span class="p">,</span> <span class="n">left_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+
+<span class="c"># Conditions to separate out-of-the-money puts and calls</span>
+<span class="n">condition1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;Mid Strike&#39;</span><span class="p">]</span>
+<span class="n">condition2</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;Mid Strike&#39;</span><span class="p">]</span>
+<span class="c"># At-the-money we have two quotes, so take the average</span>
+<span class="n">df</span><span class="p">[</span><span class="s">&#39;Premium&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&#39;P&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;C&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="c"># Remove in-the-money options</span>
+<span class="n">df</span><span class="p">[</span><span class="s">&#39;Premium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">condition1</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;P&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">condition1</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s">&#39;Premium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">condition2</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;C&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">condition2</span><span class="p">]</span>
+
+<span class="n">options4</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s">&#39;Strike&#39;</span><span class="p">,</span><span class="s">&#39;Mid Strike&#39;</span><span class="p">,</span><span class="s">&#39;Premium&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="n">options4</span><span class="p">[(</span><span class="n">options4</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">910</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">options4</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">930</span><span class="p">)]</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2009</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="mi">9</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+                 Strike  Mid Strike  Premium
+Date       Days                             
+2009-01-01 9        910         920    31.70
+           9        915         920    33.55
+           9        920         920    36.90
+           9        925         920    33.30
+           9        930         920    32.45
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Compute-difference-between-adjoining-strikes">Compute difference between adjoining strikes<a class="anchor-link" href="#Compute-difference-between-adjoining-strikes">&#182;</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that the strikes must be floats!!! In Python 3/2=1 and 3./2=1.5!</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[13]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">new</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="n">group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">new</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">new</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">new</span>
+
+<span class="n">options4</span><span class="p">[</span><span class="s">&#39;dK&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">options4</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">options4</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+                 Strike  Mid Strike  Premium    dK
+Date       Days                                   
+2009-01-01 9        400         920    0.125  25.0
+           9        425         920    0.125  25.0
+           9        450         920    0.125  22.5
+           9        470         920    0.150  12.5
+           9        475         920    0.150   5.0
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Compute-contribution-of-each-strike">Compute contribution of each strike<a class="anchor-link" href="#Compute-contribution-of-each-strike">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[14]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Merge with risk-free rate</span>
+<span class="n">contrib</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">options4</span><span class="p">,</span> <span class="n">yields</span><span class="p">,</span> <span class="n">left_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">contrib</span><span class="p">[</span><span class="s">&#39;sigma2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contrib</span><span class="p">[</span><span class="s">&#39;dK&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">contrib</span><span class="p">[</span><span class="s">&#39;Strike&#39;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">contrib</span><span class="p">[</span><span class="s">&#39;sigma2&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">contrib</span><span class="p">[</span><span class="s">&#39;Premium&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">contrib</span><span class="p">[</span><span class="s">&#39;Rate&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">contrib</span><span class="p">[</span><span class="s">&#39;Days&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">36500</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">contrib</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+                 Date  Days  Strike  Mid Strike  Premium    dK  Rate    sigma2
+0 2009-01-01 00:00:00     9     400         920    0.125  25.0  0.38  0.000020
+1 2009-01-01 00:00:00     9     425         920    0.125  25.0  0.38  0.000017
+2 2009-01-01 00:00:00     9     450         920    0.125  22.5  0.38  0.000014
+3 2009-01-01 00:00:00     9     470         920    0.150  12.5  0.38  0.000008
+4 2009-01-01 00:00:00     9     475         920    0.150   5.0  0.38  0.000003
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Compute-each-preiod-index">Compute each preiod index<a class="anchor-link" href="#Compute-each-preiod-index">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[15]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Sum up contributions from all strikes</span>
+<span class="n">sigma2</span> <span class="o">=</span> <span class="n">contrib</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])[[</span><span class="s">&#39;sigma2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="c"># Merge at-the-money strike and implied forward</span>
+<span class="n">sigma2</span><span class="p">[</span><span class="s">&#39;Mid Strike&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mid_strike</span>
+<span class="n">sigma2</span><span class="p">[</span><span class="s">&#39;Forward&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">forward</span>
+
+<span class="c"># Compute variance for each term</span>
+<span class="n">sigma2</span><span class="p">[</span><span class="s">&#39;sigma2&#39;</span><span class="p">]</span> <span class="o">-=</span> <span class="p">(</span><span class="n">sigma2</span><span class="p">[</span><span class="s">&#39;Forward&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">sigma2</span><span class="p">[</span><span class="s">&#39;Mid Strike&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">sigma2</span><span class="p">[</span><span class="s">&#39;sigma2&#39;</span><span class="p">]</span> <span class="o">/=</span> <span class="n">sigma2</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="o">/</span> <span class="mi">365</span>
+<span class="n">sigma2</span> <span class="o">=</span> <span class="n">sigma2</span><span class="p">[[</span><span class="s">&#39;sigma2&#39;</span><span class="p">]]</span>
+
+<span class="k">print</span> <span class="n">sigma2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+                    sigma2
+Date       Days           
+2009-01-01 9     0.4727672
+           37    0.3668182
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Compute-interpolated-index">Compute interpolated index<a class="anchor-link" href="#Compute-interpolated-index">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[16]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># This function determines near- and next-term if there are several maturities in the data</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+    <span class="n">days</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s">&#39;Days&#39;</span><span class="p">])</span>
+    <span class="n">sigma2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s">&#39;sigma2&#39;</span><span class="p">])</span>
+    
+    <span class="k">if</span> <span class="n">days</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">30</span><span class="p">:</span>
+        <span class="n">T1</span> <span class="o">=</span> <span class="n">days</span><span class="p">[</span><span class="n">days</span> <span class="o">&lt;=</span> <span class="mi">30</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">T1</span> <span class="o">=</span> <span class="n">days</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    
+    <span class="n">T2</span> <span class="o">=</span> <span class="n">days</span><span class="p">[</span><span class="n">days</span> <span class="o">&gt;</span> <span class="n">T1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    
+    <span class="n">sigma_T1</span> <span class="o">=</span> <span class="n">sigma2</span><span class="p">[</span><span class="n">days</span> <span class="o">==</span> <span class="n">T1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">sigma_T2</span> <span class="o">=</span> <span class="n">sigma2</span><span class="p">[</span><span class="n">days</span> <span class="o">==</span> <span class="n">T2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">ps</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s">&#39;T1&#39;</span> <span class="p">:</span> <span class="n">T1</span><span class="p">,</span> <span class="s">&#39;T2&#39;</span> <span class="p">:</span> <span class="n">T2</span><span class="p">,</span> <span class="s">&#39;sigma2_T1&#39;</span> <span class="p">:</span> <span class="n">sigma_T1</span><span class="p">,</span> <span class="s">&#39;sigma2_T2&#39;</span> <span class="p">:</span> <span class="n">sigma_T2</span><span class="p">}])</span>
+    
+<span class="n">two_sigmas</span> <span class="o">=</span> <span class="n">sigma2</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">&#39;Date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span> <span class="o">=</span> <span class="s">&#39;Date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="n">two_sigmas</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+            T1  T2  sigma2_T1  sigma2_T2
+Date                                    
+2009-01-01   9  37   0.472767   0.366818
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Interpolate-the-VIX">Interpolate the VIX<a class="anchor-link" href="#Interpolate-the-VIX">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[17]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">df</span> <span class="o">=</span> <span class="n">two_sigmas</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;T1&#39;</span><span class="p">,</span><span class="s">&#39;T2&#39;</span><span class="p">]:</span>
+    <span class="c"># Convert to fraction of the year</span>
+    <span class="n">df</span><span class="p">[</span><span class="s">&#39;days_&#39;</span> <span class="o">+</span> <span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="o">/</span> <span class="mi">365</span>
+    <span class="c"># Convert to miutes</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1440.</span> <span class="o">+</span> <span class="mi">510</span> <span class="o">+</span> <span class="mi">930</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s">&#39;sigma2_T1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;sigma2_T1&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;days_T1&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&#39;T2&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mf">30.</span> <span class="o">*</span> <span class="mf">1440.</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s">&#39;sigma2_T2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;sigma2_T2&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;days_T2&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mf">30.</span> <span class="o">*</span> <span class="mf">1440.</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;T1&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s">&#39;VIX&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s">&#39;sigma2_T1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;sigma2_T2&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&#39;T2&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;T1&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="mf">365.</span> <span class="o">/</span> <span class="mf">30.</span><span class="p">)</span> <span class="o">**</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">VIX</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s">&#39;VIX&#39;</span><span class="p">]]</span>
+
+<span class="k">print</span> <span class="n">VIX</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+                  VIX
+Date                 
+2009-01-01  61.217999
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Stanislav Khrapov</span>
+  </span>
+<time datetime="2014-04-21T17:00:00" pubdate>Apr 21, 2014</time>  <span class="categories">
+    <a class="category" href="../../../../../tag/options.html">options</a>
+    <a class="category" href="../../../../../tag/vix.html">VIX</a>
+  </span>
+</p><div class="sharing">
+  <div class="g-plusone" data-size="medium"></div>
+</div>    </footer>
+  </article>
+
+</div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="../blog/2014/04/21/analyze-yields/">Descriptive analysis of the interest rate term structure</a>
+          <a href="../../../../../blog/2014/04/21/fitting-term-structure/">Fitting term structure of interest rates</a>
+      </li>
+      <li class="post">
+          <a href="../../../../../blog/2014/04/21/diffusion-estimation/">Estimation of Simple Diffusion Models with OLS, MLE, SML, GMM</a>
+      </li>
+      <li class="post">
+          <a href="../../../../../blog/2014/04/21/vasicek-bond-pricing/">Bond Pricing with Vasicek Model</a>
+      </li>
+      <li class="post">
+          <a href="../../../../../blog/2014/04/21/vix-replication/">Replication of VIX</a>
+      </li>
+      <li class="post">
+          <a href="../../../../../blog/2014/04/21/doppler-nonparametrics/">Non-parametric Estimation of Doppler function</a>
       </li>
     </ul>
   </section>
@@ -1790,15 +2657,15 @@ init_mathjax();
       
     <h1>Categories</h1>
     <ul id="recent_posts">
-        <li><a href="../category/econometrics.html">econometrics</a></li>
-        <li><a href="../category/finmetrix.html">finmetrix</a></li>
+        <li><a href="../../../../../category/econometrics.html">econometrics</a></li>
+        <li><a href="../../../../../category/finmetrix.html">finmetrix</a></li>
     </ul>
   </section>
  
 
   <section>
   <h1>Tags</h1>
-    <a href="../tag/diffusions.html">diffusions</a>,    <a href="../tag/vix.html">VIX</a>,    <a href="../tag/term-structure.html">term structure</a>,    <a href="../tag/gmm.html">GMM</a>,    <a href="../tag/mle.html">MLE</a>,    <a href="../tag/optimization.html">optimization</a>,    <a href="../tag/realized-volatility.html">Realized Volatility</a>,    <a href="../tag/bonds.html">bonds</a>,    <a href="../tag/black-scholes.html">Black-Scholes</a>,    <a href="../tag/bandwidth.html">bandwidth</a>,    <a href="../tag/kernel-regression.html">kernel regression</a>,    <a href="../tag/options.html">options</a>,    <a href="../tag/cox-ingersoll-ross.html">Cox-Ingersoll-Ross</a>,    <a href="../tag/ols.html">OLS</a>,    <a href="../tag/nonparametrics.html">nonparametrics</a>,    <a href="../tag/sml.html">SML</a>,    <a href="../tag/vasicek.html">Vasicek</a>,    <a href="../tag/geometric-browninan-motion.html">Geometric Browninan Motion</a>,    <a href="../tag/interest-rates.html">interest rates</a>,    <a href="../tag/implied-volatility.html">implied volatility</a>,    <a href="../tag/transforms.html">transforms</a>  </section>
+    <a href="../../../../../tag/diffusions.html">diffusions</a>,    <a href="../../../../../tag/vix.html">VIX</a>,    <a href="../../../../../tag/term-structure.html">term structure</a>,    <a href="../../../../../tag/gmm.html">GMM</a>,    <a href="../../../../../tag/mle.html">MLE</a>,    <a href="../../../../../tag/optimization.html">optimization</a>,    <a href="../../../../../tag/realized-volatility.html">Realized Volatility</a>,    <a href="../../../../../tag/bonds.html">bonds</a>,    <a href="../../../../../tag/black-scholes.html">Black-Scholes</a>,    <a href="../../../../../tag/bandwidth.html">bandwidth</a>,    <a href="../../../../../tag/kernel-regression.html">kernel regression</a>,    <a href="../../../../../tag/options.html">options</a>,    <a href="../../../../../tag/cox-ingersoll-ross.html">Cox-Ingersoll-Ross</a>,    <a href="../../../../../tag/ols.html">OLS</a>,    <a href="../../../../../tag/nonparametrics.html">nonparametrics</a>,    <a href="../../../../../tag/sml.html">SML</a>,    <a href="../../../../../tag/vasicek.html">Vasicek</a>,    <a href="../../../../../tag/geometric-browninan-motion.html">Geometric Browninan Motion</a>,    <a href="../../../../../tag/interest-rates.html">interest rates</a>,    <a href="../../../../../tag/implied-volatility.html">implied volatility</a>,    <a href="../../../../../tag/transforms.html">transforms</a>  </section>
 
 
 
@@ -1812,7 +2679,7 @@ init_mathjax();
           if (!window.jXHR){
               var jxhr = document.createElement('script');
               jxhr.type = 'text/javascript';
-              jxhr.src = '../theme/js/jXHR.js';
+              jxhr.src = '../../../../../theme/js/jXHR.js';
               var s = document.getElementsByTagName('script')[0];
               s.parentNode.insertBefore(jxhr, s);
           }
@@ -1825,7 +2692,7 @@ init_mathjax();
           });
       });
     </script>
-    <script src="../theme/js/github.js" type="text/javascript"> </script>
+    <script src="../../../../../theme/js/github.js" type="text/javascript"> </script>
   </section>
 
     <section>

@@ -7,7 +7,7 @@
   <title>Pythonic FinMetrix</title>
   <meta name="author" content="Stanislav Khrapov">
 
-  <link href="http://khrapovs.github.com/finmetrix/feeds/all.rss.xml" type="application/rss+xml" rel="alternate"
+  <link href="http://khrapovs.github.io/finmetrix/feeds/all.rss.xml" type="application/rss+xml" rel="alternate"
         title="Pythonic FinMetrix RSS Feed" />
 
     
@@ -1729,7 +1729,7 @@ init_mathjax();
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="../favicon.png" rel="icon">
+  <link href="../favicon.ico" rel="icon">
   <link href="../theme/css/main.css" media="screen, projection"
         rel="stylesheet" type="text/css">
   <script src="../theme/js/modernizr-2.0.js"></script>
@@ -1747,7 +1747,7 @@ init_mathjax();
   <h1><a href="../">Pythonic FinMetrix</a></h1>
 </hgroup></header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="http://khrapovs.github.com/finmetrix/feeds/all.rss.xml" rel="subscribe-rss">RSS</a></li>
+  <li><a href="http://khrapovs.github.io/finmetrix/feeds/all.rss.xml" rel="subscribe-rss">RSS</a></li>
 </ul>
 
 
@@ -1763,14 +1763,66 @@ init_mathjax();
   		<article>
 <header>
       <h1 class="entry-title">
-        <a href="../blog/2014/04/21/term-structure-descr/">Descriptive analysis of the interest rate term structure</a>
+        <a href="../blog/2014/04/21/fitting-term-structure/">Fitting term structure of interest rates</a>
+      </h1>
+      <p class="meta"><time datetime="2014-04-21T18:30:00" pubdate>Apr 21, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>Here I show how to estimate Cox-Ingersoll-Ross model on a time series of short interest rates, and then how to calibrate risk price parameter necessary for pricing bonds at any maturity.</p></div>
+  <footer>
+    <a rel="full-article" href="../blog/2014/04/21/fitting-term-structure/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="../blog/2014/04/21/diffusion-estimation/">Estimation of Simple Diffusion Models with OLS, MLE, SML, GMM</a>
+      </h1>
+      <p class="meta"><time datetime="2014-04-21T18:00:00" pubdate>Apr 21, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>The following code is the example of adapting methodology of <a href = "http://onlinelibrary.wiley.com/doi/10.1111/1468-0262.00164/abstract">Duffie, D., Pan, J., &amp; Singleton, K. J. (2000). Transform Analysis and Asset Pricing for Affine Jump-Diffusions. Econometrica, 68(6), 1343–1376.</a> to the Vasicek model of interest rates.</p></div>
+  <footer>
+    <a rel="full-article" href="../blog/2014/04/21/diffusion-estimation/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="../blog/2014/04/21/vasicek-bond-pricing/">Bond Pricing with Vasicek Model</a>
+      </h1>
+      <p class="meta"><time datetime="2014-04-21T17:30:00" pubdate>Apr 21, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>The following code is the example of adapting methodology of <a href = "http://onlinelibrary.wiley.com/doi/10.1111/1468-0262.00164/abstract">Duffie, D., Pan, J., &amp; Singleton, K. J. (2000). Transform Analysis and Asset Pricing for Affine Jump-Diffusions. Econometrica, 68(6), 1343–1376.</a> to the Vasicek model of interest rates.</p></div>
+  <footer>
+    <a rel="full-article" href="../blog/2014/04/21/vasicek-bond-pricing/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="../blog/2014/04/21/vix-replication/">Replication of VIX</a>
+      </h1>
+      <p class="meta"><time datetime="2014-04-21T17:00:00" pubdate>Apr 21, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>This notebook shows how to reproduce the VIX given the data in CBOE White Paper (<a href='http://www.cboe.com/micro/vix/vixwhite.pdf'>http://www.cboe.com/micro/vix/vixwhite.pdf</a>). The code works for any option data set, not only one day as in the White Paper. The option data for this example is exactly the same as in the Appendix 1 of the White Paper.</p></div>
+  <footer>
+    <a rel="full-article" href="../blog/2014/04/21/vix-replication/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="../blog/2014/04/21/analyze-yields/">Descriptive analysis of the interest rate term structure</a>
       </h1>
       <p class="meta"><time datetime="2014-04-21T15:00:00" pubdate>Apr 21, 2014</time></p>
 </header>
 
   <div class="entry-content"><p>Simple example of pandas workflow to import interest rate data from archived csv file, plotting it, and filling the gaps to get the balanced panel of yields.</p></div>
   <footer>
-    <a rel="full-article" href="../blog/2014/04/21/term-structure-descr/">Read On &crarr;</a>
+    <a rel="full-article" href="../blog/2014/04/21/analyze-yields/">Read On &crarr;</a>
   </footer>
   		</article>
   		<article>
@@ -1795,10 +1847,19 @@ init_mathjax();
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="../blog/2014/04/21/term-structure-descr/">Descriptive analysis of the interest rate term structure</a>
+          <a href="../blog/2014/04/21/fitting-term-structure/">Fitting term structure of interest rates</a>
       </li>
       <li class="post">
-          <a href="../blog/2014/04/18/imp-vol-bisection/">Implied Volatility via Bisection method</a>
+          <a href="../blog/2014/04/21/diffusion-estimation/">Estimation of Simple Diffusion Models with OLS, MLE, SML, GMM</a>
+      </li>
+      <li class="post">
+          <a href="../blog/2014/04/21/vasicek-bond-pricing/">Bond Pricing with Vasicek Model</a>
+      </li>
+      <li class="post">
+          <a href="../blog/2014/04/21/vix-replication/">Replication of VIX</a>
+      </li>
+      <li class="post">
+          <a href="../blog/2014/04/21/analyze-yields/">Descriptive analysis of the interest rate term structure</a>
       </li>
     </ul>
   </section>
@@ -1806,6 +1867,7 @@ init_mathjax();
       
     <h1>Categories</h1>
     <ul id="recent_posts">
+        <li><a href="../category/econometrics.html">econometrics</a></li>
         <li><a href="../category/finmetrix.html">finmetrix</a></li>
     </ul>
   </section>
@@ -1813,7 +1875,7 @@ init_mathjax();
 
   <section>
   <h1>Tags</h1>
-    <a href="../tag/term-structure.html">term structure</a>,    <a href="../tag/implied-volatility.html">implied volatility</a>,    <a href="../tag/black-scholes.html">Black-Scholes</a>,    <a href="../tag/interest-rates.html">interest rates</a>,    <a href="../tag/bonds.html">bonds</a>  </section>
+    <a href="../tag/diffusions.html">diffusions</a>,    <a href="../tag/vix.html">VIX</a>,    <a href="../tag/term-structure.html">term structure</a>,    <a href="../tag/gmm.html">GMM</a>,    <a href="../tag/mle.html">MLE</a>,    <a href="../tag/optimization.html">optimization</a>,    <a href="../tag/realized-volatility.html">Realized Volatility</a>,    <a href="../tag/bonds.html">bonds</a>,    <a href="../tag/black-scholes.html">Black-Scholes</a>,    <a href="../tag/bandwidth.html">bandwidth</a>,    <a href="../tag/kernel-regression.html">kernel regression</a>,    <a href="../tag/options.html">options</a>,    <a href="../tag/cox-ingersoll-ross.html">Cox-Ingersoll-Ross</a>,    <a href="../tag/ols.html">OLS</a>,    <a href="../tag/nonparametrics.html">nonparametrics</a>,    <a href="../tag/sml.html">SML</a>,    <a href="../tag/vasicek.html">Vasicek</a>,    <a href="../tag/geometric-browninan-motion.html">Geometric Browninan Motion</a>,    <a href="../tag/interest-rates.html">interest rates</a>,    <a href="../tag/implied-volatility.html">implied volatility</a>,    <a href="../tag/transforms.html">transforms</a>  </section>
 
 
 
@@ -1846,7 +1908,7 @@ init_mathjax();
     <section>
         <h1>Social</h1>
         <ul>
-            <li><a href="http://khrapovs.github.com/finmetrix/feeds/all.rss.xml" type="application/rss+xml" rel="alternate">RSS</a></li>
+            <li><a href="http://khrapovs.github.io/finmetrix/feeds/all.rss.xml" type="application/rss+xml" rel="alternate">RSS</a></li>
             <li><a href="http://www.linkedin.com/in/khrapovs" target="_blank">LinkedIn</a></li>
             <li><a href="https://twitter.com/khrapovs" target="_blank">Twitter</a></li>
             <li><a href="https://www.google.com/+StanislavKhrapov" target="_blank">Google+</a></li>
