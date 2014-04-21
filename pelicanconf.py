@@ -53,7 +53,8 @@ else:
 
 # Title menu options
 MENUITEMS = (('About', 'https://sites.google.com/site/khrapovs'),
-             ('Contact', 'mailto:khrapovs@gmail.com'))
+             ('Contact', 'mailto:khrapovs@gmail.com'),
+             ('Archives', '/archives.html'))
 
 # Blogroll
 # LINKS =  (('Pelican', 'http://getpelican.com/'),
