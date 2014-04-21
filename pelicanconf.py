@@ -86,7 +86,7 @@ DISPLAY_PAGES_ON_MENU = False
 DELETE_OUTPUT_DIRECTORY = True
 
 # Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = True
+#RELATIVE_URLS = True
 
 # RSS/Atom feeds
 FEED_RSS = 'feeds/all.rss.xml'
@@ -96,5 +96,4 @@ FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
-#GOOGLE_ANALYTICS_ID = "UA-17393493-7"
 GOOGLE_ANALYTICS = "UA-17393493-7"
