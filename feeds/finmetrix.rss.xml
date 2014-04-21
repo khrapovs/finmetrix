@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Pythonic FinMetrix</title><link href="http://khrapovs.github.com/finmetrix/" rel="alternate"></link><link href="http://khrapovs.github.com/finmetrix/feeds/all.atom.xml" rel="self"></link><id>http://khrapovs.github.com/finmetrix/</id><updated>2014-04-18T14:00:00+04:00</updated><entry><title>Implied Volatility via Bisection method</title><link href="http://khrapovs.github.com/finmetrix/blog/2014/04/18/imp-vol-bisection/" rel="alternate"></link><updated>2014-04-18T14:00:00+04:00</updated><author><name>Stanislav Khrapov</name></author><id>tag:khrapovs.github.com/finmetrix,2014-04-18:blog/2014/04/18/imp-vol-bisection/</id><summary type="html">&lt;p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pythonic FinMetrix</title><link>http://khrapovs.github.io/finmetrix/</link><description></description><atom:link href="http://khrapovs.github.io/finmetrix/feeds/finmetrix.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 18 Apr 2014 14:00:00 +0400</lastBuildDate><item><title>Implied Volatility via Bisection method</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/18/imp-vol-bisection/</link><description>&lt;p&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;In this post I will show how to find implied volatilities from Black-Scholes formula using bisection method.&lt;/p&gt;
 &lt;/div&gt;
@@ -669,4 +669,4 @@ Numpy vectorize:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</summary><category term="Black-Scholes"></category><category term="implied volatility"></category></entry></feed>
+&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Fri, 18 Apr 2014 14:00:00 +0400</pubDate><guid>tag:khrapovs.github.io/finmetrix,2014-04-18:blog/2014/04/18/imp-vol-bisection/</guid><category>Black-Scholes</category><category>implied volatility</category></item></channel></rss>
