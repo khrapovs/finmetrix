@@ -4,6 +4,6 @@ category: finmetrix
 tags: diffusions, OLS, MLE, SML, GMM, Geometric Browninan Motion, Vasicek, Cox-Ingersoll-Ross, Realized Volatility
 comments: true
 slug: diffusion-estimation
-summary: The following code is the example of adapting methodology of <a href = "http://onlinelibrary.wiley.com/doi/10.1111/1468-0262.00164/abstract">Duffie, D., Pan, J., & Singleton, K. J. (2000). Transform Analysis and Asset Pricing for Affine Jump-Diffusions. Econometrica, 68(6), 1343–1376.</a> to the Vasicek model of interest rates.
+summary: In this post I show how to estimate parameters of three univariate continuous-time models using a variety of methods ranging from ordinary least squares, maximum likelihood, and generalized method of moments, to simulation-based maximum likelihood.
 
 {% notebook Diffusion_estimation.ipynb %}
