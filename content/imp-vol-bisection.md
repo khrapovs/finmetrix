@@ -1,5 +1,6 @@
 Title: Implied Volatility via Bisection method
 date: 2014-04-18 14:00
+category: finmetrix
 tags: Black-Scholes, implied volatility
 comments: true
 slug: imp-vol-bisection
