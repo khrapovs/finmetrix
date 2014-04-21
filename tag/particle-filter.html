@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Pythonic FinMetrix - MLE</title>
+  <title>Pythonic FinMetrix - particle filter</title>
   <meta name="author" content="Stanislav Khrapov">
 
   <link href="http://khrapovs.github.io/finmetrix/feeds/all.rss.xml" type="application/rss+xml" rel="alternate"
@@ -1763,27 +1763,14 @@ init_mathjax();
   		<article>
 <header>
       <h1 class="entry-title">
-        <a href="../blog/2014/04/21/fitting-term-structure/">Fitting term structure of interest rates</a>
+        <a href="../blog/2014/04/21/particle-filter-heston/">Particle Filter with Heston model</a>
       </h1>
-      <p class="meta"><time datetime="2014-04-21T18:30:00" pubdate>Apr 21, 2014</time></p>
+      <p class="meta"><time datetime="2014-04-21T19:00:00" pubdate>Apr 21, 2014</time></p>
 </header>
 
-  <div class="entry-content"><p>Here I show how to estimate Cox-Ingersoll-Ross model on a time series of short interest rates, and then how to calibrate risk price parameter necessary for pricing bonds at any maturity.</p></div>
+  <div class="entry-content"><p>The purpose of this notebook is to show on a simple simulated example how to filter out latent volatility process from observable daily prices using the Particle Filter (PF).</p></div>
   <footer>
-    <a rel="full-article" href="../blog/2014/04/21/fitting-term-structure/">Read On &crarr;</a>
-  </footer>
-  		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="../blog/2014/04/21/diffusion-estimation/">Estimation of Simple Diffusion Models with OLS, MLE, SML, GMM</a>
-      </h1>
-      <p class="meta"><time datetime="2014-04-21T18:00:00" pubdate>Apr 21, 2014</time></p>
-</header>
-
-  <div class="entry-content"><p>The following code is the example of adapting methodology of <a href = "http://onlinelibrary.wiley.com/doi/10.1111/1468-0262.00164/abstract">Duffie, D., Pan, J., &amp; Singleton, K. J. (2000). Transform Analysis and Asset Pricing for Affine Jump-Diffusions. Econometrica, 68(6), 1343–1376.</a> to the Vasicek model of interest rates.</p></div>
-  <footer>
-    <a rel="full-article" href="../blog/2014/04/21/diffusion-estimation/">Read On &crarr;</a>
+    <a rel="full-article" href="../blog/2014/04/21/particle-filter-heston/">Read On &crarr;</a>
   </footer>
   		</article>
 <div class="pagination">
@@ -1795,10 +1782,7 @@ init_mathjax();
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="../blog/2014/04/21/fitting-term-structure/">Fitting term structure of interest rates</a>
-      </li>
-      <li class="post">
-          <a href="../blog/2014/04/21/diffusion-estimation/">Estimation of Simple Diffusion Models with OLS, MLE, SML, GMM</a>
+          <a href="../blog/2014/04/21/particle-filter-heston/">Particle Filter with Heston model</a>
       </li>
     </ul>
   </section>
