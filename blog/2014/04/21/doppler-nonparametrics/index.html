@@ -1767,16 +1767,23 @@ init_mathjax();
 </header>
 
   <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Import-libraries-and-set-defaults">Import libraries and set defaults<a class="anchor-link" href="#Import-libraries-and-set-defaults">&#182;</a></h1>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[2]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
@@ -1788,21 +1795,35 @@ In&nbsp;[2]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Doppler-function">Doppler function<a class="anchor-link" href="#Doppler-function">&#182;</a></h1>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><span class="math">\[r\left(x\right)=\sqrt{x\left(1-x\right)}\sin\left(\frac{1.2\pi}{x+.05}\right),\quad x\in\left[0,1\right]\]</span></p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>$$r\left(x\right)=\sqrt{x\left(1-x\right)}\sin\left(\frac{1.2\pi}{x+.05}\right),\quad x\in\left[0,1\right]$$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[3]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">.</span><span class="mo">01</span><span class="p">,</span> <span class="o">.</span><span class="mi">99</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mf">1e3</span><span class="p">)</span>
 <span class="n">doppler</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">1.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="o">.</span><span class="mo">05</span><span class="p">))</span>
 
@@ -1812,15 +1833,16 @@ In&nbsp;[3]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYQAAAD/CAYAAADxL6FlAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJztnXtcVHX+/1+D3IQZEFRQvFGRRV7Y1HW3RQu1Mi+t4W6W
 CVratirfttp1tfz2I027t2o3Ih/l10tI7RZZWmmFi6aplXdBIy+JoIkKch2BgfP74+2BmWHucy5z
@@ -2078,25 +2100,33 @@ c6b12GXLlgmxsbGt9bT+9IcvCK7fi1GjRglBQUGCXq9vfYwfP15N0yXFnd8JkVOnTvll2ak79yIv
 L09ISEgQIiIihFGjRtlcLLWMq/eirq5OmDVrVutaMXToUGHLli1qmi45zzzzTLvZcosXL5Zk3dQJ
 gp/5lwzDMIxH8J7KDMMwDAAWBIZhGOYqLAgMwzAMABYEhmEY5iosCAzDMAwAFgSGYRjmKv8fsbSl
 jt9qhvgAAAAASUVORK5CYII=
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Derivative-of-Doppler-function">Derivative of Doppler function<a class="anchor-link" href="#Derivative-of-Doppler-function">&#182;</a></h1>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[4]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">sympy.utilities.lambdify</span> <span class="kn">import</span> <span class="n">lambdify</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span><span class="p">,</span> <span class="n">Latex</span>
 
@@ -2117,24 +2147,25 @@ In&nbsp;[4]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_latex output_subarea ">
 $$- 1.2 \frac{\pi \left(u \left(- u + 1\right)\right)^{0.5} \cos{\left (1.2 \frac{\pi}{u + 0.05} \right )}}{\left(u + 0.05\right)^{2}} + \frac{\left(u \left(- u + 1\right)\right)^{0.5} \left(- 1.0 u + 0.5\right) \sin{\left (1.2 \frac{\pi}{u + 0.05} \right )}}{u \left(- u + 1\right)}$$
-
-</div>
 </div>
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+</div>
+
+<div class="output_area"><div class="prompt"></div>
 
 
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYgAAAD/CAYAAADrE0HrAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xt0VPWBB/DvJCEkk5kJhAQwvHyEFExIqKQcegQdgl1F
 NwfTrEVXjZC6sFrrvrICUjTRxcrZbtpd0ZrTni5psaFrSWW1FY7SRtDF8pKkSQQUFQSURwh5DMyQ
@@ -2335,29 +2366,45 @@ VB3qHul5c9gExIULF/zGNTc2NkqSJEnHjx+XLBaL9Pnnn3vfW1dXJ02YMME7nncknQQkKfxjsXDh
 QmnUqFGSxWLx3u68886hLHrM6fl3Ifv0009H5DBXPceiqalJysvLk2w2m7Rw4ULVk6eRhXssHA6H
 9N3vftd7vpgzZ460Y8eOoSx6TD399NOD1smrra2N2XnTJEkjrP5JREQxMSz6IIiIaPhhQBARkSoG
 BBERqWJAEBGRKgYEERGpYkAQEZGq/wfQ2jy+P9/twAAAAABJRU5ErkJggg==
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Left-and-right-truncated-exponentials">Left and right truncated exponentials<a class="anchor-link" href="#Left-and-right-truncated-exponentials">&#182;</a></h1>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Right truncated: <span class="math">\[f\left(x\right)=\frac{e^{-x/\lambda}/\lambda}{1-e^{-b/\lambda}},\quad F\left(x\right)=\frac{1-e^{-x/\lambda}}{1-e^{-b/\lambda}},\quad F^{-1}\left(x\right)=-\lambda\log\left(1-x\left(1-e^{-b/\lambda}\right)\right)\]</span></p>
-<p>Left truncated: <span class="math">\[f\left(x\right)=\frac{e^{x/\lambda}/\lambda}{e^{b/\lambda}-1},\quad F\left(x\right)=\frac{1-e^{x/\lambda}}{1-e^{b/\lambda}},\quad F^{-1}\left(x\right)=\lambda\log\left(1-x\left(1-e^{b/\lambda}\right)\right)\]</span></p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Right truncated:
+$$f\left(x\right)=\frac{e^{-x/\lambda}/\lambda}{1-e^{-b/\lambda}},\quad F\left(x\right)=\frac{1-e^{-x/\lambda}}{1-e^{-b/\lambda}},\quad F^{-1}\left(x\right)=-\lambda\log\left(1-x\left(1-e^{-b/\lambda}\right)\right)$$</p>
+<p>Left truncated:
+$$f\left(x\right)=\frac{e^{x/\lambda}/\lambda}{e^{b/\lambda}-1},\quad F\left(x\right)=\frac{1-e^{x/\lambda}}{1-e^{b/\lambda}},\quad F^{-1}\left(x\right)=\lambda\log\left(1-x\left(1-e^{b/\lambda}\right)\right)$$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[5]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">f_rtexp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lmbd</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">/</span> <span class="n">lmbd</span><span class="p">)</span> <span class="o">/</span> <span class="n">lmbd</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="n">lmbd</span><span class="p">))</span>
 
@@ -2387,18 +2434,26 @@ In&nbsp;[5]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Draw-the-densitites">Draw the densitites<a class="anchor-link" href="#Draw-the-densitites">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[6]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -2420,15 +2475,16 @@ In&nbsp;[6]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2YAAAFCCAYAAACad873AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XmcjeX/x/HXfWYww8zYySTb165EoSIMIYrskSVGllS+
 ihaJyJfSNyWpviW/JGRJfWlREkaWFoRk5IuMCmPJvs9y/f6YnM59Zjszc5aZ8X4+HufRXNd939f1
@@ -2944,32 +3000,46 @@ hxtxcXHl03XXXRfI1APCm7+vMvv37w/a4YC9aa8FCxYY7dq1MxISEoxBgwa5/bBt6Dxtr7y8PGPy
 5Mnln189e/Y0vvjii0CmHhC///3vDZvN5jA9++yz+ryvhPpH76mP9Jz6R++pj/SO+kjP1XX/aDOM
 IDxuKyIiIiIiYiEeXWMmIiIiIiIidUeFmYiIiIiISICpMBMREREREQkwFWYiIiIiIiIBpsJMRERE
 REQkwFSYiYiIiIiIBNj/Byd+KohjOWgsAAAAAElFTkSuQmCC
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Kernels">Kernels<a class="anchor-link" href="#Kernels">&#182;</a></h1>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Truncated (Uniform): <span class="math">\(k_{0}\left(u\right)=\frac{1}{2}1\left(\left|u\right|\leq1\right)\)</span></p>
-<p>Epanechnikov: <span class="math">\(k_{1}\left(u\right)=\frac{3}{4}\left(1-u^{2}\right)1\left(\left|u\right|\leq1\right)\)</span></p>
-<p>Biweight: <span class="math">\(k_{2}\left(u\right)=\frac{15}{16}\left(1-u^{2}\right)^{2}1\left(\left|u\right|\leq1\right)\)</span></p>
-<p>Triweight: <span class="math">\(k_{2}\left(u\right)=\frac{35}{36}\left(1-u^{2}\right)^{3}1\left(\left|u\right|\leq1\right)\)</span></p>
-<p>Gaussian: <span class="math">\(k_{\phi}\left(u\right)=\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{1}{2}u^2\right)\)</span></p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Truncated (Uniform): $k_{0}\left(u\right)=\frac{1}{2}1\left(\left|u\right|\leq1\right)$</p>
+<p>Epanechnikov: $k_{1}\left(u\right)=\frac{3}{4}\left(1-u^{2}\right)1\left(\left|u\right|\leq1\right)$</p>
+<p>Biweight: $k_{2}\left(u\right)=\frac{15}{16}\left(1-u^{2}\right)^{2}1\left(\left|u\right|\leq1\right)$</p>
+<p>Triweight: $k_{2}\left(u\right)=\frac{35}{36}\left(1-u^{2}\right)^{3}1\left(\left|u\right|\leq1\right)$</p>
+<p>Gaussian: $k_{\phi}\left(u\right)=\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{1}{2}u^2\right)$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[7]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">indicator</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asfarray</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0.</span><span class="p">))</span>
 
@@ -3021,15 +3091,16 @@ In&nbsp;[7]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXsAAAD/CAYAAAAQaHZxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XdUFFf7wPHvLL0XBQRBQbGj2BsWbDG+aiwxiRqxayyJ
 mtcSNWo0vprEEmtsP5NolCRGYwxJNGoUe0PsghUQK6ggUqTu/f2xsmEFARVcyv2cM0d2987Ms3vG
@@ -3490,32 +3561,52 @@ XLhQkiRJOnz4sKRWq6WjR4/W7vvuu+9KsbGxUlhYmPTggw9K1adT0wq13L2fzz77rBQbGyuFhoZK
 HTt2lKZNmyY5HI7mLHqLM23aNEmhUNR5zZgxQ9RNL7l7P0XdbNihQ4ckhUIhBQcHS2q1uvb11Vdf
 NUr9VEiS+CwlCIJwuRNr0AqCIFwBRLAXBEG4AohgLwiCcAUQwV4QBOEKIIK9IAjCFUAEe0EQhCvA
 /wOVheaMfbwKCAAAAABJRU5ErkJggg==
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Nadaraya-Watson-(NW)-or-local-constant-estimator">Nadaraya-Watson (NW) or local constant estimator<a class="anchor-link" href="#Nadaraya-Watson-(NW)-or-local-constant-estimator">&#182;</a></h1>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Local-weighting">Local weighting<a class="anchor-link" href="#Local-weighting">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For each observed data <span class="math">\(X\)</span> (<span class="math">\(N\)</span>-vector) and grid <span class="math">\(U\)</span> (<span class="math">\(M\)</span>-vector) this function returns <span class="math">\(N\times M\)</span>-matrix of weights</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For each observed data $X$ ($N$-vector) and grid $U$ ($M$-vector) this function returns $N\times M$-matrix of weights</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[8]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">weight</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">ktype</span> <span class="o">=</span> <span class="s">&#39;Truncated&#39;</span><span class="p">):</span>
     <span class="c"># X - N-array</span>
     <span class="c"># U - M-array</span>
@@ -3533,42 +3624,70 @@ In&nbsp;[8]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Nadaraya-Watson-(NW)">Nadaraya-Watson (NW)<a class="anchor-link" href="#Nadaraya-Watson-(NW)">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><span class="math">\[\hat{m}\left(x\right)=\frac{\sum_{i=1}^{n}k\left(\frac{X_{i}-x}{h}\right)Y_{i}}{\sum_{i=1}^{n}k\left(\frac{X_{i}-x}{h}\right)}\]</span></p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>$$\hat{m}\left(x\right)=\frac{\sum_{i=1}^{n}k\left(\frac{X_{i}-x}{h}\right)Y_{i}}{\sum_{i=1}^{n}k\left(\frac{X_{i}-x}{h}\right)}$$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[9]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">NW</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">ktype</span> <span class="o">=</span> <span class="s">&#39;Truncated&#39;</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weight</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">ktype</span><span class="p">),</span> <span class="n">Y</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Generate-data">Generate data<a class="anchor-link" href="#Generate-data">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><span class="math">\[Y_{i}=m\left(X_{i}\right)+\epsilon_{i},\quad\epsilon_{i}\sim NID\left(0,\sigma=0.1\right)\]</span></p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>$$Y_{i}=m\left(X_{i}\right)+\epsilon_{i},\quad\epsilon_{i}\sim NID\left(0,\sigma=0.1\right)$$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[10]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">lmbd</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">trunc</span> <span class="o">=</span> <span class="s">&#39;left&#39;</span><span class="p">):</span>
     
     <span class="k">if</span> <span class="n">trunc</span> <span class="o">==</span> <span class="s">&#39;left&#39;</span><span class="p">:</span>
@@ -3584,18 +3703,26 @@ In&nbsp;[10]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Perform-estimation-and-plot-the-results">Perform estimation and plot the results<a class="anchor-link" href="#Perform-estimation-and-plot-the-results">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[11]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">()</span>
 
 <span class="c"># Nadaraya-Watson estimator</span>
@@ -3614,15 +3741,16 @@ In&nbsp;[11]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAF8CAYAAACg++17AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XtczfcfwPHX6X5PSZEkRG5jzNyZS2YYGbvkbsw1d1GS
 LpL7vWk2Nvfrb9hiDEMINZl7bomRVKpVul/O5/fH4WwtNpeu9nk+Hj3qfM/n+/2+v+ecznmfz1Uh
@@ -5297,28 +5425,42 @@ Jmzbtg0XFxdcXV358ccf8fDw0HdoQgghSZwQQhSnd+/e2NnZsWbNGgC+/vprFi5cSHR0NKampnqO
 TgjxspMkTgghirBz505GjhxJbGwsNjY2uuc7dOjA66+/zqxZs/QYnRBCSBInhBBCCGGQZGODEEII
 IYQBkiROCCGEEMIASRInhBBCCGGAJIkTQgghhDBAksQJIYQQQhggSeKEEEIIIQzQ/wPhFRtq66J2
 sAAAAABJRU5ErkJggg==
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Bias-correction">Bias correction<a class="anchor-link" href="#Bias-correction">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For bias computation we take the density of <span class="math">\(X\)</span> and two derivatives of conditional mean <span class="math">\(m(x)\)</span> as known. In practice, they have to be estimated.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For bias computation we take the density of $X$ and two derivatives of conditional mean $m(x)$ as known. In practice, they have to be estimated.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[12]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">fx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lmbd</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">/</span> <span class="n">lmbd</span><span class="p">)</span> <span class="o">/</span> <span class="n">lmbd</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="n">lmbd</span><span class="p">))</span>
 
@@ -5354,15 +5496,16 @@ In&nbsp;[12]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4gAAAF8CAYAAACNLJXoAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xd8Tff/wPHXvRmyI0RkIQixSmvE3qtKarS+tqBKFUVs
 IrIQsWuUlmqpUVqUGqUqaqWCCJLYxI6RRPa85/dH6v6aBg1JXOH9fDzu45Fz7ud8zvvce5Oc9/0s
@@ -7403,39 +7546,53 @@ YDLFVAghhCgCsbGxODs7s379emrXrk29evX4448/aNu2bUmHJoQQQuSbJIhCCCFEEfjwww+xtrbm
 hx9+AGDp0qXMmDGD06dPY2BgUMLRCSGEEPkjCaIQQgjxnDZu3MjXX39NZGQkFhYWup+7ubnRunVr
 AgICSjA6IYQQIv8kQRRCCCGEEEIIAUiRGiGEEEIIIYQQ/5IEUQghhBBCCCEEIAmiEEIIIYQQQoh/
 SYIohBBCCCGEEAKQBFEIIYQQQgghxL8kQRRCCCGEEEIIAcD/AayKxvci4+tTAAAAAElFTkSuQmCC
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Local-Linear-(LL)-estimator">Local Linear (LL) estimator<a class="anchor-link" href="#Local-Linear-(LL)-estimator">&#182;</a></h1>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><span class="math">\[\left(\begin{array}{c}
+<p>$$\left(\begin{array}{c}
 \hat{\alpha}\left(x\right)\\
 \hat{\beta}\left(x\right)
-\end{array}\right)=\left(\sum_{i=1}^{n}k_{i}\left(x\right)Z_{i}\left(x\right)Z_{i}\left(x\right)^{\prime}\right)^{-1}\sum_{i=1}^{n}k_{i}\left(x\right)Z_{i}\left(x\right)Y_{i}\]</span></p>
-<p><span class="math">\[\left(\begin{array}{c}
+\end{array}\right)=\left(\sum_{i=1}^{n}k_{i}\left(x\right)Z_{i}\left(x\right)Z_{i}\left(x\right)^{\prime}\right)^{-1}\sum_{i=1}^{n}k_{i}\left(x\right)Z_{i}\left(x\right)Y_{i}$$</p>
+<p>$$\left(\begin{array}{c}
 \hat{\alpha}\left(x\right)\\
 \hat{\beta}\left(x\right)
 \end{array}\right)
-=\left(Z\left(x\right)^{\prime}K\left(x\right)Z\left(x\right)\right)^{-1}Z\left(x\right)^{\prime}K\left(x\right)Y\]</span></p>
-<p><span class="math">\(K(x)\)</span> - <span class="math">\(N\times N\)</span></p>
-<p><span class="math">\(Z(x)\)</span> - <span class="math">\(N\times 2\)</span></p>
-<p><span class="math">\(Y\)</span> - <span class="math">\(N\times 1\)</span></p>
+=\left(Z\left(x\right)^{\prime}K\left(x\right)Z\left(x\right)\right)^{-1}Z\left(x\right)^{\prime}K\left(x\right)Y$$</p>
+<p>$K(x)$ - $N\times N$</p>
+<p>$Z(x)$ - $N\times 2$</p>
+<p>$Y$ - $N\times 1$</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[13]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">LL</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">ktype</span> <span class="o">=</span> <span class="s">&#39;Truncated&#39;</span><span class="p">):</span>
     <span class="c"># X - N-array</span>
     <span class="c"># U - M-array</span>
@@ -7469,18 +7626,26 @@ In&nbsp;[13]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Perform-estimation-and-plot-the-results">Perform estimation and plot the results<a class="anchor-link" href="#Perform-estimation-and-plot-the-results">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[14]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">()</span>
 
 <span class="n">Yhat</span><span class="p">,</span> <span class="n">dYhat</span> <span class="o">=</span> <span class="n">LL</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="o">.</span><span class="mo">05</span><span class="p">,</span> <span class="n">ktype</span> <span class="o">=</span> <span class="s">&#39;Gaussian&#39;</span><span class="p">)</span>
@@ -7511,15 +7676,16 @@ In&nbsp;[14]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4gAAAGICAYAAAADL87nAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XtcT/cfwPHX99v9XnRBiVquuQ0zlyGE/YyfyTZmTWaz
 zWXLdQipSMhlZsOYMTGXGRsbu9gWyzVGiJHbyCU/k9L9dn5/tL7rq6J0+abez8fj++h7zvmccz7n
@@ -9283,25 +9449,33 @@ CSGEEDoj7aMQxScJohBlWJ8+fbCxsSE0NBSAsLAwlixZQmRkJEZGRjqOTgghhNANaR+FKD5JEIUo
 o3bu3MnYsWOJjo7GyspK83iHDh1o3bo1c+bM0WF0QgghhG5I+yjEs5EEUQghhBBCCCEEIIvUCCGE
 EEIIIYT4lySIQgghhBBCCCEASRCFEEIIIYQQQvxLEkQhhBBCCCGEEIAkiEIIIYQQQggh/iUJohBC
 CCGEEEIIAP4f9iakHMBVPaoAAAAASUVORK5CYII=
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Comparison-for-different-DGP-of-X">Comparison for different DGP of X<a class="anchor-link" href="#Comparison-for-different-DGP-of-X">&#182;</a></h1>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[15]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">X1</span><span class="p">,</span> <span class="n">Y1</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">lmbd</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">trunc</span> <span class="o">=</span> <span class="s">&#39;left&#39;</span><span class="p">)</span>
 <span class="n">X2</span><span class="p">,</span> <span class="n">Y2</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">lmbd</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">trunc</span> <span class="o">=</span> <span class="s">&#39;right&#39;</span><span class="p">)</span>
 
@@ -9344,15 +9518,16 @@ In&nbsp;[15]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4kAAAJbCAYAAABJr9HFAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xl8FdX9//H3JAFCNiDsiwoIQUBBLc3XVsALaAGRBnAD
 FQF3QNxKi4CQhLVWhSoI1FoxIItaFxRZRMoFKehPELCERVABA7LJkhASyDK/PwIjkS0hc+/cuff1
@@ -11157,29 +11332,43 @@ HaoQhZ7sbipEEbF582ZGjhxJWFgYFhYWmsfd3d35z3/+w/vvv0+rVq0AUKlUKIqCm5sb+/bt01XI
 QgghRIF4UY5s2rQpP/zwA1FRURgaGmqe69OnD8uXL9dFuEIUejJIFEIIIYQQQgihIdNNhRBCCCGE
 EEJoyCBRCCGEEEIIIYSGDBKFEEIIIYQQQmjIIFEIIYQQQgghhIYMEoUQQgghhBBCaPwfQK/FBL15
 SbwAAAAASUVORK5CYII=
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Conditional-variance-and-confidence-intervals">Conditional variance and confidence intervals<a class="anchor-link" href="#Conditional-variance-and-confidence-intervals">&#182;</a></h1>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Leave-one-out-errors">Leave-one-out errors<a class="anchor-link" href="#Leave-one-out-errors">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[16]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">ktype</span><span class="p">):</span>
     <span class="n">ehat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
@@ -11191,18 +11380,26 @@ In&nbsp;[16]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Estimate-variance">Estimate variance<a class="anchor-link" href="#Estimate-variance">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[23]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">N</span> <span class="o">=</span> <span class="mi">500</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="n">N</span><span class="p">,</span> <span class="n">lmbd</span> <span class="o">=</span> <span class="o">.</span><span class="mi">2</span><span class="p">)</span>
 
@@ -11220,18 +11417,26 @@ In&nbsp;[23]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Plot-the-results">Plot the results<a class="anchor-link" href="#Plot-the-results">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[24]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -11267,15 +11472,16 @@ In&nbsp;[24]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAsQAAALDCAYAAAASUBY7AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xl4jGf3wPHvZN9DRBBr1L7WWlttpfYWbRU/LV1QW+07
 IcFLW7W8SrXV5S2p1trSVrWWlBCqQRBLEkIESUQi+z7z++OWkdWWZbKcz3XNJWaeeeaezGTmPPdz
@@ -13115,34 +13321,54 @@ LV26VO9YAABCwCAGAJgHpqamqKSkhGKxGLW2tpLb7dY7EgCAMHAPMQDAPJCdnU02m43C4TDt3btX
 k8rLy/WOBgAgBAxiAADBVVVV0eLFi6m9vZ2IiC5evEitra30/PlzysjI0DkdAMDfD4MYAEBggUCA
 jhw5QpIkkcViSbzucDhow4YN1NLSomM6AAAxYBADAAAAQFrDh+oAAAAAIK1hEAMAAABAWsMgBgAA
 AIC0hkEMAAAAAGkNgxgAAAAA0hoGMQAAAACktX8AUIUi1OH5WZwAAAAASUVORK5CYII=
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Bandwidth-selection">Bandwidth selection<a class="anchor-link" href="#Bandwidth-selection">&#182;</a></h1>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Cross-validation-criterion">Cross-validation criterion<a class="anchor-link" href="#Cross-validation-criterion">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><span class="math">\[\tilde{e}_{i}\left(h\right)=Y_{i}-\tilde{m}_{-i}\left(X_{i},h\right)\]</span></p>
-<p><span class="math">\[CV\left(h\right)=\frac{1}{n}\sum_{i=1}^{n}\tilde{e}_{i}\left(h\right)^{2}\]</span></p>
-<p><span class="math">\[\hat{h}=\arg\min_{h\geq h_{l}}CV\left(h\right)\]</span></p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>$$\tilde{e}_{i}\left(h\right)=Y_{i}-\tilde{m}_{-i}\left(X_{i},h\right)$$</p>
+<p>$$CV\left(h\right)=\frac{1}{n}\sum_{i=1}^{n}\tilde{e}_{i}\left(h\right)^{2}$$</p>
+<p>$$\hat{h}=\arg\min_{h\geq h_{l}}CV\left(h\right)$$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[56]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">N</span> <span class="o">=</span> <span class="mi">500</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">N</span> <span class="o">=</span> <span class="n">N</span><span class="p">)</span>
 
@@ -13174,15 +13400,16 @@ In&nbsp;[56]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAn0AAAFGCAYAAAAfJik+AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XtcVVX+//EXioZyDnhHyJTMKMMgG0srL3gptZoKdUwx
 r0xOZjM1l/p15ZKMRpZ2MTNSs8yYycuUdpFCJDU1a0yaQIcvWkcxBRXkqiKwf3/s8RSCinEOBzjv
@@ -13535,25 +13762,33 @@ kJ6e7tR/8eLFUBTFMbmyv78/Fi1ahOjoaKd+4z/v378fVqsVRqMRmZmZyMzMdGq3WCzYtm0bAgMD
 8eGHH0Kj0Uwa46VLlxATE3Pd9qu3vdH+iMhzaIT/DSQimjESEhKwb98+LFmyZLpDIaIZhkUfERER
 kQfg410iIiIiD8Cij4iIiMgDsOgjIiIi8gAs+oiIiIg8AIs+IiIiIg/wP/iJz35y6qeeAAAAAElF
 TkSuQmCC
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Plot-the-(optimized)-fit">Plot the (optimized) fit<a class="anchor-link" href="#Plot-the-(optimized)-fit">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[57]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="c">#plt.plot(U, doppler(U), lw = 2, color = &#39;blue&#39;, label = &#39;True&#39;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">Yhat</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">shat</span><span class="p">,</span> <span class="n">Yhat</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">shat</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&#39;+2s&#39;</span><span class="p">)</span>
@@ -13568,15 +13803,16 @@ In&nbsp;[57]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAFECAYAAABI0mi7AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XlcVNX7wPHPDPsqoIIgICqKaIKaS2oqri1qJllZWpal
 ZZoauS8IuFu5a5bVL9fUvu6pbZrmQq4lihsqq4ooIPs2zP39cRlgYFBUYAY979eLF3DnztwzbPPw
@@ -14785,9 +15021,10 @@ y+3bt5kwYQJbtmyhTp061K9fnwEDBuDu7q7roQkhxANkJk4IIXIZM2YMvXr1ok2bNlSsWJG5c+cy
 fPhw0tLSUBSFlJQU0tPTURSF1NRU0tLSdD1kIcR/lOxOFUKILNu3b2fMmDH4+/tjaWmZc32HDh1o
 0aIFHTt2pF27dgBoNBoURaFt27b88ccfuhqyEOI/TII4IYQQQogSSJZThRBCCCFKIAnihBBCCCFK
 IAnihBBCCCFKIAnihBBCCCFKIAnihBBCCCFKoP8DB0R4Wip8f+4AAAAASUVORK5CYII=
-">
-
+"
+>
 </div>
+
 </div>
 
 </div>

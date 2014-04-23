@@ -1767,15 +1767,22 @@ init_mathjax();
 </header>
 
   <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Set up the environment.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[1]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">ps</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -1784,17 +1791,25 @@ In&nbsp;[1]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Printing options for nicer output.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[2]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
 <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">suppress</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 <span class="n">ps</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">&#39;float_format&#39;</span><span class="p">,</span> <span class="s">&#39;{:8.3f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
@@ -1802,23 +1817,36 @@ In&nbsp;[2]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Import-data">Import data<a class="anchor-link" href="#Import-data">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-The short rate proxy is 30-day T-note zero-coupon yield.
-<p>
-<p>More details on how the data set was created are <a href="../../../../../blog/2014/04/21/analyze-yields/">here</a>.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The short rate proxy is 30-day T-note zero-coupon yield.<p>
+More details on how the data set was created are <a href="../../../../../blog/2014/04/21/analyze-yields/">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[3]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">rates</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="s">&#39;new_rates.h5&#39;</span><span class="p">,</span> <span class="s">&#39;rates&#39;</span><span class="p">)</span>
 <span class="n">rates</span><span class="p">[[</span><span class="mi">30</span><span class="p">,</span><span class="mi">360</span><span class="p">,</span><span class="mi">1440</span><span class="p">,</span><span class="mi">2880</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rates</span><span class="p">[</span><span class="mi">30</span><span class="p">])[:</span><span class="mi">1000</span><span class="p">]</span>
@@ -1828,15 +1856,16 @@ In&nbsp;[3]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeUAAAFpCAYAAACiQjDBAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXd4FHX6wD9bkk1vJPTeQyAJTRAFg6KIBX4CghQLeOqJ
 p4cn4iEWEBE5FFQU+ykqggUEEQHFIxAJHRJ6J5QQID3ZJJtt8/tjZnZnN4UEUpZ1Ps+TJzt93plk
@@ -2930,35 +2959,54 @@ iEQiy1UuEf2EP/Qi0ojf78ejR4+QSCQQi8Xw+PFjAEAsFkNBQQGSySQ6OjqsRrxq1Sp8+fIFQGrT
 xxEMBtHX14e6ujq4XC50dnbCMAzU19djcnISyWQStbW1aGpqsjsSkWOwKRMRESmCy9dERESKYFMm
 IiJSBJsyERGRItiUiYiIFMGmTEREpAg2ZSIiIkWwKRMRESmCTZmIiEgR/wC2cOgEZ9qlnAAAAABJ
 RU5ErkJggg==
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Cox-Ingersoll-Ross-model">Cox-Ingersoll-Ross model<a class="anchor-link" href="#Cox-Ingersoll-Ross-model">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><span class="math">\[
+<p>$$
 dr_{t}=\kappa\left(\mu-r_{t}\right)dt+\sigma\sqrt{r_{t}}dW_{t}
-\]</span></p>
+$$</p>
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-Below we define the class for CIR process together with a few estimation methods applicable for it.
-<p>
-<p>More details of estimation of diffusion processes can be found <a href="../../../../../blog/2014/04/21/diffusion-estimation/">here</a>.</p>
+<p>Below we define the class for CIR process together with a few estimation methods applicable for it.<p>
+More details of estimation of diffusion processes can be found <a href="../../../../../blog/2014/04/21/diffusion-estimation/">here</a>.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[4]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">class</span> <span class="nc">CIR</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -3007,18 +3055,26 @@ In&nbsp;[4]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Estimate-objective-parameters-of-the-model">Estimate objective parameters of the model<a class="anchor-link" href="#Estimate-objective-parameters-of-the-model">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[5]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">cir</span> <span class="o">=</span> <span class="n">CIR</span><span class="p">()</span>
 <span class="n">cir</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="mf">1.</span>
 <span class="n">theta_ols</span> <span class="o">=</span> <span class="n">cir</span><span class="o">.</span><span class="n">estimate_ols_euler</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
@@ -3032,13 +3088,14 @@ In&nbsp;[5]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 OLS =  [ 0.012  5.597  0.021]
 MLE =  [ 0.013  3.586  0.035]
@@ -3052,19 +3109,32 @@ Feller condition:  True
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Transform-analysis">Transform analysis<a class="anchor-link" href="#Transform-analysis">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>More details on how transforms of stochastic processes work can be found <a href="../../../../../blog/2014/04/21/vasicek-bond-pricing/">here</a>.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[6]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">scipy.integrate</span> <span class="kn">as</span> <span class="nn">si</span>
 <span class="kn">import</span> <span class="nn">functools</span>
 
@@ -3110,26 +3180,44 @@ In&nbsp;[6]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Compute-yields-given-the-risk-price">Compute yields given the risk price<a class="anchor-link" href="#Compute-yields-given-the-risk-price">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We consider two optons for market price of risk: <span class="math">\[
+<p>We consider two optons for market price of risk:
+$$
 \Lambda_{1t}=\lambda_{1}r_{t}^{-1/2},\quad\Lambda_{2t}=\lambda_{2}r_{t}^{1/2}.
-\]</span></p>
-This produces two risk-neutral models for the short interest rate:
-
+$$</p>
+<p>This produces two risk-neutral models for the short interest rate:
+\begin{eqnarray*}
+dr_{t} &amp; = &amp; \kappa\left[\left(\mu-\frac{\lambda_{1}\sigma}{\kappa}\right)-r_{t}\right]dt+\sigma r_{t}^{1/2}dW_{t}^{Q}.\\
+dr_{t} &amp; = &amp; \left(\kappa-\lambda_{2}\sigma\right)\left[\frac{\kappa\mu}{\kappa-\lambda_{2}\sigma}-r_{t}\right]dt+\sigma r_{t}^{1/2}dW_{t}^{Q}.
+\end{eqnarray*}</p>
 <p>Below we implement two functions that change objective parameters into risk-neutral ones, and apply numerical transform method to compute model implied yields given the current short rate, maturities, and the risk price parameter.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[7]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">yields1</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
     <span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">theta_mle</span>
     <span class="c"># Feller condition for CIR:</span>
@@ -3166,17 +3254,25 @@ In&nbsp;[7]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Illustrate how these functions work:</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[8]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">price</span> <span class="o">=</span> <span class="o">-.</span><span class="mi">5</span>
 <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">1e1</span><span class="p">)</span>
 <span class="n">x0</span> <span class="o">=</span> <span class="mf">1.5</span>
@@ -3191,15 +3287,16 @@ In&nbsp;[8]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXgAAAEACAYAAAC57G0KAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3XlUVFeeB/AvuEUWFUEWAcMiCghWlWLcE0RBTVwQTaJR
 MWIjSdpOTJuZnHS6Z7B72mimuzPa5mTQdsElGpOoiaPgEgWJikZZxFZQEZRNtFhkEymoO3+8tiJB
@@ -3393,28 +3490,42 @@ pKQkYWZmJhQKhVAqlUKpVIq4uDjZ67p48aJQqVRCoVAIf39/8emnnwohhOx1PZSQkKAbRSNnTTdu
 hBBr1qwRvr6+ws/PT4SHh4u6ujrZ6xo/frzw9fUVCoVCHD9+XAhh+PfqafPyz3/+s/D09BSDBw8W
 8fHxLW6fJzoREZkoXrKPiMhEMeCJiEwUA56IyEQx4ImITBQDnojIRDHgiYhMFAOeiMhEMeCJiEzU
 /wPvBWsM+z/MmQAAAABJRU5ErkJggg==
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Calibrate-the-risk-price">Calibrate the risk price<a class="anchor-link" href="#Calibrate-the-risk-price">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Below we define the function that, given the risk price parameter vector, computes two version of the yields, compares them to the data, and returns Root Mean Squared Error (RMSE) indexed by the input parameter.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[9]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">rmse</span><span class="p">(</span><span class="n">price</span><span class="p">):</span>
     <span class="n">RMSE1</span><span class="p">,</span> <span class="n">RMSE2</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">price</span><span class="p">):</span>
@@ -3428,17 +3539,25 @@ In&nbsp;[9]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's try it!</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let&#39;s try it!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[10]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Subset the term structure to make code run faster</span>
 <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rates</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <span class="n">H</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
@@ -3456,13 +3575,14 @@ In&nbsp;[10]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 The price is too big!!! 0.43 0.38
 The price is too big!!! 0.57 0.38
@@ -3476,10 +3596,10 @@ Wall time: 2min 11s
 </div>
 </div>
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_area"><div class="prompt"></div>
 
 
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW4AAAEPCAYAAABiCi5wAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xd8FHX+x/HXptNCQkuAAEF6CUnoIkhEkqBelENPAVFC
 0PsJJ5zIIVhOPSxwFvQA5c4CAQvqnacoaiSUBfGkCwRReqgJIIEUsim7md8f424S0jZbMjvJ5/l4
@@ -3720,24 +3840,32 @@ I8N2Vabc3FwsFgvx8fG8+eabmM1mQG2/5Ofn180vIISdpHCLeqNHjx688cYb9O7dm+zsbKZNm1bl
 sr6+vnz88cfMmDGDqKgo4uPjKSws5IEHHqB3797079+fiIgIpk2bZiviQngKGQ4o6oX09HQSEhJI
 S0vTOooQbid73KLeaEjXHBQNm+xxCyGEzsgetxBC6IwUbiGE0Bkp3EIIoTNSuIUQQmekcAshhM5I
 4RZCCJ35f8VW5fQDNpmrAAAAAElFTkSuQmCC
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here are the optimal values of price parameter for each model and corresponding RMSE.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[11]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">best_price1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">RMSE</span><span class="p">[</span><span class="s">&#39;RMSE1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">())</span>
 <span class="n">best_price2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">RMSE</span><span class="p">[</span><span class="s">&#39;RMSE2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">())</span>
 <span class="n">best_RMSE1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">RMSE</span><span class="p">[</span><span class="s">&#39;RMSE1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
@@ -3751,13 +3879,14 @@ In&nbsp;[11]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Best price 1 = -3.43
 Best price 2 = 0.29
@@ -3772,19 +3901,32 @@ Best RMSE 2 = 0.69
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Plot-term-structures-for-one-day">Plot term structures for one day<a class="anchor-link" href="#Plot-term-structures-for-one-day">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Use the optimal price parameters to corresponding yields. Also illustrate it for one day.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[12]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">y1</span> <span class="o">=</span> <span class="n">yields1</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">best_price1</span><span class="p">)</span>
 <span class="n">y2</span> <span class="o">=</span> <span class="n">yields1</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">best_price2</span><span class="p">)</span>
 <span class="n">implied1</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
@@ -3801,13 +3943,14 @@ In&nbsp;[12]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                     data   model1   model2
 date       days                           
@@ -3823,10 +3966,10 @@ date       days
 </div>
 </div>
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_area"><div class="prompt"></div>
 
 
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAEPCAYAAABfmE8WAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xl4FGW6NvC7l+wJ2YBAFgiEBAgBEkgQo9EwiIgDyCay
 yCY6zKUoeHTU4xw/Rx22EY4SR884CgLiAT3KuLCNAhMGlYAIAUQFxERCAkEgCdl7e78/iu5KIEsn
@@ -4029,9 +4172,10 @@ Yv369ejatSt69uyJIUOGIDAwEH/5y1/QpUsX3HTTTaiqqsLatWsBABcuXEDv3r1x4cIFdOrUCSaT
 CSNGjEBFRQWEEJg1axaeeuoplT8VUfswkZNX+PDDD/HZZ5/ZBvkn8iR6tTtApLRHH30U//znP7F9
 +3a1u0KkCB6RExG5OZ7sJCJyc0zkRERujomciMjNMZETEbk5JnIiIjfHRE5E5Ob+P+h8DWeMc1Qb
 AAAAAElFTkSuQmCC
-">
-
+"
+>
 </div>
+
 </div>
 
 </div>

@@ -1767,15 +1767,22 @@ init_mathjax();
 </header>
 
   <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Set up the environment.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[1]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">log</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">ps</span>
@@ -1785,17 +1792,25 @@ In&nbsp;[1]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Printing options for nicer output.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[2]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
 <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">suppress</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 <span class="n">ps</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">&#39;float_format&#39;</span><span class="p">,</span> <span class="s">&#39;{:8.3f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
@@ -1803,21 +1818,35 @@ In&nbsp;[2]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Generic-class-for-diffusion-models">Generic class for diffusion models<a class="anchor-link" href="#Generic-class-for-diffusion-models">&#182;</a></h1>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Here we will define a generic class which later will be inherited by more specific model classes. Here we only define functions that will be common for all models. First of all we initialize it as having a single property 'paths' which is set to None.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here we will define a generic class which later will be inherited by more specific model classes. Here we only define functions that will be common for all models. First of all we initialize it as having a single property &#39;paths&#39; which is set to None.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[3]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1827,26 +1856,36 @@ In&nbsp;[3]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Next we define the function that will simulate discrete time paths of a selected diffusion model given parameters, length of paths, and number of simulations. Here we generate paths according to simple Euler discretization scheme.</p>
-Given the generic continuous-time diffusion model
-<p>
-
-we can discretize it as
-<p>
-<p><span class="math">\[
+<p>Given the generic continuous-time diffusion model</p>
+<p><p>
+\begin{equation}
+dY_{t}=\mu\left(Y_{t},\theta_{0}\right)dt+\sigma\left(Y_{t},\theta_{0}\right)dW_{t},
+\end{equation}</p>
+<p>we can discretize it as</p>
+<p><p>
+$$
 Y_{t}\approx Y_t+\mu\left(Y_{t-h},\theta_{0}\right)h+\sigma\left(Y_{t-h},\theta_{0}\right)\sqrt{h}\epsilon_{t}.
-\]</span></p>
+$$</p>
 <p>Hence, define helper functions that convert drift and diffusion functions into approximate location and scale.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[4]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">euler_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">drift</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span>
 
@@ -1859,17 +1898,25 @@ In&nbsp;[4]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here is the method to simulate the data according to Euler discretization scheme.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[5]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">h</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">N</span>
@@ -1889,17 +1936,25 @@ In&nbsp;[5]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Next we want to plot some trajectories. Only a few, hence the argument.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[6]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">plot_trajectories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">print</span> <span class="s">&#39;Simulate data first!&#39;</span>
@@ -1915,17 +1970,25 @@ In&nbsp;[6]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Again, only out of curiosity we want to plot the empirical distribution of the final value across all simulated trajectories.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[7]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">plot_final_distr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">scipy.stats.kde</span> <span class="kn">import</span> <span class="n">gaussian_kde</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -1944,19 +2007,27 @@ In&nbsp;[7]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now we start adding methods for estimation. First, we add generic quasi-likelihood function. Depending on the 'scheme' argument, there are two versions of the likelihood available.</p>
+<p>Now we start adding methods for estimation. First, we add generic quasi-likelihood function. Depending on the &#39;scheme&#39; argument, there are two versions of the likelihood available.</p>
 <p>One version takes Euler approximation as is.</p>
 <p>The second takes exact discretization (analytic first and second moments) and uses it to compute Normal likelihood.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[8]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">quasi_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">scheme</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
     <span class="n">loc</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;euler&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">euler_loc</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">exact_loc</span><span class="p">}</span>
@@ -1970,18 +2041,26 @@ In&nbsp;[8]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It turns out that the GMM methods is common for all models considered here. So we define it for the 'Model' class.</p>
+<p>It turns out that the GMM methods is common for all models considered here. So we define it for the &#39;Model&#39; class.</p>
 <p>The function uses only two exact moments, mean and variance as conditional moment restrictions. The first method defines the moment restrictions.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[9]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">moment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
     <span class="n">loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exact_loc</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta</span><span class="p">)</span>
     <span class="n">scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exact_scale</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta</span><span class="p">)</span>
@@ -1998,17 +2077,25 @@ In&nbsp;[9]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The second method defines GMM objective function.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[10]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">gmm_objective</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">inv</span>
     <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -2022,17 +2109,25 @@ In&nbsp;[10]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Another useful method for estimation, especially of multivariate diffusions with no known density or simple moments, is the Simulated Maximum Likelihood (SML). Below is the likelihood function itself.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[11]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">sml_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
     <span class="c"># M: number of subintervals</span>
@@ -2058,17 +2153,25 @@ In&nbsp;[11]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Next we define three methods responsible for finding the minimum of respective objective functions. Eventually, we will define QMLE, MLE, and GMM estimators, hence three methods.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[12]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">estimate_qmle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">theta0</span><span class="p">,</span> <span class="n">scheme</span><span class="p">):</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quasi_likelihood</span><span class="p">,</span> <span class="n">theta0</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scheme</span><span class="p">),</span>
                    <span class="n">method</span> <span class="o">=</span> <span class="s">&#39;Nelder-Mead&#39;</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;disp&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">})</span>
@@ -2097,36 +2200,56 @@ In&nbsp;[12]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Geometric-Brownian-motion-model">Geometric Brownian motion model<a class="anchor-link" href="#Geometric-Brownian-motion-model">&#182;</a></h1>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-GBM model is normally used as a the most simple example of continuous-time model for the stock price.
-<p>
-<span class="math">\[
+<p>GBM model is normally used as a the most simple example of continuous-time model for the stock price.</p>
+<p><p>
+$$
 \frac{dS_{t}}{S_{t}}=\mu dt+\sigma dW_{t}.
-\]</span>
-<p>
-<span class="math">\[
+$$</p>
+<p><p>
+$$
 d\log S_{t}=\left(\mu-\frac{1}{2}\sigma^{2}\right)dt+\sigma dW_{t}.
-\]</span>
-<p>
-<p><span class="math">\[
+$$</p>
+<p><p>
+$$
 r_{t,h}=\log\frac{S_{t+h}}{S_{t}}=\left(\mu-\frac{1}{2}\sigma^{2}\right)h+\sigma\sqrt{h}\varepsilon_{t+h}.
-\]</span></p>
+$$</p>
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We create a new 'GBM' class which inherits all properties of a generic 'Model' class. For GBM process we only need two parameters, <span class="math">\(\mu\)</span>, and <span class="math">\(\sigma\)</span>.</p>
+<p>We create a new &#39;GBM&#39; class which inherits all properties of a generic &#39;Model&#39; class. For GBM process we only need two parameters, $\mu$, and $\sigma$.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[13]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">class</span> <span class="nc">GBM</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2137,17 +2260,25 @@ In&nbsp;[13]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We chracterize the GBM class by defining the drift and diffusion functions.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[14]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">drift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">theta</span>
     <span class="k">return</span> <span class="n">mu</span> <span class="o">-</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span>
@@ -2162,17 +2293,25 @@ In&nbsp;[14]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this simple model the exact discretization coincides with Euler scheme.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[15]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">exact_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">euler_loc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
 
@@ -2185,17 +2324,25 @@ In&nbsp;[15]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>At this point we can initialize a model object using the class GBM.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[16]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="o">.</span><span class="mo">05</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span>
 <span class="n">theta_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">])</span>
 <span class="n">gbm</span> <span class="o">=</span> <span class="n">GBM</span><span class="p">()</span>
@@ -2203,17 +2350,25 @@ In&nbsp;[16]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Choosing the initial value, length of the time interval, length of the interval for simulation, and number of paths, we simulate the data using a single method which stores the paths in the object.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[17]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">x0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span>
 <span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span>
 <span class="n">gbm</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">theta_true</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
@@ -2221,31 +2376,40 @@ In&nbsp;[17]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Calling another method creates a simple plot.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[18]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">gbm</span><span class="o">.</span><span class="n">plot_trajectories</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYcAAAEQCAYAAABbfbiFAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3XdcVfUbwPHPRXCguBXcJIqCIuLANA0cuHLlyL3Q3Kml
 ZvkrNSt3pi0z9xZTc4MrMRy4JzgRDVFwgiJL4Pz++BZKVxRZ9wLP+/Xildx77rnPOS86zznf8Xx1
@@ -2519,44 +2683,66 @@ keQghBBCjyQHIVLp4sWLTJ061dBhCJEhJDkIkUr79+/HycnJ0GEIkSEkOQiRCp6enixevJhbt24l
 VsEUIjuR2kpCpFLbtm3Ztm2bocMQIkPIk4MQqRASEoKVlZWhwxAiw0hyECIVjh8/jrOzM8ePHycy
 MtLQ4QiR7iQ5CJEKpUuXJjg4mIiICMzNzQ0djhDpTvochBBC6JEnByGEEHokOQghhNAjyUEIIYQe
 SQ5CCCH0SHIQQgihR5KDEEIIPZIchBBC6JHkIIQQQs//AWAlynI0pZ4YAAAAAElFTkSuQmCC
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Use the first path for furtehr estimation.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[19]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">logS</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">.</span><span class="n">paths</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="OLS-estimation">OLS estimation<a class="anchor-link" href="#OLS-estimation">&#182;</a></h3>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>OLS estimation method is different for all models considered in this document. Here is the one for GBM.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[20]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">estimate_ols</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="kn">as</span> <span class="nn">sm</span>
     <span class="n">Y</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -2571,30 +2757,39 @@ In&nbsp;[20]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's try it. Should be close to the truth.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let&#39;s try it. Should be close to the truth.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[21]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">time</span> <span class="n">theta_ols</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">.</span><span class="n">estimate_ols</span><span class="p">(</span><span class="n">logS</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">theta_ols</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CPU times: user 329 ms, sys: 24.8 ms, total: 354 ms
 Wall time: 334 ms
@@ -2608,19 +2803,32 @@ Wall time: 334 ms
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Maximum-Likelihood-estimation">Maximum Likelihood estimation<a class="anchor-link" href="#Maximum-Likelihood-estimation">&#182;</a></h3>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here we define two likelihood functions. It turns out that for this simplistic model, all of the likelihoods coincide. The true distribution is normal and two discretizations coincide.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[22]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">quasi_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">scheme</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">GBM</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">quasi_likelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">scheme</span><span class="p">)</span>
 
@@ -2633,17 +2841,25 @@ In&nbsp;[22]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's try all three estimators. Note that estimation method is inherited from the parent 'Model' class.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let&#39;s try all three estimators. Note that estimation method is inherited from the parent &#39;Model&#39; class.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[23]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">time</span> <span class="n">theta_qmle_euler</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">.</span><span class="n">estimate_qmle</span><span class="p">(</span><span class="n">logS</span><span class="p">,</span> <span class="n">theta_ols</span><span class="p">,</span> <span class="s">&#39;euler&#39;</span><span class="p">)</span>
 <span class="o">%</span><span class="k">time</span> <span class="n">theta_qmle_exact</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">.</span><span class="n">estimate_qmle</span><span class="p">(</span><span class="n">logS</span><span class="p">,</span> <span class="n">theta_ols</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">)</span>
 <span class="o">%</span><span class="k">time</span> <span class="n">theta_mle</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">.</span><span class="n">estimate_mle</span><span class="p">(</span><span class="n">logS</span><span class="p">,</span> <span class="n">theta_ols</span><span class="p">)</span>
@@ -2657,13 +2873,14 @@ In&nbsp;[23]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CPU times: user 14 ms, sys: 129 µs, total: 14.1 ms
 Wall time: 13 ms
@@ -2686,15 +2903,22 @@ Wall time: 230 ms
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To finish off with GBM estimation we use some pandas goodness to show our results in one nice table.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[24]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">theta_true</span><span class="p">,</span> <span class="n">theta_ols</span><span class="p">,</span> <span class="n">theta_qmle_euler</span><span class="p">,</span> <span class="n">theta_qmle_exact</span><span class="p">,</span> <span class="n">theta_mle</span><span class="p">,</span> <span class="n">theta_sml</span><span class="p">]</span>
 <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;True&#39;</span><span class="p">,</span> <span class="s">&#39;OLS&#39;</span><span class="p">,</span> <span class="s">&#39;QMLE euler&#39;</span><span class="p">,</span> <span class="s">&#39;QMLE exact&#39;</span><span class="p">,</span> <span class="s">&#39;MLE&#39;</span><span class="p">,</span> <span class="s">&#39;SML&#39;</span><span class="p">]</span>
 <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;mu&#39;</span><span class="p">,</span><span class="s">&#39;sigma&#39;</span><span class="p">]</span>
@@ -2707,13 +2931,14 @@ In&nbsp;[24]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                  mu    sigma     logL
 True          0.050    0.100    0.911
@@ -2733,20 +2958,35 @@ SML           0.051    0.100    0.910
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Vasicek-model">Vasicek model<a class="anchor-link" href="#Vasicek-model">&#182;</a></h1>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-
+<p>\begin{equation}
+dr_{t}=\kappa\left(\mu-r_{t}\right)dt+\sigma dW_{t}.
+\end{equation}</p>
 <p>This model has three parameters, hence the new class is slightly different.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[25]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">class</span> <span class="nc">Vasicek</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2765,22 +3005,30 @@ In&nbsp;[25]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-Exact discretization is based on two conditional moments:
-<p>
-<p><span class="math">\[
-E_{t}\left[r_{t+h}\right]   =   r_{t}e^{-\kappa h}+\mu\left(1-e^{-\kappa h}\right),\\
-V_{t}\left[r_{t+h}\right]   =   \frac{\sigma^{2}}{2\kappa}\left(1-e^{-2\kappa h}\right).\]</span></p>
-<p>Note that the likelihood function is evaluated at the difference between two consequtive values, <span class="math">\(x_{t+h}-x_t\)</span>.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Exact discretization is based on two conditional moments:</p>
+<p><p>
+$$
+E_{t}\left[r_{t+h}\right]	=	r_{t}e^{-\kappa h}+\mu\left(1-e^{-\kappa h}\right),\\
+V_{t}\left[r_{t+h}\right]	=	\frac{\sigma^{2}}{2\kappa}\left(1-e^{-2\kappa h}\right).$$</p>
+<p>Note that the likelihood function is evaluated at the difference between two consequtive values, $x_{t+h}-x_t$.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[26]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">exact_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">theta</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span> <span class="o">-</span> <span class="n">kappa</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="p">)</span>
@@ -2797,17 +3045,25 @@ In&nbsp;[26]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we can create the Vasicek model object, simulate somepaths, and plot them.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[27]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span>
 <span class="n">theta_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">])</span>
 <span class="n">x0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">1e3</span>
@@ -2819,31 +3075,40 @@ In&nbsp;[27]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Plot a few.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[28]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">vasicek</span><span class="o">.</span><span class="n">plot_trajectories</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAY8AAAEQCAYAAABIqvhxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvXuUHGd95/2p6qq+91w0M7rLlmQJS4pv8hobEgx2uBjt
 goE4OXiTfeM9IbwO2CGc4N0kL3AwCZsTb8guSbz74rAn7OIE4wR4cQBjYxsE2AaLYMnY+CZb99GM
@@ -3833,35 +4098,38 @@ ksbgQURESWPwICKipDF4EBFR0hg8iHR0+/ZtnDx50uhhEEnH4EGko2vXrsHj8Rg9DCLpGDyIdDI4
 OIhz587h3r174V1MicyCe1sR6ejFF1/E5cuXjR4GkXTMPIh0Mjs7ix07dhg9DCJdMHgQ6eTmzZto
 bGzEzZs3sbS0ZPRwiKRi8CDSSUVFBXw+H/x+PzZs2GD0cIikYs+DiIiSxsyDiIiSxuBBRERJY/Ag
 IqKkMXgQEVHSGDyIiChpDB5ERJQ0Bg8iIkoagwcRESXt/1UvMB2FtwDqAAAAAElFTkSuQmCC
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[29]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">vasicek</span><span class="o">.</span><span class="n">plot_final_distr</span><span class="p">()</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX8AAAEPCAYAAACqZsSmAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3XmcjvX+x/HXMMouhbJMYQiTbZBB0S0xiLIlSxuhTv0q
 Lb86nV+dtDxO6nQqyaEcElkqY60sTUwdWyKlgxKDBglZZ2wz4/r98W3mUJZZ7uv+Xvd9vZ+Pxzwa
@@ -4032,44 +4300,66 @@ Qit8RX7n6aef5tixYxw9epSYmBieeOIJ25FEgk7FX+R3MjMzadasGSVKlGD58uWubissYovaPiK/
 s3fvXjIyMkhPT+fo0aO244i4QiN/kd+56aab6NevH6mpqfz888+MHDnSdiSRoHNlS2eRcDVx4kQu
 vPBC+vTpw8mTJ2nVqhUpKSkEAgHb0USCSiN/EREfUs9fRMSHVPxFRHxIxV9ExIdU/EVEfEjFX0TE
 h1T8RUR8SMVfRMSHVPxFRHzo/wHxiakNMDEMhQAAAABJRU5ErkJggg==
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For further estimation we will take only the first path out of all simulated.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[30]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">r</span> <span class="o">=</span> <span class="n">vasicek</span><span class="o">.</span><span class="n">paths</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="OLS-estimation">OLS estimation<a class="anchor-link" href="#OLS-estimation">&#182;</a></h3>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Given the differences in Euler and exact discretization, we can define two corresponding methods for estimation of structural parameters.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[31]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">estimate_ols_euler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="kn">as</span> <span class="nn">sm</span>
     <span class="n">Y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -4096,17 +4386,25 @@ In&nbsp;[31]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's try both.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let&#39;s try both.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[32]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">time</span> <span class="n">theta_ols_euler</span> <span class="o">=</span> <span class="n">vasicek</span><span class="o">.</span><span class="n">estimate_ols_euler</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 <span class="o">%</span><span class="k">time</span> <span class="n">theta_ols_exact</span> <span class="o">=</span> <span class="n">vasicek</span><span class="o">.</span><span class="n">estimate_ols_exact</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
@@ -4116,13 +4414,14 @@ In&nbsp;[32]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CPU times: user 3.71 ms, sys: 0 ns, total: 3.71 ms
 Wall time: 2.97 ms
@@ -4139,22 +4438,37 @@ Wall time: 1.73 ms
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Maximum-Likelihood-estimation">Maximum Likelihood estimation<a class="anchor-link" href="#Maximum-Likelihood-estimation">&#182;</a></h3>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-The conditional distribution is still normal:
-<p>
-
+<p>The conditional distribution is still normal:</p>
+<p><p>
+\begin{equation}
+r_{t+h}|r_{t}\sim N\left(E_{t}\left[r_{t+h}\right],V_{t}\left[r_{t+h}\right]\right).
+\end{equation}</p>
 <p>So the likelihood functions are the same except for the number of parameters.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[33]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">quasi_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">scheme</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Vasicek</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">quasi_likelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">scheme</span><span class="p">)</span>
 
@@ -4167,17 +4481,25 @@ In&nbsp;[33]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>When we try all three, the last two should coincide.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[34]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">time</span> <span class="n">theta_qmle_euler</span> <span class="o">=</span> <span class="n">vasicek</span><span class="o">.</span><span class="n">estimate_qmle</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta_ols_exact</span><span class="p">,</span> <span class="s">&#39;euler&#39;</span><span class="p">)</span>
 <span class="o">%</span><span class="k">time</span> <span class="n">theta_qmle_exact</span> <span class="o">=</span> <span class="n">vasicek</span><span class="o">.</span><span class="n">estimate_qmle</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta_ols_exact</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">)</span>
 <span class="o">%</span><span class="k">time</span> <span class="n">theta_mle</span> <span class="o">=</span> <span class="n">vasicek</span><span class="o">.</span><span class="n">estimate_mle</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta_ols_exact</span><span class="p">)</span>
@@ -4191,13 +4513,14 @@ In&nbsp;[34]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CPU times: user 65.6 ms, sys: 75 µs, total: 65.7 ms
 Wall time: 64.6 ms
@@ -4220,19 +4543,32 @@ Wall time: 812 ms
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="GMM-estimation">GMM estimation<a class="anchor-link" href="#GMM-estimation">&#182;</a></h3>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Since the GMM estimator is common for all models, except for number of parameters and their names, we can already try it here.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[35]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">time</span> <span class="n">theta_gmm</span> <span class="o">=</span> <span class="n">vasicek</span><span class="o">.</span><span class="n">estimate_gmm</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta_ols_exact</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">theta_gmm</span>
@@ -4240,13 +4576,14 @@ In&nbsp;[35]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CPU times: user 41.7 ms, sys: 25 µs, total: 41.7 ms
 Wall time: 40.7 ms
@@ -4260,19 +4597,32 @@ Wall time: 40.7 ms
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Comparison">Comparison<a class="anchor-link" href="#Comparison">&#182;</a></h3>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To simplify our work even more, we write the function that prints all estimation results, and exact-likelihood evaluated at each estimate. Next the models are ranked by log-likelihood.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[36]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">compare_estimators</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">theta_true</span><span class="p">):</span>
     <span class="n">theta_ols_euler</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">estimate_ols_euler</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">theta_ols_exact</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">estimate_ols_exact</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -4292,29 +4642,38 @@ In&nbsp;[36]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Try this function.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[37]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">compare_estimators</span><span class="p">(</span><span class="n">vasicek</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">theta_true</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
               kappa       mu    sigma     logL  Rank
 True          1.500    0.500    0.100    1.439     6
@@ -4336,22 +4695,35 @@ GMM           1.344    0.496    0.097    1.443     4
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Cox-Ingersoll-Ross-model">Cox-Ingersoll-Ross model<a class="anchor-link" href="#Cox-Ingersoll-Ross-model">&#182;</a></h1>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><span class="math">\[
-dr_{t}=\kappa\left(\mu-r_{t}\right)dt+\sigma\sqrt{r_{t}}dW_{t}
-\]</span></p>
-<p>This model also has only three parameters. In the initial definition we add the method that checks the Feller condition on the positivity of the process, <span class="math">\(2\kappa\mu&gt;\sigma^2\)</span>.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>$$
+dr_{t}=\kappa\left(\mu-r_{t}\right)dt+\sigma\sqrt{r_{t}}dW_{t}
+$$</p>
+<p>This model also has only three parameters. In the initial definition we add the method that checks the Feller condition on the positivity of the process, $2\kappa\mu&gt;\sigma^2$.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[38]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">class</span> <span class="nc">CIR</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -4374,19 +4746,28 @@ In&nbsp;[38]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Exact discretization is based on two conditional moments: <span class="math">\[
-E_{t}\left[r_{t+h}\right]   =   r_{t}e^{-\kappa h}+\mu\left(1-e^{-\kappa h}\right),\\
-V_{t}\left[r_{t+h}\right]   =   \frac{\sigma^{2}}{\kappa}r_{t}e^{-\kappa h}\left(1-e^{-\kappa h}\right)+\frac{\sigma^{2}}{2\kappa}\left(1-e^{-\kappa h}\right)^{2}\]</span></p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Exact discretization is based on two conditional moments:
+$$
+E_{t}\left[r_{t+h}\right]	=	r_{t}e^{-\kappa h}+\mu\left(1-e^{-\kappa h}\right),\\
+V_{t}\left[r_{t+h}\right]	=	\frac{\sigma^{2}}{\kappa}r_{t}e^{-\kappa h}\left(1-e^{-\kappa h}\right)+\frac{\sigma^{2}}{2\kappa}\left(1-e^{-\kappa h}\right)^{2}$$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[39]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">exact_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">theta</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span> <span class="o">-</span> <span class="n">kappa</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="p">)</span>
@@ -4403,17 +4784,25 @@ In&nbsp;[39]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Lte's create the object and check that parameters are valid.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lte&#39;s create the object and check that parameters are valid.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[40]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span>
 <span class="n">theta_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">])</span>
 <span class="n">x0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">1e2</span>
@@ -4426,50 +4815,59 @@ In&nbsp;[40]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt output_prompt">
+<div class="output_area"><div class="prompt output_prompt">
     Out[40]:</div>
-<div class="box-flex1 output_subarea output_pyout">
 
 
+<div class="output_text output_subarea output_pyout">
 <pre>
 True
 </pre>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now simulate some paths, and plot a few.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[41]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">cir</span><span class="o">.</span><span class="n">plot_trajectories</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAY8AAAEQCAYAAABIqvhxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvXmUHNWdJvrFHrlV1iqpVCWpEBJIbiMsWwjbbU3LY0BW
 j1sG2u9ZbZrTC2NjpvnDPT4Pz+tpj4WnPW3mPLdngLEfjRcexzbm9MGNunsaGWOQweBGIKCRLQm0
@@ -5470,35 +5868,38 @@ iHEoeBBCCFGNggchhBDVKHgQQghRjYIHIYQQ1Sh4EEIIUY2CByGEENUoeBBCCFGNggchOrpw4QJ2
 PGl0MwjRHGUehOhkeHgYTqfT6GYQogsKHoTo5Ny5c1i8eDHOnTuH8fFxo5tDiKYoeBCiE7fbjWAw
 iLGxMRQWFhrdHEI0RWMehBBCVKPMgxBCiGoUPAghhKhGwYMQQohqFDwIIYSoRsGDEEKIahQ8CCGE
 qEbBgxBCiGoUPAghhKj2X1c9gJV8PD4ZAAAAAElFTkSuQmCC
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[42]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">cir</span><span class="o">.</span><span class="n">plot_final_distr</span><span class="p">()</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX8AAAEPCAYAAACqZsSmAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xt8jvX/B/DXPVs5ZZHF2ApzmI0dMmSMOxGT+lISeuyB
 HBMR+vbN4euYQw7f0DeLL34p6UBlyvlwi1kNyWIhNmWiohw2ZrZdvz/emaJxz31f9+e67uv1fDz2
@@ -5654,44 +6055,66 @@ J7rOlStXEBMTgzJlyiAlJcUQraKJ3I3TPkTXOX36NHJycpCdnY1Lly6pjkOkC478ia7z+OOPo0eP
 HsjIyMDJkycxb9481ZGI3E6Xk7yIzGrp0qW488470a1bNxQWFiI2NhYOhwN2u111NCK34sifiMiC
 OOdPRGRBLP5ERBbE4k9EZEEs/kREFsTiT0RkQSz+REQWxOJPRGRBLP5ERBb0/ydk17mpBgtEAAAA
 AElFTkSuQmCC
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For further estimation we will take only the first path out of all simulated.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[43]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">r</span> <span class="o">=</span> <span class="n">cir</span><span class="o">.</span><span class="n">paths</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="OLS-estimation">OLS estimation<a class="anchor-link" href="#OLS-estimation">&#182;</a></h3>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>OLS estimation is very similar to Vasicek model</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[44]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">estimate_ols_euler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="kn">as</span> <span class="nn">sm</span>
     <span class="n">Y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="o">.</span><span class="mi">5</span>
@@ -5722,17 +6145,25 @@ In&nbsp;[44]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's try both.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let&#39;s try both.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[45]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">time</span> <span class="n">theta_ols_euler</span> <span class="o">=</span> <span class="n">cir</span><span class="o">.</span><span class="n">estimate_ols_euler</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 <span class="o">%</span><span class="k">time</span> <span class="n">theta_ols_exact</span> <span class="o">=</span> <span class="n">cir</span><span class="o">.</span><span class="n">estimate_ols_exact</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
@@ -5742,13 +6173,14 @@ In&nbsp;[45]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CPU times: user 2.59 ms, sys: 90 µs, total: 2.68 ms
 Wall time: 2.58 ms
@@ -5765,25 +6197,44 @@ Wall time: 2.9 ms
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Maximum-Likelihood-estimation">Maximum Likelihood estimation<a class="anchor-link" href="#Maximum-Likelihood-estimation">&#182;</a></h3>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The exact distribution is known to be <span class="math">\[
-f\left(\left.r_{t+h}\right|r_{t};\theta\right)=ce^{-u-v}\left(\frac{u}{v}\right)^{q/2}I_{q}\left(2\sqrt{uv}\right),
-\]</span> where <span class="math">\[
-c=\frac{2\kappa}{\sigma^{2}\left(1-e^{-\kappa h}\right)},\quad u=cr_{t}e^{-\kappa h},\quad v=cr_{t+h},\quad q=\frac{2\kappa\mu}{\sigma^{2}}-1,
-\]</span> and <span class="math">\(I_{q}\)</span> is the modified Bessel function of the first kind of order <span class="math">\(q\)</span>. Sometimes, it is useful to work with a transformation <span class="math">\(x_{t+h}=2cr_{t+h}\)</span>. The transition density of <span class="math">\(x_{t+h}\)</span> is <span class="math">\[
-f\left(\left.x_{t+h}\right|x_{t};\theta\right)=f\left(\left.2cr_{t+h}\right|2cr_{t};\theta\right)=\frac{1}{2c}f\left(\left.r_{t+h}\right|r_{t};\theta\right),
-\]</span> which is a noncentral <span class="math">\(\chi^{2}\)</span> with <span class="math">\(2q+2\)</span> degrees of freedom and noncentrality parameter <span class="math">\(2u\)</span>.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The exact distribution is known to be
+$$
+f\left(\left.r_{t+h}\right|r_{t};\theta\right)=ce^{-u-v}\left(\frac{u}{v}\right)^{q/2}I_{q}\left(2\sqrt{uv}\right),
+$$
+where
+$$
+c=\frac{2\kappa}{\sigma^{2}\left(1-e^{-\kappa h}\right)},\quad u=cr_{t}e^{-\kappa h},\quad v=cr_{t+h},\quad q=\frac{2\kappa\mu}{\sigma^{2}}-1,
+$$
+and $I_{q}$ is the modified Bessel function of the first kind of order $q$. Sometimes, it is useful to work with a transformation $x_{t+h}=2cr_{t+h}$. The transition density of $x_{t+h}$ is
+$$
+f\left(\left.x_{t+h}\right|x_{t};\theta\right)=f\left(\left.2cr_{t+h}\right|2cr_{t};\theta\right)=\frac{1}{2c}f\left(\left.r_{t+h}\right|r_{t};\theta\right),
+$$
+which is a noncentral $\chi^{2}$ with $2q+2$ degrees of freedom and noncentrality parameter $2u$.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[46]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">quasi_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">scheme</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">CIR</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">quasi_likelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">scheme</span><span class="p">)</span>
 
@@ -5805,17 +6256,25 @@ In&nbsp;[46]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's try them.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let&#39;s try them.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[47]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">time</span> <span class="n">theta_qmle_euler</span> <span class="o">=</span> <span class="n">cir</span><span class="o">.</span><span class="n">estimate_qmle</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta_ols_exact</span><span class="p">,</span> <span class="s">&#39;euler&#39;</span><span class="p">)</span>
 <span class="o">%</span><span class="k">time</span> <span class="n">theta_qmle_exact</span> <span class="o">=</span> <span class="n">cir</span><span class="o">.</span><span class="n">estimate_qmle</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta_ols_exact</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">)</span>
 <span class="o">%</span><span class="k">time</span> <span class="n">theta_mle</span> <span class="o">=</span> <span class="n">cir</span><span class="o">.</span><span class="n">estimate_mle</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta_ols_exact</span><span class="p">)</span>
@@ -5829,13 +6288,14 @@ In&nbsp;[47]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CPU times: user 60.6 ms, sys: 24 µs, total: 60.6 ms
 Wall time: 59.5 ms
@@ -5858,19 +6318,32 @@ Wall time: 5.87 s
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="GMM-estimation">GMM estimation<a class="anchor-link" href="#GMM-estimation">&#182;</a></h3>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's try it.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let&#39;s try it.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[48]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">time</span> <span class="n">theta_gmm</span> <span class="o">=</span> <span class="n">cir</span><span class="o">.</span><span class="n">estimate_gmm</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta_ols_exact</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">theta_gmm</span>
@@ -5878,13 +6351,14 @@ In&nbsp;[48]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CPU times: user 72.2 ms, sys: 3.91 ms, total: 76.1 ms
 Wall time: 75.2 ms
@@ -5898,28 +6372,36 @@ Wall time: 75.2 ms
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Comparison">Comparison<a class="anchor-link" href="#Comparison">&#182;</a></h3>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[49]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">compare_estimators</span><span class="p">(</span><span class="n">cir</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">theta_true</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
               kappa       mu    sigma     logL  Rank
 True          1.000    0.200    0.200    1.393     2
@@ -5941,19 +6423,32 @@ GMM           0.980    0.195    0.119    0.874     8
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="True-data">True data<a class="anchor-link" href="#True-data">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Here we use Realized Volatility data available at http://realized.oxford-man.ox.ac.uk/media/1366/oxfordmanrealizedvolatilityindices.zip</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here we use Realized Volatility data available at <a href="http://realized.oxford-man.ox.ac.uk/media/1366/oxfordmanrealizedvolatilityindices.zip">http://realized.oxford-man.ox.ac.uk/media/1366/oxfordmanrealizedvolatilityindices.zip</a></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[50]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">zipfile</span>
 <span class="kn">import</span> <span class="nn">StringIO</span>
 <span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
@@ -5975,13 +6470,14 @@ In&nbsp;[50]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
             SPX2.rv
 date               
@@ -5997,10 +6493,10 @@ date
 </div>
 </div>
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_area"><div class="prompt"></div>
 
 
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXwAAAEECAYAAAArlo9mAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJztnX1cVFX+xz8TsKVGjlma61CoMwG1CJpFD6asWQgamVuG
 bCskuWgZa0/bk2a75dPuzy2VtbAUtN1Yy9WweCgzxoeEMEGzsMTCFQbIUhAt5WH4/v64zgwDM3ee
@@ -6261,21 +6757,23 @@ cwZXXXUV2tra8K9//cts5IODg9Hc3AwAuOyyyzBs2DBs3rwZgNDy//LLL/2TEYaxA7+0ZZhOLFmy
 BBs2bMCgQYNwzTXXYPTo0ejbty/+9re/4corr0RMTAzOnj2L9evXY+/evZg9ezYuueQSbN68GSqV
 CnPnzkV9fT3a2towY8YMLFiwwN9ZYhgzbPAZhmEUArt0GIZhFAIbfIZhGIXABp9hGEYhsMFnGIZR
 CGzwGYZhFAIbfIZhGIXABp9hGEYhsMFnGIZRCP8P4/7LKnw/rmcAAAAASUVORK5CYII=
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[51]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">cir</span> <span class="o">=</span> <span class="n">CIR</span><span class="p">()</span>
 <span class="n">cir</span><span class="o">.</span><span class="n">h</span><span class="p">,</span> <span class="n">cir</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">RV</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RV</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mi">25200</span> <span class="p">)</span>
@@ -6299,13 +6797,14 @@ In&nbsp;[51]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
               kappa       mu    sigma     logL
 OLS euler     0.303    1.398    0.368   -0.486

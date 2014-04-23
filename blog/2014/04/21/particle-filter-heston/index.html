@@ -1767,27 +1767,53 @@ init_mathjax();
 </header>
 
   <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here I follow the paper by Johannes, Polson, and Stroud (2009, RFS) &quot;Optimal Filtering of Jump Diffusions: Extracting Latent States from Asset Prices&quot;.<br> It is available <a href = "http://rfs.oxfordjournals.org/cgi/content/long/22/7/2759">here</a>.</p>
+<p>Here I follow the paper by Johannes, Polson, and Stroud (2009, RFS) &quot;Optimal Filtering of Jump Diffusions: Extracting Latent States from Asset Prices&quot;.<br>
+It is available <a href = "http://rfs.oxfordjournals.org/cgi/content/long/22/7/2759">here</a>.</p>
 <p>The purpose of this notebook is to show on a simple simulated example how to filter out latent volatility process from observable daily prices using the Particle Filter (PF). There are a few methods proposed, but I start with the simplest one called the Sampling-Importance Resampling (SIR).</p>
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-code">The code<a class="anchor-link" href="#The-code">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Set up the environment.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[1]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">ps</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -1797,43 +1823,74 @@ In&nbsp;[1]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Printing options for nicer output.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[2]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
 <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">suppress</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Heston-model">Heston model<a class="anchor-link" href="#Heston-model">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Assume that the log-price evolves according to the following SV model:</p>
-
-<p>with <span class="math">\(Corr\left(dW_{1t},dW_{2t}\right)=\rho\)</span>.</p>
+<p>\begin{eqnarray*}
+d\log S_{t} &amp; = &amp; \left(\mu-\frac{1}{2}V_{t}\right)dt+\sqrt{V_{t}}dW_{1t},\\
+dV_{t} &amp; = &amp; \kappa_{v}\left(\theta_{v}-V_{t}\right)dt+\sigma_{v}\sqrt{V_{t}}dW_{2t},
+\end{eqnarray*}
+with $Corr\left(dW_{1t},dW_{2t}\right)=\rho$.</p>
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Below we define the class for this model. First of all we need to define its drif and diffusion functions.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[3]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">class</span> <span class="nc">Heston</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1881,24 +1938,44 @@ In&nbsp;[3]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Simulation-methods">Simulation methods<a class="anchor-link" href="#Simulation-methods">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now that we have a basic description of the Heston model, we can write the method to simulate some data using Euler discretization scheme.</p>
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This function does a couple of tricks to make errors nicer and reduce Monte-Carlo variance.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[4]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">nice_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">sdim</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Normalize the errors and apply antithetic sampling.</span>
 <span class="sd">    </span>
@@ -1914,17 +1991,25 @@ In&nbsp;[4]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now the simulation function itself.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[5]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Simulate bivariate diffusion.</span>
 <span class="sd">    </span>
@@ -1964,17 +2049,25 @@ In&nbsp;[5]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The simulation method returns some generic x array. We need to extract prices, returns, and volatilities from that.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[6]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">assign_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Break down generic x into meaningful data.&quot;&quot;&quot;</span>
     <span class="c"># Log-price</span>
@@ -1990,21 +2083,35 @@ In&nbsp;[6]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Simulating-the-data">Simulating the data<a class="anchor-link" href="#Simulating-the-data">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Initialize the object and check that parameters are valid.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[7]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># .15 corresponds to .15*100 = 15% annualized vol</span>
 <span class="c"># That is, vol is already annualized</span>
 <span class="c"># mu_r, kappa, mu_v, eta, rho = .0, .1, .15**2, .09, -.5</span>
@@ -2020,13 +2127,14 @@ In&nbsp;[7]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Parameters are valid:  True
 
@@ -2038,15 +2146,22 @@ Parameters are valid:  True
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now simulate the data and ...</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[11]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="n">mu_v</span><span class="p">]</span>
 <span class="n">T</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span>
 <span class="o">%</span><span class="k">time</span> <span class="n">hes</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">theta_true</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
@@ -2056,13 +2171,14 @@ In&nbsp;[11]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CPU times: user 29.5 s, sys: 23.9 ms, total: 29.5 s
 Wall time: 29.5 s
@@ -2075,15 +2191,22 @@ Wall time: 29.5 s
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>... and plot it.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[12]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
@@ -2092,15 +2215,16 @@ In&nbsp;[12]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYoAAAEACAYAAACtVTGuAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXd4FNX6x7+bBoQSOkjClUsA6UlAjA0FBTVBEUVFvSqK
 hR+C7drbNSrFXriooFfsF1G8CEpAUAkqCqgUUVSKoKFKkRIIpM3vj5c3c+bszOzM7szuBs7nefaZ
@@ -2597,36 +2721,45 @@ rEGz2YzFxcX47Nkz7zX79u1Do9GImZmZ2NbWFq+ma4by8nJMS0vDhIQENBgMePr06bDsd/36dczJ
 yUGj0Yh1dXXxuJW4I7flqVOnsLKyEnNzczEvLw83bNiAjx498p5PtlSmo6MDdTodWq1WzM/Px/z8
 fHQ4HDHpn5RwRxAEQSii2aUngiAIQhuQoyAIgiAUIUdBEARBKEKOgiAIglCEHAVBEAShCDkKgiAI
 QhFyFARBEIQi5CgIgiAIRf4P4c0Nmhznz64AAAAASUVORK5CYII=
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Compute contemoraneous correlation between returns and volatility.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[13]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">print</span> <span class="s">&quot;Corr(R,V) = </span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">hes</span><span class="o">.</span><span class="n">R</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">hes</span><span class="o">.</span><span class="n">V</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Corr(R,V) = -9.73
 
@@ -2638,19 +2771,32 @@ Corr(R,V) = -9.73
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="PF-methods-specific-to-the-model">PF methods specific to the model<a class="anchor-link" href="#PF-methods-specific-to-the-model">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To continue with the Particle Filter we need to define two methods for the model class. First will simulate only latent process. The second will compute the density of the observed data point given the simulated particles.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[14]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">sim_latent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Simulate latent volatility only.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">sim</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
@@ -2677,18 +2823,26 @@ In&nbsp;[14]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Particle-filter-class">Particle filter class<a class="anchor-link" href="#Particle-filter-class">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[15]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">class</span> <span class="nc">ParticleFilter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Model</span><span class="p">,</span> <span class="n">observed</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
@@ -2717,37 +2871,59 @@ In&nbsp;[15]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Using-the-PF-class">Using the PF class<a class="anchor-link" href="#Using-the-PF-class">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Initialize the PF instance.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[16]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">pf</span> <span class="o">=</span> <span class="n">ParticleFilter</span><span class="p">(</span><span class="n">hes</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">mu_v</span><span class="p">,</span> <span class="n">theta_true</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Run SIR PF method to filter out the volatility.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[17]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># M - number of sub-intervals inside unit interval</span>
 <span class="c"># S - number os simulations</span>
 <span class="n">M</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span>
@@ -2756,13 +2932,14 @@ In&nbsp;[17]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CPU times: user 14.1 s, sys: 3.99 ms, total: 14.1 s
 Wall time: 14.1 s
@@ -2775,15 +2952,22 @@ Wall time: 14.1 s
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Plot the result.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[20]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">V_latent</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="o">.</span><span class="mo">005</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&#39;True&#39;</span><span class="p">)</span>
@@ -2796,15 +2980,16 @@ In&nbsp;[20]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAAFHCAYAAACI3Hv6AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvXm0JFWV7/+NiMy8ecequhRDMRbzJFKFdvOgQUoFpO0G
 UXFAWwGnZWvbYCsKvFYLWwVtGxfY9mtkibbtQD9d0oDtj3ai4AHSiFCooBRFURQUFNR4p8yM+fdH
@@ -4507,9 +4692,10 @@ ey+55BLmz5/PiBEjmDRpEgCbNm1izJgxXHnllWzZsoW1a9dy6qmnHv0b0Wg0mrcoWoHWaDSa44D+
 0Wg0b1IefPBBpkyZwlVXXaWVZ41GozmKaAu0RqPRaDQajUYzDLQFWqPRaDQajUajGQZagdZoNBqN
 RqPRaIaBVqA1Go1Go9FoNJphoBVojUaj0Wg0Go1mGGgFWqPRaDQajUajGQZagdZoNBqNRqPRaIbB
 /w9ZXPQF5YHOiQAAAABJRU5ErkJggg==
-">
-
+"
+>
 </div>
+
 </div>
 
 </div>

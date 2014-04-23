@@ -1767,36 +1767,77 @@ init_mathjax();
 </header>
 
   <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This notebook shows how to reproduce the VIX given the data in CBOE White Paper (<a href='http://www.cboe.com/micro/vix/vixwhite.pdf'>http://www.cboe.com/micro/vix/vixwhite.pdf</a>). The code works for any option data set, not only one day as in the White Paper. The option data for this example is exactly the same as in the Appendix 1 of the White Paper.</p>
 </div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Given are the prices <span class="math">\(C_{i}\)</span>, <span class="math">\(i\in\left\{ 0,\ldots,n\right\}\)</span>, of a series of European call options on the index with fixed maturity date <span class="math">\(T\)</span> and exercise prices <span class="math">\(K_{i}\)</span>, <span class="math">\(i\in\left\{ 0,\ldots,n\right\}\)</span>, as well as the prices <span class="math">\(P_{i}\)</span>, <span class="math">\(i\in\left\{ 0,\ldots,n\right\}\)</span>, of a series of European put options on the index with the same maturity date <span class="math">\(T\)</span> and exercise prices <span class="math">\(K_{i}\)</span>. Let further hold <span class="math">\(K_{i}&lt;K_{i+1}\)</span> for all <span class="math">\(i\in\left\{ 0,\ldots,n-1\right\}\)</span>.</p>
-<p>The VIX itself is <span class="math">\[VIX=100\cdot\sqrt{V^{2}},\]</span> where <span class="math">\(V\)</span> is explained below.</p>
-<p>Since there are days when there no options with precisely 30 days to expiration, we have to interpolate between near-term index and next-term index: <span class="math">\[V^{2}=\left[T_{1}\sigma_{1}^{2}\left(\frac{N_{T_{2}}-N_{30}}{N_{T_{2}}-N_{T_{1}}}\right)+T_{2}\sigma_{2}^{2}\left(\frac{N_{30}-N_{T_{1}}}{N_{T_{2}}-N_{T_{1}}}\right)\right]\frac{365}{30}\]</span> with each <span class="math">\(\sigma_{i}^{2}\)</span> computed according to <span class="math">\[\sigma^{2}=\frac{2}{T}\sum_{i=0}^{n}\frac{\Delta K_{i}}{K_{i}^{2}}e^{rT}M_{i}-\frac{1}{T}\left(\frac{F}{K_{*}}-1\right)^{2},\]</span> where the distance between strikes is <span class="math">\[\Delta K_{i}  =   \begin{cases}
+<p>This notebook shows how to reproduce the VIX given the data in CBOE White Paper (<a href='http://www.cboe.com/micro/vix/vixwhite.pdf'><a href="http://www.cboe.com/micro/vix/vixwhite.pdf">http://www.cboe.com/micro/vix/vixwhite.pdf</a></a>). The code works for any option data set, not only one day as in the White Paper. The option data for this example is exactly the same as in the Appendix 1 of the White Paper.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Given are the prices $C_{i}$, $i\in\left\{ 0,\ldots,n\right\}$, of a series of European call options on the index with fixed maturity date $T$ and exercise prices $K_{i}$, $i\in\left\{ 0,\ldots,n\right\}$, as well as the prices $P_{i}$, $i\in\left\{ 0,\ldots,n\right\}$, of a series of European put options on the index with the same maturity date $T$ and exercise prices $K_{i}$. Let further hold $K_{i}&lt;K_{i+1}$ for all $i\in\left\{ 0,\ldots,n-1\right\}$.</p>
+<p>The VIX itself is
+$$VIX=100\cdot\sqrt{V^{2}},$$
+where $V$ is explained below.</p>
+<p>Since there are days when there no options with precisely 30 days to expiration, we have to interpolate between near-term index and next-term index:
+$$V^{2}=\left[T_{1}\sigma_{1}^{2}\left(\frac{N_{T_{2}}-N_{30}}{N_{T_{2}}-N_{T_{1}}}\right)+T_{2}\sigma_{2}^{2}\left(\frac{N_{30}-N_{T_{1}}}{N_{T_{2}}-N_{T_{1}}}\right)\right]\frac{365}{30}$$
+with each $\sigma_{i}^{2}$ computed according to
+$$\sigma^{2}=\frac{2}{T}\sum_{i=0}^{n}\frac{\Delta K_{i}}{K_{i}^{2}}e^{rT}M_{i}-\frac{1}{T}\left(\frac{F}{K_{*}}-1\right)^{2},$$
+where the distance between strikes is
+$$\Delta K_{i}	=	\begin{cases}
 K_{1}-K_{0}, &amp; i=0\\
 \frac{1}{2}\left(K_{i+1}-K_{i-1}\right), &amp; i=1,\ldots,n-1\\
 K_{n}-K_{n-1}, &amp; i=n
-\end{cases}\]</span> the out-of-the-money option premium is <span class="math">\[M_{i} =   \begin{cases}
+\end{cases}$$
+the out-of-the-money option premium is
+$$M_{i}	=	\begin{cases}
 P_{i}, &amp; K_{i}&lt;K_{*}\\
 \frac{1}{2}\left(P_{i}+C_{i}\right), &amp; K_{i}=K_{*}\\
 C_{i}, &amp; K_{i}&gt;K_{*}
-\end{cases}\]</span> at-the-money strike price is <span class="math">\[K_{*} =   \max\left\{ K_{i}&lt;F\right\},\]</span> forward price extracted from put-call parity: <span class="math">\[F =   K_{j}+e^{rT}\left|C_{j}-P_{j}\right|,\]</span> with <span class="math">\[j=\min\left\{ \left|C_{i}-P_{i}\right|\right\},\]</span> and finally <span class="math">\(r\)</span> is the constant risk-free short rate appropriate for maturity <span class="math">\(T\)</span>.</p>
+\end{cases}$$
+at-the-money strike price is
+$$K_{*}	=	\max\left\{ K_{i}&lt;F\right\},$$
+forward price extracted from put-call parity:
+$$F	=	K_{j}+e^{rT}\left|C_{j}-P_{j}\right|,$$
+with
+$$j=\min\left\{ \left|C_{i}-P_{i}\right|\right\},$$
+and finally $r$ is the constant risk-free short rate appropriate for maturity $T$.</p>
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Import-modules">Import modules<a class="anchor-link" href="#Import-modules">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[1]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">ps</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -1804,21 +1845,35 @@ In&nbsp;[1]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Import-yields">Import yields<a class="anchor-link" href="#Import-yields">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the white paper it is assumed that the risk-free rate is 0.38% for both near- and nex-term options. The date chosen for computation is Jan 1, 2009 with options expiring in 9 and 37 days.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[2]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">ff</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;yields.csv&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">ff</span><span class="p">:</span>
     <span class="k">print</span> <span class="n">line</span><span class="p">,</span>
@@ -1832,13 +1887,14 @@ In&nbsp;[2]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Date,Days,Rate
 20090101,9,0.38
@@ -1856,16 +1912,23 @@ Date       Days
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Import-options">Import options<a class="anchor-link" href="#Import-options">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[3]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">ff</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;options.csv&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
 <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
@@ -1888,13 +1951,14 @@ In&nbsp;[3]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Expiration,Days,Strike,Call Bid,Call Ask,Put Bid,Put Ask
 20090110,9,200,717.6,722.8,0,0.05
@@ -1934,16 +1998,23 @@ dtype: object
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Do-some-cleaning-and-indexing">Do some cleaning and indexing<a class="anchor-link" href="#Do-some-cleaning-and-indexing">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[4]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Since VIX is computed for the date of option quotations, we do not really need Expiration</span>
 <span class="n">options</span> <span class="o">=</span> <span class="n">raw_options</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">,</span><span class="s">&#39;Strike&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s">&#39;Expiration&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 
@@ -1965,13 +2036,14 @@ In&nbsp;[4]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                              Bid    Ask
 Date       Days CP Strike              
@@ -1989,19 +2061,32 @@ Date       Days CP Strike
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Compute-bid/ask-average">Compute bid/ask average<a class="anchor-link" href="#Compute-bid/ask-average">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This step is used further to filter out in-the-money options.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[5]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">options</span><span class="p">[</span><span class="s">&#39;Premium&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;Bid&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;Ask&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
 <span class="n">options2</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;Bid&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">][</span><span class="s">&#39;Premium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s">&#39;CP&#39;</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">options2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -2009,13 +2094,14 @@ In&nbsp;[5]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CP                           C   P
 Date       Days Strike            
@@ -2033,16 +2119,23 @@ Date       Days Strike
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Determine-minimum-difference">Determine minimum difference<a class="anchor-link" href="#Determine-minimum-difference">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[6]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Find the absolute difference</span>
 <span class="n">options2</span><span class="p">[</span><span class="s">&#39;CPdiff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">options2</span><span class="p">[</span><span class="s">&#39;C&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">options2</span><span class="p">[</span><span class="s">&#39;P&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
 <span class="c"># Mark the minimum for each date/term</span>
@@ -2053,13 +2146,14 @@ In&nbsp;[6]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CP                          C      P  CPdiff  min
 Date       Days Strike                           
@@ -2077,16 +2171,23 @@ Date       Days Strike
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Compute-forward-price">Compute forward price<a class="anchor-link" href="#Compute-forward-price">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[7]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Leave only at-the-money optons</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">options2</span><span class="p">[</span><span class="n">options2</span><span class="p">[</span><span class="s">&#39;min&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="c"># Merge with risk-free rate</span>
@@ -2102,13 +2203,14 @@ In&nbsp;[7]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                     Forward
 Date       Days            
@@ -2123,16 +2225,23 @@ Date       Days
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Compute-at-the-money-strike">Compute at-the-money strike<a class="anchor-link" href="#Compute-at-the-money-strike">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[8]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Merge options with implied forward price</span>
 <span class="n">left</span> <span class="o">=</span> <span class="n">options2</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">forward</span><span class="p">,</span> <span class="n">left_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
@@ -2145,13 +2254,14 @@ In&nbsp;[8]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                  Mid Strike
 Date       Days            
@@ -2166,16 +2276,23 @@ Date       Days
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Separate-out-of-the-money-calls-and-puts">Separate out-of-the-money calls and puts<a class="anchor-link" href="#Separate-out-of-the-money-calls-and-puts">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[9]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Go back to original data and reindex it</span>
 <span class="n">left</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s">&#39;Premium&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 <span class="c"># Merge with at-the-money strike</span>
@@ -2191,13 +2308,14 @@ In&nbsp;[9]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                 CP  Strike   Bid   Ask  Mid Strike
 Date       Days                                   
@@ -2222,16 +2340,23 @@ Date       Days
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Remove-all-quotes-after-two-consequtive-zero-bids">Remove all quotes after two consequtive zero bids<a class="anchor-link" href="#Remove-all-quotes-after-two-consequtive-zero-bids">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[10]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Indicator of zero bid</span>
 <span class="n">calls</span><span class="p">[</span><span class="s">&#39;zero_bid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">calls</span><span class="p">[</span><span class="s">&#39;Bid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 <span class="c"># Accumulate number of zero bids starting at-the-money</span>
@@ -2249,13 +2374,14 @@ In&nbsp;[10]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                 CP  Strike   Bid   Ask  Mid Strike  zero_bid  zero_bid_accum
 Date       Days                                                             
@@ -2275,12 +2401,13 @@ Date       Days
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[11]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Merge puts and cals</span>
 <span class="n">options3</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">calls</span><span class="p">,</span> <span class="n">puts</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="c"># Throw away bad stuff</span>
@@ -2295,13 +2422,14 @@ In&nbsp;[11]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CP                          C   P
 Date       Days Strike           
@@ -2317,16 +2445,23 @@ Date       Days Strike
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Compute-out-of-the-money-option-price">Compute out-of-the-money option price<a class="anchor-link" href="#Compute-out-of-the-money-option-price">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[12]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Merge wth at-the-money strike price</span>
 <span class="n">left</span> <span class="o">=</span> <span class="n">options3</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">mid_strike</span><span class="p">,</span> <span class="n">left_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
@@ -2347,13 +2482,14 @@ In&nbsp;[12]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                  Strike  Mid Strike  Premium
 Date       Days                             
@@ -2371,19 +2507,32 @@ Date       Days
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Compute-difference-between-adjoining-strikes">Compute difference between adjoining strikes<a class="anchor-link" href="#Compute-difference-between-adjoining-strikes">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Note that the strikes must be floats!!! In Python 3/2=1 and 3./2=1.5!</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[13]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
     <span class="n">new</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">new</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="n">group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
@@ -2398,13 +2547,14 @@ In&nbsp;[13]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                  Strike  Mid Strike  Premium    dK
 Date       Days                                   
@@ -2422,16 +2572,23 @@ Date       Days
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Compute-contribution-of-each-strike">Compute contribution of each strike<a class="anchor-link" href="#Compute-contribution-of-each-strike">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[14]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Merge with risk-free rate</span>
 <span class="n">contrib</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">options4</span><span class="p">,</span> <span class="n">yields</span><span class="p">,</span> <span class="n">left_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
@@ -2443,13 +2600,14 @@ In&nbsp;[14]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                  Date  Days  Strike  Mid Strike  Premium    dK  Rate    sigma2
 0 2009-01-01 00:00:00     9     400         920    0.125  25.0  0.38  0.000020
@@ -2466,16 +2624,23 @@ In&nbsp;[14]:
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Compute-each-preiod-index">Compute each preiod index<a class="anchor-link" href="#Compute-each-preiod-index">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[15]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Sum up contributions from all strikes</span>
 <span class="n">sigma2</span> <span class="o">=</span> <span class="n">contrib</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="s">&#39;Days&#39;</span><span class="p">])[[</span><span class="s">&#39;sigma2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span>
 
@@ -2493,13 +2658,14 @@ In&nbsp;[15]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                     sigma2
 Date       Days           
@@ -2514,16 +2680,23 @@ Date       Days
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Compute-interpolated-index">Compute interpolated index<a class="anchor-link" href="#Compute-interpolated-index">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[16]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># This function determines near- and next-term if there are several maturities in the data</span>
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
     <span class="n">days</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s">&#39;Days&#39;</span><span class="p">])</span>
@@ -2548,13 +2721,14 @@ In&nbsp;[16]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
             T1  T2  sigma2_T1  sigma2_T2
 Date                                    
@@ -2568,16 +2742,23 @@ Date
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Interpolate-the-VIX">Interpolate the VIX<a class="anchor-link" href="#Interpolate-the-VIX">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[17]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">df</span> <span class="o">=</span> <span class="n">two_sigmas</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;T1&#39;</span><span class="p">,</span><span class="s">&#39;T2&#39;</span><span class="p">]:</span>
@@ -2597,13 +2778,14 @@ In&nbsp;[17]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                   VIX
 Date                 

@@ -1767,18 +1767,31 @@ init_mathjax();
 </header>
 
   <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this post I will show how to find implied volatilities from Black-Scholes formula using bisection method.</p>
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>First of all, import all necessary libraries</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[1]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">erf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -1789,14 +1802,16 @@ In&nbsp;[1]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[2]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Standard Normal distribution with math library only</span>
 <span class="k">def</span> <span class="nf">Phi</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span> <span class="mf">1.</span> <span class="o">+</span> <span class="n">erf</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="p">)</span>
@@ -1804,17 +1819,25 @@ In&nbsp;[2]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Check how it works</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[3]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">Phi</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">x</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1822,15 +1845,16 @@ In&nbsp;[3]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAEACAYAAABI5zaHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xl0lEW+xvFvNFE2FdwiJHGiSUgCmEUDkUGcoEYgI1GR
 q1HGy0VEDm7X41XBmVFxQ3DGBYgLKptbhFHGOBDCZhplMwooIAiBI2NoAdlBEEI67/2jxggk6Wzd
@@ -1980,30 +2004,47 @@ nnusuLhCFelMAAAAjElEQVQ4KyUlxe3qKTvrzM/Ptzp37mylpqZa3bt3t5YtW+bzGvPy8qz27dtb
 ERERVnR0tDVp0iS/7Mv66vSHvrQsy/r888+tsLAwKzU1tTozi4qKmtWnuolJRCQI+WS1jIiI+JbC
 XUQkCCncRUSCkMJdRCQIKdxFRIKQwl1EJAgp3EVEgpDCXUQkCP0/1mNJdExKJd4AAAAASUVORK5C
 YII=
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Simple-BS-formula">Simple BS formula<a class="anchor-link" href="#Simple-BS-formula">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-Black-Scholes formula
-<p>
-
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Black-Scholes formula<p>
+\begin{eqnarray*}
+BS\left(S,K,\sigma,r,T\right) &amp; = &amp; S\Phi\left(d_{1}\right)-e^{-rT}K\Phi\left(d_{2}\right),\\
+d_{1} &amp; = &amp; \frac{\log\left(S/K\right)+rT}{\sigma\sqrt{T}}+\frac{1}{2}\sigma\sqrt{T},\\
+d_{2} &amp; = &amp; d_{1}-\sigma\sqrt{T}.
+\end{eqnarray*}</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[4]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Black-Scholes Function</span>
 <span class="k">def</span> <span class="nf">BS</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">cp</span><span class="p">):</span>
     <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">S</span><span class="o">/</span><span class="n">K</span><span class="p">)</span> <span class="o">+</span> <span class="n">r</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sig</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">))</span> <span class="o">+</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="n">sig</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
@@ -2018,17 +2059,25 @@ In&nbsp;[4]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Check how it works</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[5]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># S - stock price</span>
 <span class="c"># K - strike</span>
 <span class="c"># T - maturity in years</span>
@@ -2042,13 +2091,14 @@ In&nbsp;[5]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Call price: 5.2822
 
@@ -2060,15 +2110,22 @@ Call price: 5.2822
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Define function to find implied volatility given option price</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[6]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Function to find BS Implied Vol using Bisection Method</span>
 <span class="k">def</span> <span class="nf">impvol</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="n">fcount</span> <span class="o">=</span> <span class="mf">1e3</span><span class="p">):</span>
     <span class="n">sig</span><span class="p">,</span> <span class="n">sig_u</span><span class="p">,</span> <span class="n">sig_d</span> <span class="o">=</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1e-3</span>
@@ -2096,17 +2153,25 @@ In&nbsp;[6]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Check how it works</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[7]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Test code:</span>
 <span class="c"># S - stock price</span>
 <span class="c"># K - strike</span>
@@ -2121,13 +2186,14 @@ In&nbsp;[7]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Implied volatility: 0.1500
 
@@ -2139,22 +2205,38 @@ Implied volatility: 0.1500
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Standardized-BS-formula">Standardized BS formula<a class="anchor-link" href="#Standardized-BS-formula">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-Denote<br><span class="math">\(F=Se^{rT}\)</span> as forward price, and<br><span class="math">\(X=\log\left(K/F\right)\)</span> as log-forward moneyness.<br> Also normalize the option price by the spot. This gives us the following standardized BS formula which depends only on three inputs versus five in the original version.
-<p>
-
-
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Denote<br>$F=Se^{rT}$ as forward price, and<br>$X=\log\left(K/F\right)$ as log-forward moneyness.<br>
+Also normalize the option price by the spot. This gives us the following standardized BS formula which depends only on three inputs versus five in the original version.<p></p>
+<p>\begin{eqnarray*}
+\tilde{BS}\left(\sigma,X,T\right) &amp; = &amp; \Phi\left(d_{1}\right)-e^{X}\Phi\left(d_{2}\right),\\
+d_{1} &amp; = &amp; -\frac{X}{\sigma\sqrt{T}}+\frac{1}{2}\sigma\sqrt{T},\\
+d_{2} &amp; = &amp; d_{1}-\sigma\sqrt{T}.
+\end{eqnarray*}</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[8]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Standardized Black-Scholes Function</span>
 <span class="k">def</span> <span class="nf">BSst</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">cp</span><span class="p">):</span>
     <span class="c"># X = log(K/S)</span>
@@ -2170,17 +2252,25 @@ In&nbsp;[8]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Check how it works</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[9]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">cp</span> <span class="o">=</span> <span class="mf">105.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">30.</span><span class="o">/</span><span class="mi">365</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">15</span><span class="p">,</span> <span class="s">&#39;C&#39;</span>
 <span class="n">C1</span> <span class="o">=</span> <span class="n">BS</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">cp</span><span class="p">)</span>
 <span class="k">print</span> <span class="s">&#39;Call price (simple): </span><span class="si">%.4f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">C1</span>
@@ -2195,13 +2285,14 @@ In&nbsp;[9]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Call price (simple): 5.2822
 Call price (standardized): 5.2822
@@ -2215,15 +2306,22 @@ The result conincides:  True
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Define function to find implied volatility given standardized option price</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[10]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Function to find BS Implied Vol using Bisection Method</span>
 <span class="k">def</span> <span class="nf">impvol_st</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="n">fcount</span> <span class="o">=</span> <span class="mf">1e3</span><span class="p">):</span>
     <span class="n">sig</span><span class="p">,</span> <span class="n">sig_u</span><span class="p">,</span> <span class="n">sig_d</span> <span class="o">=</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1e-3</span>
@@ -2251,17 +2349,25 @@ In&nbsp;[10]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Check how it works</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[11]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">cp</span> <span class="o">=</span> <span class="mf">105.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">30.</span><span class="o">/</span><span class="mi">365</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">5.282</span><span class="p">,</span> <span class="s">&#39;C&#39;</span>
 <span class="n">v1</span> <span class="o">=</span> <span class="n">impvol</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">cp</span><span class="p">)</span>
 <span class="k">print</span> <span class="s">&#39;Implied volatility: </span><span class="si">%.4f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">v1</span>
@@ -2275,13 +2381,14 @@ In&nbsp;[11]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Implied volatility: 0.1500
 Implied volatility (standardized): 0.1499
@@ -2295,12 +2402,13 @@ The result conincides:  False
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[12]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">cp</span> <span class="o">=</span> <span class="mf">105.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">30.</span><span class="o">/</span><span class="mi">365</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">5.282</span><span class="p">,</span> <span class="s">&#39;C&#39;</span>
 <span class="o">%</span><span class="k">timeit</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">impvol</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">cp</span><span class="p">)</span>
 <span class="k">print</span> <span class="s">&#39;Implied volatility: </span><span class="si">%.4f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">v1</span>
@@ -2314,13 +2422,14 @@ In&nbsp;[12]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 10000 loops, best of 3: 71.2 µs per loop
 Implied volatility: 0.1500
@@ -2336,19 +2445,32 @@ The result conincides:  False
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Vectorize-the-function">Vectorize the function<a class="anchor-link" href="#Vectorize-the-function">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The following is all we need to create a vectorized version of the function</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[13]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Use standard Numpy vectorization function</span>
 <span class="c"># The vector size is determined by the first input</span>
 <span class="n">vec_impvol_st</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">impvol_st</span><span class="p">)</span>
@@ -2356,17 +2478,25 @@ In&nbsp;[13]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Check how it works</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[14]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Number of option prices</span>
 <span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span>
@@ -2377,13 +2507,14 @@ In&nbsp;[14]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Implied volatility (standardized):  [ 0.15  0.15  0.15  0.15  0.15  0.15  0.15  0.15  0.15  0.15]
 
@@ -2395,15 +2526,22 @@ Implied volatility (standardized):  [ 0.15  0.15  0.15  0.15  0.15  0.15  0.15  
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Is there any benefit over a loop operation?</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[15]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">print</span> <span class="s">&#39;Loop (simple):&#39;</span>
 <span class="o">%</span><span class="k">timeit</span> <span class="p">[</span><span class="n">impvol</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">cp</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
 <span class="k">print</span> <span class="s">&#39;Loop (standardized):&#39;</span>
@@ -2414,13 +2552,14 @@ In&nbsp;[15]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Loop (simple):
 100 loops, best of 3: 7.09 ms per loop

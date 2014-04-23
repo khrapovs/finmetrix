@@ -1767,22 +1767,44 @@ init_mathjax();
 </header>
 
   <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The following code is the example of adapting methodology of<br> <a href = "http://onlinelibrary.wiley.com/doi/10.1111/1468-0262.00164/abstract">Duffie, D., Pan, J., &amp; Singleton, K. J. (2000). Transform Analysis and Asset Pricing for Affine Jump-Diffusions. Econometrica, 68(6), 1343–1376.</a> <br> to the Vasicek model of interest rates.</p>
 </div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following code is the example of adapting methodology of<br>
+<a href = "http://onlinelibrary.wiley.com/doi/10.1111/1468-0262.00164/abstract">Duffie, D., Pan, J., &amp; Singleton, K. J. (2000). Transform Analysis and Asset Pricing for Affine Jump-Diffusions. Econometrica, 68(6), 1343–1376.</a>
+<br>
+to the Vasicek model of interest rates.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Set up environment</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[1]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">scipy.integrate</span> <span class="kn">as</span> <span class="nn">si</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -1791,24 +1813,46 @@ In&nbsp;[1]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-Model">The Model<a class="anchor-link" href="#The-Model">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-
 </div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>\begin{equation}
+dr_{t}=\kappa\left(\mu-r_{t}\right)dt+\sigma dW_{t}.
+\end{equation}</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Set up parameters</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[2]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">h</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span>
 <span class="n">theta</span> <span class="o">=</span> <span class="p">[</span><span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">]</span>
@@ -1817,30 +1861,55 @@ In&nbsp;[2]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Characteristic-function">Characteristic function<a class="anchor-link" href="#Characteristic-function">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Analytic-solution">Analytic solution<a class="anchor-link" href="#Analytic-solution">&#182;</a></h3>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-The analytic solution for the characteristic function is exponentially affine
-<p>
-
-with
-<p>
-
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The analytic solution for the characteristic function is exponentially affine</p>
+<p><p>
+\begin{equation}
+E_{t}\left[\exp\left(iur_{T}\right)\right]=\exp\left(\alpha_{t}\left(u\right)+\beta_{t}\left(u\right)r_{t}\right),
+\end{equation}
+with</p>
+<p><p>
+\begin{eqnarray*}
+\beta_{t}\left(u\right) &amp; = &amp; iue^{-\kappa h}\\
+\alpha_{t}\left(u\right) &amp; = &amp; \mu iu\left(1-e^{-\kappa h}\right)-\frac{\sigma^{2}}{4\kappa}u^{2}\left(1-e^{-2\kappa h}\right)
+\end{eqnarray*}</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[3]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">alpha</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">theta</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="o">-</span> <span class="n">kappa</span> <span class="o">*</span> <span class="n">h</span> <span class="p">)</span>
@@ -1853,17 +1922,25 @@ In&nbsp;[3]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Evaluate these functions on the grid.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[4]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">beta</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
 <span class="n">sol_analytic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
@@ -1871,28 +1948,50 @@ In&nbsp;[4]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Numeric-solution">Numeric solution<a class="anchor-link" href="#Numeric-solution">&#182;</a></h3>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-We need to solve the following system of ODE:
-<p>
-
-<p>
-<p>with terminal conditions <span class="math">\(\beta_{T}=iu\)</span> and <span class="math">\(\alpha_{T}=0\)</span>.</p>
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The following function is the right hand side of the ODE system. Since the solution is actually in terms of distance <span class="math">\(h\)</span> to the terminal date and not in calendar time <span class="math">\(t\)</span>, the left-hand side derivatives go with minus.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We need to solve the following system of ODE:<p>
+\begin{eqnarray*}
+\dot{\alpha}_{t} &amp; = &amp; -\kappa\mu\beta_{t}-\frac{1}{2}\sigma^{2}\beta_{t}^{2},\\
+\dot{\beta}_{t} &amp; = &amp; \kappa\beta_{t},
+\end{eqnarray*}</p>
+<p><p>
+with terminal conditions $\beta_{T}=iu$ and $\alpha_{T}=0$.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following function is the right hand side of the ODE system. Since the solution is actually in terms of distance $h$ to the terminal date and not in calendar time $t$, the left-hand side derivatives go with minus.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[5]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">theta</span>
     <span class="n">da</span> <span class="o">=</span> <span class="o">-</span> <span class="n">kappa</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
@@ -1902,17 +2001,25 @@ In&nbsp;[5]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This function solves the system of complex valued ODE.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[6]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">dt</span> <span class="o">=</span> <span class="n">h</span> <span class="o">/</span> <span class="mf">1e1</span>
     <span class="n">df_args</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">)</span>
@@ -1929,34 +2036,50 @@ In&nbsp;[6]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Separate solution into functions <span class="math">\(\alpha_t(u)\)</span> and <span class="math">\(\beta_t(u)\)</span></p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Separate solution into functions $\alpha_t(u)$ and $\beta_t(u)$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[7]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">alpha_num</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">beta_num</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Evaluate numerical solutions at specific values.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[8]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span> <span class="o">=</span> <span class="n">alpha_num</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">beta_num</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
 <span class="n">sol_integrate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
@@ -1964,21 +2087,35 @@ In&nbsp;[8]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Compare-solutions">Compare solutions<a class="anchor-link" href="#Compare-solutions">&#182;</a></h3>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Plot them.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[9]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="p">[</span><span class="n">sol_analytic</span><span class="p">,</span> <span class="n">sol_integrate</span><span class="p">]:</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
@@ -1997,15 +2134,16 @@ In&nbsp;[9]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfwAAAGJCAYAAABvvYFhAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XtcTPn/B/DXdEFSqeii6UIzqUgubcKiXdJFckkXly6L
 tZtFWJZdazescv3ul90vy2520y7S7qrYDG208iURW0t2TRTd5FIR3ajP74++zq9RSGaamXo/H495
@@ -2613,28 +2751,42 @@ RBkgCV8IIYQoAyThCyGEEGWAJHwhhBCiDJCEL4QQQpQBkvDFfUlMTMTT01P/88yZM5k8ebIJIxJC
 3BdbW1t+//13MjMzycvLY9OmTaYOSQhxn6Q9lw3Wpg5AWCYbGxsmTJhA8+bNsbe3x8PDQ8b9hLBQ
 0p7LBtkeVwghhCgD5Ja+EEIIUQZIwhdCCCHKAEn4QgghRBkgCV8IIYQoAyThCyGEEGWAJHwhhBCi
 DJCEL4QQQpQBkvCFEEKIMuD/AYaoFKIcoTLWAAAAAElFTkSuQmCC
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Compare-characteristic-functions">Compare characteristic functions<a class="anchor-link" href="#Compare-characteristic-functions">&#182;</a></h3>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Define conditional characteristic functions.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[10]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">rt</span> <span class="o">=</span> <span class="mf">1.5</span>
 <span class="n">psi_analytic</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">u</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="n">alpha</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">beta</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">rt</span> <span class="p">)</span>
 <span class="n">psi_numeric</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">u</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="n">alpha_num</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">beta_num</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">rt</span> <span class="p">)</span>
@@ -2642,17 +2794,25 @@ In&nbsp;[10]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Plot them.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[11]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mf">1e2</span><span class="p">)</span>
 <span class="n">psi_a</span> <span class="o">=</span> <span class="n">psi_analytic</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">psi_n</span> <span class="o">=</span> <span class="n">psi_numeric</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -2670,15 +2830,16 @@ In&nbsp;[11]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAewAAAGJCAYAAABIEwCJAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXd4VFXawH+TSgIhBFJJAdIJBAgdEQwlNGniolgQxbbW
 9VN3ddVVRFSKDcWCqAiICLpKkSIIhA6hJKGGJEAgnVRCejJzvz/ODqRMQsq0xPN7nvuQuffcc94Z
@@ -3378,28 +3539,42 @@ kRtgwyYiInIDbNhERERugA2baI5qaWmBVqu1r584cQJHjhyRsCIimggbNhEB4NvziFwdGzYREZEb
 YMMmmqM8PT0xODhoX+/v75ewGiKaDBs20RylUCjw9OlT9PT04PXr1ygsLJS6JCKagKfUBRCRNORy
 OQ4fPozo6Gj4+flBrVZzHJvIhfH1mkRERG6Al8SJiIjcABs2ERGRG2DDJiIicgNs2ERERG6ADZuI
 iMgNsGETERG5ATZsIiIiN8CGTURE5Ab+D3x+xcAUZcdiAAAAAElFTkSuQmCC
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Compare-transition-densities">Compare transition densities<a class="anchor-link" href="#Compare-transition-densities">&#182;</a></h3>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Fast Fourier inverse of charcteristic function. Returns density.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[12]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">CFinverse</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1e2</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="mf">1e2</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="mf">1e5</span><span class="p">):</span>
     <span class="n">eta</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">A</span><span class="p">)</span>
     <span class="n">lmbd</span> <span class="o">=</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
@@ -3413,17 +3588,25 @@ In&nbsp;[12]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Compute densities. Note how much time was spent on each operation.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[13]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">N</span> <span class="o">=</span> <span class="mf">1e4</span>
 <span class="o">%</span><span class="k">time</span> <span class="n">x</span><span class="p">,</span> <span class="n">density_analytic</span> <span class="o">=</span> <span class="n">CFinverse</span><span class="p">(</span><span class="n">psi_analytic</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">N</span><span class="p">)</span>
 <span class="o">%</span><span class="k">time</span> <span class="n">x</span><span class="p">,</span> <span class="n">density_numeric</span> <span class="o">=</span> <span class="n">CFinverse</span><span class="p">(</span><span class="n">psi_numeric</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">N</span><span class="p">)</span>
@@ -3431,13 +3614,14 @@ In&nbsp;[13]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 CPU times: user 8.27 ms, sys: 7 µs, total: 8.27 ms
 Wall time: 7.86 ms
@@ -3452,15 +3636,22 @@ Wall time: 40.8 s
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Plot transition densities.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[14]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">density_analytic</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">density_numeric</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
@@ -3472,15 +3663,16 @@ In&nbsp;[14]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXwAAAEPCAYAAABBUX+lAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xl8VOW9P/DPZCH7SjIhZCGYAFnYAgHUkOuIgoJIKQKy
 r7Xe+6qtS21vvf1VE1/34toFtS+r9IoC/YFof0WsiIoymrCIGhaRNYFINrKQfSGZzJzfH9MZczJn
@@ -3677,49 +3869,86 @@ Sejq6kJ7ezvGjx/PEx1pyOBOW6I+fve73+H69evo7OxEUlIS/vM//1PtIRF5BAOfqA+DwYCcnBwE
 BQXhyJEjPA6ZhgyWdIj6qK+vR3t7O9ra2tDZ2an2cIg8hjN8oj4WLFiAFStW4NKlS6iursbLL7+s
 9pCIPEL245GJBpNt27YhICAAy5Ytg8lkwq233gq9Xg+dTqf20Ij6jTN8IiIvwRo+EZGXYOATEXkJ
 Bj4RkZdg4BMReQkGPhGRl2DgExF5CQY+EZGXYOATEXmJ/w++x5XagMbEqwAAAABJRU5ErkJggg==
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Bond-Pricing">Bond Pricing<a class="anchor-link" href="#Bond-Pricing">&#182;</a></h1>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-Thanks to Duffie, Pan, &amp; Singleton (2000, Econometrica) we know how to compute the following transform for AJD models:
-<p>
-
-<p>
-But in order to compute the bond price we obviously need to set <span class="math">\(u=0\)</span> in this transform:
-<p>
-
-<p>
-In case of Vasicek model we need to solve the following system of ODE
-<p>
-
-<p>with terminal conditions <span class="math">\(\beta_{T}=u\)</span> and <span class="math">\(\alpha_{T}=0\)</span>.</p>
 </div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Thanks to Duffie, Pan, &amp; Singleton (2000, Econometrica) we know how to compute the following transform for AJD models:</p>
+<p><p>
+\begin{equation}
+\mathbb{T}^{\chi}\left(u,Y_{t},t,T\right)=E_{t}\left[\exp\left(-\int_{t}^{T}r_{s}ds\right)\exp\left(ur_{T}\right)\right]
+=\exp\left(\alpha_{t}(u)+\beta_{t}(u)r_{t}\right).
+\end{equation}</p>
+<p><p>
+But in order to compute the bond price we obviously need to set $u=0$ in this transform:</p>
+<p><p>
+\begin{equation}
+B_{t,T}=E_{t}\left[\exp\left(-\int_{t}^{T}r_{s}ds\right)\right]=\mathbb{T}^{\chi}\left(0,r_{t},t,T\right)=\exp\left(\alpha_{t}\left(0\right)+\beta_{t}\left(0\right)r_{t}\right),
+\end{equation}</p>
+<p><p>
+In case of Vasicek model we need to solve the following system of ODE</p>
+<p><p>
+\begin{eqnarray*}
+\dot{\beta}_{t} &amp; = &amp; 1+\kappa\beta_{t},\\
+\dot{\alpha}_{t} &amp; = &amp; -\kappa\mu\beta_{t}-\frac{1}{2}\sigma^{2}\beta_{t}^{2},
+\end{eqnarray*}
+with terminal conditions $\beta_{T}=u$ and $\alpha_{T}=0$.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Analytic-solution">Analytic solution<a class="anchor-link" href="#Analytic-solution">&#182;</a></h2>
 </div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-The analytic solution to this problem is known to be
-<p>
-
-<p>It is coded below.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The analytic solution to this problem is known to be</p>
+<p><p>
+\begin{eqnarray*}
+\beta_{t}\left(0\right) &amp; = &amp; \frac{1}{\kappa}\left(e^{-\kappa h}-1\right),\\
+\alpha_{t}\left(0\right) &amp; = &amp; -\left(\mu-\frac{\sigma^{2}}{2\kappa^{2}}\right)\left(\beta_{t}\left(0\right)+h\right)-\frac{\sigma^{2}}{4\kappa}\beta_{t}^{2}\left(0\right).
+\end{eqnarray*}
+It is coded below.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[15]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">beta</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">theta</span>
     <span class="k">return</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="o">-</span> <span class="n">kappa</span> <span class="o">*</span> <span class="n">h</span> <span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">/</span> <span class="n">kappa</span>
@@ -3733,36 +3962,55 @@ In&nbsp;[15]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-Most of the time we are actually interested in yields, rather than in bond prices directly.
-<p>
-
+<p>Most of the time we are actually interested in yields, rather than in bond prices directly.</p>
+<p><p>
+\begin{equation}
+y_{t,T}= -\frac{1}{h}\log B_{t,T}=-\frac{1}{h}\alpha_{t}\left(0\right)-\frac{1}{h}\beta_{t}\left(0\right)r_{t}
+=A\left(h\right) + B\left(h\right)r_t
+\end{equation}</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[16]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">A_exact</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">:</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span> <span class="o">/</span> <span class="n">h</span>
 <span class="n">B_exact</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">:</span> <span class="o">-</span> <span class="n">beta</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span> <span class="o">/</span> <span class="n">h</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can compute these for the interval of <span class="math">\(H\)</span> days in case of analytic solution.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can compute these for the interval of $H$ days in case of analytic solution.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[17]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">1e2</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">A_exact</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">B_exact</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
@@ -3771,21 +4019,35 @@ In&nbsp;[17]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Numeric-solution">Numeric solution<a class="anchor-link" href="#Numeric-solution">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For numerical solution we need to set up the system of ODEs.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[18]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">kappa</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">theta</span>
     <span class="n">da</span> <span class="o">=</span> <span class="o">-</span> <span class="n">kappa</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
@@ -3795,17 +4057,25 @@ In&nbsp;[18]:
 
 </div>
 </div>
+</div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The solver is adjusted since for bond pricign we only need the value of functions <span class="math">\(\alpha_t(u)\)</span> and <span class="math">\(\beta_t(u)\)</span> at zero but for variety of <span class="math">\(h\)</span>.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The solver is adjusted since for bond pricign we only need the value of functions $\alpha_t(u)$ and $\beta_t(u)$ at zero but for variety of $h$.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[19]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="n">df_args</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">ode</span><span class="p">(</span><span class="n">df_args</span><span class="p">)</span>
@@ -3822,17 +4092,25 @@ In&nbsp;[19]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The solutions are written as function below.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[20]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">alpha_num</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">H</span><span class="p">,</span> <span class="n">theta</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">theta</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">beta_num</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">H</span><span class="p">,</span> <span class="n">theta</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">theta</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
@@ -3842,17 +4120,25 @@ In&nbsp;[20]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can evaluate these at a specific time interval.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[21]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span> <span class="o">=</span> <span class="n">A_numeric</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">B_numeric</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
 <span class="n">sol_integrate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
@@ -3860,21 +4146,35 @@ In&nbsp;[21]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Comparison">Comparison<a class="anchor-link" href="#Comparison">&#182;</a></h2>
 </div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now plot the solutions and the resulting yield.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[22]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="p">[</span><span class="n">sol_analytic</span><span class="p">,</span> <span class="n">sol_integrate</span><span class="p">]:</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -3891,15 +4191,16 @@ In&nbsp;[22]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfMAAAGJCAYAAACettrsAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xd4VGXe//H39GTSe5lJCJCYhCoQmorECuKCBX2MuzZE
 RVdUHn1+q666gq4ruKtribuLrquiLuJaCCoEpYQiJYBUQUgoYVIIhPQy7cz5/RHJGkMnw6R8X9d1
@@ -4358,9 +4659,10 @@ DHIjhPeTYi6EuCAZV0oI7+e1w7kKITzDYrE0De0LUFFRwR133OHBREKIi5FiLoRoxmAwsHfv3qbn
 y5YtY/fu3R5MJIS4GGlmF0JckDSzC+H9pJgLIYQQPk6KuRCimXP1Zpce7UJ4N7kFqhBCCOHj5Mhc
 CCGE8HFSzIUQQggfJ8VcCCGE8HFSzIUQQggfJ8VcCCGE8HFSzIUQQggfJ8VcCCGE8HFSzIUQQggf
 9/9ugQj6Ql2H5AAAAABJRU5ErkJggg==
-">
-
+"
+>
 </div>
+
 </div>
 
 </div>

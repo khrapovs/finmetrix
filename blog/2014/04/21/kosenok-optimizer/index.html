@@ -1767,29 +1767,38 @@ init_mathjax();
 </header>
 
   <div class="entry-content"><p>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[1]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Define-optimizer">Define optimizer<a class="anchor-link" href="#Define-optimizer">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[2]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">kosenok_opt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Optimizer function</span>
 
@@ -1865,18 +1874,26 @@ In&nbsp;[2]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Define-Rosenbrock-function">Define Rosenbrock function<a class="anchor-link" href="#Define-Rosenbrock-function">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[3]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Rosenbrock function</span>
 <span class="k">def</span> <span class="nf">rosen</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
@@ -1884,18 +1901,26 @@ In&nbsp;[3]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Import-modules">Import modules<a class="anchor-link" href="#Import-modules">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[4]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="c"># Import for rosenbrock plot:</span>
@@ -1913,18 +1938,26 @@ In&nbsp;[4]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Search-for-the-minimum-of-the-function">Search for the minimum of the function<a class="anchor-link" href="#Search-for-the-minimum-of-the-function">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[5]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c">#Start location</span>
 <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">])</span>
 
@@ -1944,13 +1977,14 @@ In&nbsp;[5]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Optimization terminated successfully.
          Current function value: 0.000000
@@ -1981,16 +2015,23 @@ Iter: 14 , x[i] = [ 0.78   0.609] , Delta = 6.1e-06
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Plot-surface-of-the-function-and-optimizer-path">Plot surface of the function and optimizer path<a class="anchor-link" href="#Plot-surface-of-the-function-and-optimizer-path">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[6]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
 <span class="c">#ax = Axes3D(fig, azim = -128, elev = 43)</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">Axes3D</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">azim</span> <span class="o">=</span> <span class="mi">115</span><span class="p">,</span> <span class="n">elev</span> <span class="o">=</span> <span class="mi">35</span><span class="p">)</span>
@@ -2015,15 +2056,16 @@ In&nbsp;[6]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAk4AAAJOCAYAAABBWYj1AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvVmMHOd57v9U79s0RYrLkMNV4lAUtTKK6Rwc5eToL8vH
 dhJBiAMFDmTLgA0EMhDYcBzAkW8CBI6FBIiXxELOhS4EGYidA1uSz0V05IVaTFuURFEiRYqc4XBm
@@ -5153,9 +5195,10 @@ Ukt1iqIonci6det49tln+fDDD3E4HCGvSUpK4ujRo+Tm5uLz+Vi9ejWLFi0K80gV5eqkCidFUZRO
 ZMWKFVRVVTFnzhzGjx/PD3/4Q6BuAKfFYuGll15i3rx5jBw5kttuu43ExMT2HLaiXDVUjpOiKIqi
 KEozqRknRVEURVGUZlKFk6IoiqIoSjOpwklRFEVRFKWZVOGkKIqiKIrSTKpwUhRFURRFaSZVOCmK
 oiiKojSTKpwURVEURVGa6f8BgxNXnwXpMiAAAAAASUVORK5CYII=
-">
-
+"
+>
 </div>
+
 </div>
 
 </div>

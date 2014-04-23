@@ -1767,16 +1767,23 @@ init_mathjax();
 </header>
 
   <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Import-modules">Import modules<a class="anchor-link" href="#Import-modules">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[1]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">zipfile</span>
 <span class="kn">import</span> <span class="nn">StringIO</span>
 <span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
@@ -1792,18 +1799,26 @@ In&nbsp;[1]:
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Import-yields">Import yields<a class="anchor-link" href="#Import-yields">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[2]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">zf</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s">&#39;yield_curve.zip&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
 <span class="n">name</span> <span class="o">=</span> <span class="n">zf</span><span class="o">.</span><span class="n">namelist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">StringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
@@ -1815,13 +1830,14 @@ In&nbsp;[2]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
                      rate
 date       days          
@@ -1844,16 +1860,23 @@ date       days
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Fill-empty-values">Fill empty values<a class="anchor-link" href="#Fill-empty-values">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[3]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">fg</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">rate</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">days</span><span class="p">)</span>
@@ -1873,13 +1896,14 @@ In&nbsp;[3]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
 <pre>
 &lt;class &apos;pandas.core.frame.DataFrame&apos;&gt;
 DatetimeIndex: 4286 entries, 1996-01-02 00:00:00 to 2013-01-31 00:00:00
@@ -1894,16 +1918,23 @@ dtypes: float64(3653)
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Plot-interest-rate-surface-on-a-monthly-frequency">Plot interest rate surface on a monthly frequency<a class="anchor-link" href="#Plot-interest-rate-surface-on-a-monthly-frequency">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[4]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">stacked</span> <span class="o">=</span> <span class="n">new_rates</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&#39;M&#39;</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">stacked</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
@@ -1922,15 +1953,16 @@ In&nbsp;[4]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAt4AAALeCAYAAACdlBZfAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvVmTJNd5pvmc40tE5FoFFHaAACn1qNWjMc2MTG1GqU0X
 sra5aJpuu2/0O3TdZur+JWwzmXg7S7OllrhAIEGRAEWQAAkSYGGvJfeI8P0sc3HcPSMTmVmZWZmR
@@ -6279,25 +6311,33 @@ mZiYyI8fP/Lr168kybt373L58uVcuXIl29vb+f37d16/fm1lHzBQRvo9AAD8F+vr69nc3MzS0lKS
 ZHl5Offv38+5c+dy6dKlPH78OENDQ1lYWEi1Wj3eagIwKKwTBACAAnw1AQCAAoQ3AAAUILwBAKAA
 4Q0AAAUIbwAAKEB4AwBAAcIbAAAKEN4AAFCA8AYAgAKENwAAFCC8AQCgAOENAAAFCG8AAChAeAMA
 QAH/ANExaseQii4MAAAAAElFTkSuQmCC
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Plot-yield-curve-on-a-single-date">Plot yield curve on a single date<a class="anchor-link" href="#Plot-yield-curve-on-a-single-date">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[5]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">subset</span> <span class="o">=</span> <span class="n">yields</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">17</span><span class="p">)]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">subset</span><span class="o">.</span><span class="n">rate</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">subset</span><span class="o">.</span><span class="n">days</span>
@@ -6314,15 +6354,16 @@ In&nbsp;[5]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeYAAAFrCAYAAAAEvSrJAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xd4VGXi9vHvpE8KoQUEFGkC4tIiLSEJCU0QRFFRkdhX
 X8WVYkFXXAUUASm6qCiugoroD7GgoiItSFmKFANBF0EEhdBLSDKTMjPP+0cggmAASXJmJvfnuuZy
@@ -6556,25 +6597,33 @@ Zw3OmDHD62ZlFxYWmi5dupgqVaqYrl27mtWrV59z9oULF5q4uDjTuXNn89tvv1k5jDOOIzY21iQl
 JZk777zTeDweY4x3j+P99983MTExJjk52SQnJ5uVK1f65Lo40zh8bV189tlnplOnTiYpKcnccccd
 xuVy+eS6+OM41q5d63Pr4mSJiYnGmHP//Xq+Y7AZo8tziYiIeAvdj1lERMSLqJhFRES8iIpZRETE
 i6iYRUREvIiKWURExIuomEVERLzI/wcCQlE1HKGIeAAAAABJRU5ErkJggg==
-">
+"
+>
+</div>
+
+</div>
 
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-
-</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Plot-yield-time-series-for-several-terms">Plot yield time series for several terms<a class="anchor-link" href="#Plot-yield-time-series-for-several-terms">&#182;</a></h2>
 </div>
+</div>
+</div>
 
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[6]:
 </div>
-<div class="input_area box-flex1">
+<div class="inner_cell">
+    <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">new_rates</span><span class="p">[[</span><span class="mi">30</span><span class="p">,</span><span class="mi">360</span><span class="p">,</span><span class="mi">1440</span><span class="p">,</span><span class="mi">2880</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;rate&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;plots/interest_rates.eps&#39;</span><span class="p">,</span>
@@ -6584,15 +6633,16 @@ In&nbsp;[6]:
 
 </div>
 </div>
+</div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_display_data">
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAFgCAYAAABjZKpNAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXd8FGX6wL/bU0lCIEDAUCQgPYIigkgREBQUFUGs6Inl
 DtE779Sz/uyip6eo2AvYUVBQTkQkoUon1ABBCKGH9LZ95/fHO7M7u9mQBEKyWef7+eTDzsy7s++z
@@ -7632,9 +7682,10 @@ ApZIajnNmjXjwIEDAOzbt4+8vDxat25NXFwco0ePRqfT4ebmRlFRkWH/qKgoYmNjiY2NZcOGDTU5
 fInkpkUqYImkljNq1Ch27NjB0KFDycjIIDc3lzVr1jBixAgSExPRaDTUr1+ftLQ0xo0bh6urK8OG
 DWPAgAEMHDiQt956q6ZFkEhuSmQtaIlEIpFIagBpAUskEolEUgNIBSyRSCQSSQ0gFbBEIpFIJDWA
 VMASiUQikdQAUgFLJBKJRFIDSAUskUgkEkkN8P8EkyfjYCNrMwAAAABJRU5ErkJggg==
-">
-
+"
+>
 </div>
+
 </div>
 
 </div>
