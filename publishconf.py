@@ -20,5 +20,5 @@ DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
 
-#DISQUS_SITENAME = ""
+DISQUS_SITENAME = "pythonicfinmetrix"
 GOOGLE_ANALYTICS = "UA-17393493-7"
