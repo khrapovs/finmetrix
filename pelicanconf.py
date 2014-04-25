@@ -33,7 +33,7 @@ THEME = '../pelican-octopress-theme/'
 #THEME = '../pelican-themes/maggner-pelican/'
 # Plugins
 PLUGIN_PATH = '../pelican-plugins/'
-PLUGINS = ['liquid_tags.img', 'liquid_tags.video',
+PLUGINS = ['summary', 'liquid_tags.img', 'liquid_tags.video',
            'liquid_tags.youtube', 'liquid_tags.vimeo',
            'liquid_tags.include_code', 'liquid_tags.notebook']
 
@@ -97,5 +97,15 @@ FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
-GOOGLE_ANALYTICS = "UA-17393493-7"
+#GOOGLE_ANALYTICS = "UA-17393493-7"
 DISQUS_SITENAME = "pythonicfinmetrix"
+
+EXTRA_HEADER = "<script>\n\
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n\
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n\
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n\
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');\n\
+\n\
+  ga('create', 'UA-17393493-7', 'khrapovs.github.io');\n\
+  ga('send', 'pageview');\n\
+  </script>"
