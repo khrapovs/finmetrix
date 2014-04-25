@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pythonic FinMetrix</title><link>http://khrapovs.github.com/finmetrix/</link><description></description><atom:link href="http://khrapovs.github.com/finmetrix/feeds/econometrics.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 21 Apr 2014 16:30:00 +0400</lastBuildDate><item><title>Non-parametric Estimation of Doppler function</title><link>http://khrapovs.github.com/finmetrix/blog/2014/04/21/doppler-nonparametrics/</link><description>&lt;p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pythonic FinMetrix</title><link>http://khrapovs.github.io/finmetrix/</link><description></description><atom:link href="http://khrapovs.github.io/finmetrix/feeds/econometrics.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 21 Apr 2014 16:30:00 +0400</lastBuildDate><item><title>Non-parametric Estimation of Doppler function</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/doppler-nonparametrics/</link><description>&lt;p&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Import-libraries-and-set-defaults"&gt;Import libraries and set defaults&lt;a class="anchor-link" href="#Import-libraries-and-set-defaults"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[2]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;mpl&lt;/span&gt;
@@ -21,21 +28,35 @@ In&amp;nbsp;[2]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Doppler-function"&gt;Doppler function&lt;a class="anchor-link" href="#Doppler-function"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;span class="math"&gt;\[r\left(x\right)=\sqrt{x\left(1-x\right)}\sin\left(\frac{1.2\pi}{x+.05}\right),\quad x\in\left[0,1\right]\]&lt;/span&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;$$r\left(x\right)=\sqrt{x\left(1-x\right)}\sin\left(\frac{1.2\pi}{x+.05}\right),\quad x\in\left[0,1\right]$$&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[3]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;linspace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mo"&gt;01&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;99&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1e3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;doppler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1.2&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pi&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mo"&gt;05&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
@@ -45,15 +66,16 @@ In&amp;nbsp;[3]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYQAAAD/CAYAAADxL6FlAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJztnXtcVHX+/1+D3IQZEFRQvFGRRV7Y1HW3RQu1Mi+t4W6W
 CVratirfttp1tfz2I027t2o3Ih/l10tI7RZZWmmFi6aplXdBIy+JoIkKch2BgfP74+2BmWHucy5z
@@ -311,25 +333,33 @@ c6b12GXLlgmxsbGt9bT+9IcvCK7fi1GjRglBQUGCXq9vfYwfP15N0yXFnd8JkVOnTvll2ak79yIv
 L09ISEgQIiIihFGjRtlcLLWMq/eirq5OmDVrVutaMXToUGHLli1qmi45zzzzTLvZcosXL5Zk3dQJ
 gp/5lwzDMIxH8J7KDMMwDAAWBIZhGOYqLAgMwzAMABYEhmEY5iosCAzDMAwAFgSGYRjmKv8fsbSl
 jt9qhvgAAAAASUVORK5CYII=
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Derivative-of-Doppler-function"&gt;Derivative of Doppler function&lt;a class="anchor-link" href="#Derivative-of-Doppler-function"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[4]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sympy.utilities.lambdify&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;lambdify&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Latex&lt;/span&gt;
 
@@ -350,24 +380,25 @@ In&amp;nbsp;[4]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_latex output_subarea "&gt;
 $$- 1.2 \frac{\pi \left(u \left(- u + 1\right)\right)^{0.5} \cos{\left (1.2 \frac{\pi}{u + 0.05} \right )}}{\left(u + 0.05\right)^{2}} + \frac{\left(u \left(- u + 1\right)\right)^{0.5} \left(- 1.0 u + 0.5\right) \sin{\left (1.2 \frac{\pi}{u + 0.05} \right )}}{u \left(- u + 1\right)}$$
-
-&lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;/div&gt;
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 
 
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYgAAAD/CAYAAADrE0HrAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xt0VPWBB/DvJCEkk5kJhAQwvHyEFExIqKQcegQdgl1F
 NwfTrEVXjZC6sFrrvrICUjTRxcrZbtpd0ZrTni5psaFrSWW1FY7SRtDF8pKkSQQUFQSURwh5DMyQ
@@ -568,29 +599,45 @@ VB3qHul5c9gExIULF/zGNTc2NkqSJEnHjx+XLBaL9Pnnn3vfW1dXJ02YMME7nncknQQkKfxjsXDh
 QmnUqFGSxWLx3u68886hLHrM6fl3Ifv0009H5DBXPceiqalJysvLk2w2m7Rw4ULVk6eRhXssHA6H
 9N3vftd7vpgzZ460Y8eOoSx6TD399NOD1smrra2N2XnTJEkjrP5JREQxMSz6IIiIaPhhQBARkSoG
 BBERqWJAEBGRKgYEERGpYkAQEZGq/wfQ2jy+P9/twAAAAABJRU5ErkJggg==
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Left-and-right-truncated-exponentials"&gt;Left and right truncated exponentials&lt;a class="anchor-link" href="#Left-and-right-truncated-exponentials"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Right truncated: &lt;span class="math"&gt;\[f\left(x\right)=\frac{e^{-x/\lambda}/\lambda}{1-e^{-b/\lambda}},\quad F\left(x\right)=\frac{1-e^{-x/\lambda}}{1-e^{-b/\lambda}},\quad F^{-1}\left(x\right)=-\lambda\log\left(1-x\left(1-e^{-b/\lambda}\right)\right)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Left truncated: &lt;span class="math"&gt;\[f\left(x\right)=\frac{e^{x/\lambda}/\lambda}{e^{b/\lambda}-1},\quad F\left(x\right)=\frac{1-e^{x/\lambda}}{1-e^{b/\lambda}},\quad F^{-1}\left(x\right)=\lambda\log\left(1-x\left(1-e^{b/\lambda}\right)\right)\]&lt;/span&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Right truncated:
+$$f\left(x\right)=\frac{e^{-x/\lambda}/\lambda}{1-e^{-b/\lambda}},\quad F\left(x\right)=\frac{1-e^{-x/\lambda}}{1-e^{-b/\lambda}},\quad F^{-1}\left(x\right)=-\lambda\log\left(1-x\left(1-e^{-b/\lambda}\right)\right)$$&lt;/p&gt;
+&lt;p&gt;Left truncated:
+$$f\left(x\right)=\frac{e^{x/\lambda}/\lambda}{e^{b/\lambda}-1},\quad F\left(x\right)=\frac{1-e^{x/\lambda}}{1-e^{b/\lambda}},\quad F^{-1}\left(x\right)=\lambda\log\left(1-x\left(1-e^{b/\lambda}\right)\right)$$&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[5]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;f_rtexp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lmbd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;lmbd&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;lmbd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;lmbd&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
@@ -620,18 +667,26 @@ In&amp;nbsp;[5]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Draw-the-densitites"&gt;Draw the densitites&lt;a class="anchor-link" href="#Draw-the-densitites"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[6]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;fig&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -653,15 +708,16 @@ In&amp;nbsp;[6]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2YAAAFCCAYAAACad873AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XmcjeX/x/HXfWYww8zYySTb165EoSIMIYrskSVGllS+
 ihaJyJfSNyWpviW/JGRJfWlREkaWFoRk5IuMCmPJvs9y/f6YnM59Zjszc5aZ8X4+HufRXNd939f1
@@ -1177,32 +1233,46 @@ hxtxcXHl03XXXRfI1APCm7+vMvv37w/a4YC9aa8FCxYY7dq1MxISEoxBgwa5/bBt6Dxtr7y8PGPy
 5Mnln189e/Y0vvjii0CmHhC///3vDZvN5jA9++yz+ryvhPpH76mP9Jz6R++pj/SO+kjP1XX/aDOM
 IDxuKyIiIiIiYiEeXWMmIiIiIiIidUeFmYiIiIiISICpMBMREREREQkwFWYiIiIiIiIBpsJMRERE
 REQkwFSYiYiIiIiIBNj/Byd+KohjOWgsAAAAAElFTkSuQmCC
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Kernels"&gt;Kernels&lt;a class="anchor-link" href="#Kernels"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Truncated (Uniform): &lt;span class="math"&gt;\(k_{0}\left(u\right)=\frac{1}{2}1\left(\left|u\right|\leq1\right)\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Epanechnikov: &lt;span class="math"&gt;\(k_{1}\left(u\right)=\frac{3}{4}\left(1-u^{2}\right)1\left(\left|u\right|\leq1\right)\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Biweight: &lt;span class="math"&gt;\(k_{2}\left(u\right)=\frac{15}{16}\left(1-u^{2}\right)^{2}1\left(\left|u\right|\leq1\right)\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Triweight: &lt;span class="math"&gt;\(k_{2}\left(u\right)=\frac{35}{36}\left(1-u^{2}\right)^{3}1\left(\left|u\right|\leq1\right)\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Gaussian: &lt;span class="math"&gt;\(k_{\phi}\left(u\right)=\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{1}{2}u^2\right)\)&lt;/span&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Truncated (Uniform): $k_{0}\left(u\right)=\frac{1}{2}1\left(\left|u\right|\leq1\right)$&lt;/p&gt;
+&lt;p&gt;Epanechnikov: $k_{1}\left(u\right)=\frac{3}{4}\left(1-u^{2}\right)1\left(\left|u\right|\leq1\right)$&lt;/p&gt;
+&lt;p&gt;Biweight: $k_{2}\left(u\right)=\frac{15}{16}\left(1-u^{2}\right)^{2}1\left(\left|u\right|\leq1\right)$&lt;/p&gt;
+&lt;p&gt;Triweight: $k_{2}\left(u\right)=\frac{35}{36}\left(1-u^{2}\right)^{3}1\left(\left|u\right|\leq1\right)$&lt;/p&gt;
+&lt;p&gt;Gaussian: $k_{\phi}\left(u\right)=\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{1}{2}u^2\right)$&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[7]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;indicator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;asfarray&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
@@ -1254,15 +1324,16 @@ In&amp;nbsp;[7]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXsAAAD/CAYAAAAQaHZxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XdUFFf7wPHvLL0XBQRBQbGj2BsWbDG+aiwxiRqxayyJ
 mtcSNWo0vprEEmtsP5NolCRGYwxJNGoUe0PsghUQK6ggUqTu/f2xsmEFARVcyv2cM0d2987Ms3vG
@@ -1723,32 +1794,52 @@ XLhQkiRJOnz4sKRWq6WjR4/W7vvuu+9KsbGxUlhYmPTggw9K1adT0wq13L2fzz77rBQbGyuFhoZK
 HTt2lKZNmyY5HI7mLHqLM23aNEmhUNR5zZgxQ9RNL7l7P0XdbNihQ4ckhUIhBQcHS2q1uvb11Vdf
 NUr9VEiS+CwlCIJwuRNr0AqCIFwBRLAXBEG4AohgLwiCcAUQwV4QBOEKIIK9IAjCFUAEe0EQhCvA
 /wOVheaMfbwKCAAAAABJRU5ErkJggg==
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Nadaraya-Watson-(NW)-or-local-constant-estimator"&gt;Nadaraya-Watson (NW) or local constant estimator&lt;a class="anchor-link" href="#Nadaraya-Watson-(NW)-or-local-constant-estimator"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Local-weighting"&gt;Local weighting&lt;a class="anchor-link" href="#Local-weighting"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;For each observed data &lt;span class="math"&gt;\(X\)&lt;/span&gt; (&lt;span class="math"&gt;\(N\)&lt;/span&gt;-vector) and grid &lt;span class="math"&gt;\(U\)&lt;/span&gt; (&lt;span class="math"&gt;\(M\)&lt;/span&gt;-vector) this function returns &lt;span class="math"&gt;\(N\times M\)&lt;/span&gt;-matrix of weights&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;For each observed data $X$ ($N$-vector) and grid $U$ ($M$-vector) this function returns $N\times M$-matrix of weights&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[8]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;weight&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ktype&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Truncated&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="c"&gt;# X - N-array&lt;/span&gt;
     &lt;span class="c"&gt;# U - M-array&lt;/span&gt;
@@ -1766,42 +1857,70 @@ In&amp;nbsp;[8]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Nadaraya-Watson-(NW)"&gt;Nadaraya-Watson (NW)&lt;a class="anchor-link" href="#Nadaraya-Watson-(NW)"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;span class="math"&gt;\[\hat{m}\left(x\right)=\frac{\sum_{i=1}^{n}k\left(\frac{X_{i}-x}{h}\right)Y_{i}}{\sum_{i=1}^{n}k\left(\frac{X_{i}-x}{h}\right)}\]&lt;/span&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;$$\hat{m}\left(x\right)=\frac{\sum_{i=1}^{n}k\left(\frac{X_{i}-x}{h}\right)Y_{i}}{\sum_{i=1}^{n}k\left(\frac{X_{i}-x}{h}\right)}$$&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[9]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;NW&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ktype&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Truncated&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;weight&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ktype&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Generate-data"&gt;Generate data&lt;a class="anchor-link" href="#Generate-data"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;span class="math"&gt;\[Y_{i}=m\left(X_{i}\right)+\epsilon_{i},\quad\epsilon_{i}\sim NID\left(0,\sigma=0.1\right)\]&lt;/span&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;$$Y_{i}=m\left(X_{i}\right)+\epsilon_{i},\quad\epsilon_{i}\sim NID\left(0,\sigma=0.1\right)$$&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[10]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;M&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lmbd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;trunc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;left&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;trunc&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;left&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -1817,18 +1936,26 @@ In&amp;nbsp;[10]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Perform-estimation-and-plot-the-results"&gt;Perform estimation and plot the results&lt;a class="anchor-link" href="#Perform-estimation-and-plot-the-results"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[11]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;generate_data&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
 &lt;span class="c"&gt;# Nadaraya-Watson estimator&lt;/span&gt;
@@ -1847,15 +1974,16 @@ In&amp;nbsp;[11]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAF8CAYAAACg++17AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XtczfcfwPHX6X5PSZEkRG5jzNyZS2YYGbvkbsw1d1GS
 LpL7vWk2Nvfrb9hiDEMINZl7bomRVKpVul/O5/fH4WwtNpeu9nk+Hj3qfM/n+/2+v+ecznmfz1Uh
@@ -3530,28 +3658,42 @@ Jmzbtg0XFxdcXV358ccf8fDw0HdoQgghSZwQQhSnd+/e2NnZsWbNGgC+/vprFi5cSHR0NKampnqO
 TgjxspMkTgghirBz505GjhxJbGwsNjY2uuc7dOjA66+/zqxZs/QYnRBCSBInhBBCCGGQZGODEEII
 IYQBkiROCCGEEMIASRInhBBCCGGAJIkTQgghhDBAksQJIYQQQhggSeKEEEIIIQzQ/wPhFRtq66J2
 sAAAAABJRU5ErkJggg==
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Bias-correction"&gt;Bias correction&lt;a class="anchor-link" href="#Bias-correction"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;For bias computation we take the density of &lt;span class="math"&gt;\(X\)&lt;/span&gt; and two derivatives of conditional mean &lt;span class="math"&gt;\(m(x)\)&lt;/span&gt; as known. In practice, they have to be estimated.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;For bias computation we take the density of $X$ and two derivatives of conditional mean $m(x)$ as known. In practice, they have to be estimated.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[12]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fx&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lmbd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;sp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;lmbd&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;lmbd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;sp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;lmbd&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
@@ -3587,15 +3729,16 @@ In&amp;nbsp;[12]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4gAAAF8CAYAAACNLJXoAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xd8Tff/wPHXvRmyI0RkIQixSmvE3qtKarS+tqBKFUVs
 IrIQsWuUlmqpUVqUGqUqaqWCCJLYxI6RRPa85/dH6v6aBg1JXOH9fDzu45Fz7ud8zvvce5Oc9/0s
@@ -5636,39 +5779,53 @@ YDLFVAghhCgCsbGxODs7s379emrXrk29evX4448/aNu2bUmHJoQQQuSbJIhCCCFEEfjwww+xtrbm
 hx9+AGDp0qXMmDGD06dPY2BgUMLRCSGEEPkjCaIQQgjxnDZu3MjXX39NZGQkFhYWup+7ubnRunVr
 AgICSjA6IYQQIv8kQRRCCCGEEEIIAUiRGiGEEEIIIYQQ/5IEUQghhBBCCCEEIAmiEEIIIYQQQoh/
 SYIohBBCCCGEEAKQBFEIIYQQQgghxL8kQRRCCCGEEEIIAcD/AayKxvci4+tTAAAAAElFTkSuQmCC
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Local-Linear-(LL)-estimator"&gt;Local Linear (LL) estimator&lt;a class="anchor-link" href="#Local-Linear-(LL)-estimator"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;span class="math"&gt;\[\left(\begin{array}{c}
+&lt;p&gt;$$\left(\begin{array}{c}
 \hat{\alpha}\left(x\right)\\
 \hat{\beta}\left(x\right)
-\end{array}\right)=\left(\sum_{i=1}^{n}k_{i}\left(x\right)Z_{i}\left(x\right)Z_{i}\left(x\right)^{\prime}\right)^{-1}\sum_{i=1}^{n}k_{i}\left(x\right)Z_{i}\left(x\right)Y_{i}\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="math"&gt;\[\left(\begin{array}{c}
+\end{array}\right)=\left(\sum_{i=1}^{n}k_{i}\left(x\right)Z_{i}\left(x\right)Z_{i}\left(x\right)^{\prime}\right)^{-1}\sum_{i=1}^{n}k_{i}\left(x\right)Z_{i}\left(x\right)Y_{i}$$&lt;/p&gt;
+&lt;p&gt;$$\left(\begin{array}{c}
 \hat{\alpha}\left(x\right)\\
 \hat{\beta}\left(x\right)
 \end{array}\right)
-=\left(Z\left(x\right)^{\prime}K\left(x\right)Z\left(x\right)\right)^{-1}Z\left(x\right)^{\prime}K\left(x\right)Y\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="math"&gt;\(K(x)\)&lt;/span&gt; - &lt;span class="math"&gt;\(N\times N\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="math"&gt;\(Z(x)\)&lt;/span&gt; - &lt;span class="math"&gt;\(N\times 2\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="math"&gt;\(Y\)&lt;/span&gt; - &lt;span class="math"&gt;\(N\times 1\)&lt;/span&gt;&lt;/p&gt;
+=\left(Z\left(x\right)^{\prime}K\left(x\right)Z\left(x\right)\right)^{-1}Z\left(x\right)^{\prime}K\left(x\right)Y$$&lt;/p&gt;
+&lt;p&gt;$K(x)$ - $N\times N$&lt;/p&gt;
+&lt;p&gt;$Z(x)$ - $N\times 2$&lt;/p&gt;
+&lt;p&gt;$Y$ - $N\times 1$&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[13]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;LL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ktype&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Truncated&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="c"&gt;# X - N-array&lt;/span&gt;
     &lt;span class="c"&gt;# U - M-array&lt;/span&gt;
@@ -5702,18 +5859,26 @@ In&amp;nbsp;[13]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Perform-estimation-and-plot-the-results"&gt;Perform estimation and plot the results&lt;a class="anchor-link" href="#Perform-estimation-and-plot-the-results"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[14]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;generate_data&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
 &lt;span class="n"&gt;Yhat&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dYhat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;LL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mo"&gt;05&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ktype&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Gaussian&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -5744,15 +5909,16 @@ In&amp;nbsp;[14]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4gAAAGICAYAAAADL87nAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XtcT/cfwPHX99v9XnRBiVquuQ0zlyGE/YyfyTZmTWaz
 zWXLdQipSMhlZsOYMTGXGRsbu9gWyzVGiJHbyCU/k9L9dn5/tL7rq6J0+abez8fj++h7zvmccz7n
@@ -7516,25 +7682,33 @@ CSGEEDoj7aMQxScJohBlWJ8+fbCxsSE0NBSAsLAwlixZQmRkJEZGRjqOTgghhNANaR+FKD5JEIUo
 o3bu3MnYsWOJjo7GyspK83iHDh1o3bo1c+bM0WF0QgghhG5I+yjEs5EEUQghhBBCCCEEIIvUCCGE
 EEIIIYT4lySIQgghhBBCCCEASRCFEEIIIYQQQvxLEkQhhBBCCCGEEIAkiEIIIYQQQggh/iUJohBC
 CCGEEEIIAP4f9iakHMBVPaoAAAAASUVORK5CYII=
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Comparison-for-different-DGP-of-X"&gt;Comparison for different DGP of X&lt;a class="anchor-link" href="#Comparison-for-different-DGP-of-X"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[15]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;X1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;generate_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lmbd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;trunc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;left&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;X2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;generate_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lmbd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;trunc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;right&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -7577,15 +7751,16 @@ In&amp;nbsp;[15]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4kAAAJbCAYAAABJr9HFAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xl8FdX9//H3JAFCNiDsiwoIQUBBLc3XVsALaAGRBnAD
 FQF3QNxKi4CQhLVWhSoI1FoxIItaFxRZRMoFKehPELCERVABA7LJkhASyDK/PwIjkS0hc+/cuff1
@@ -9390,29 +9565,43 @@ HaoQhZ7sbipEEbF582ZGjhxJWFgYFhYWmsfd3d35z3/+w/vvv0+rVq0AUKlUKIqCm5sb+/bt01XI
 QgghRIF4UY5s2rQpP/zwA1FRURgaGmqe69OnD8uXL9dFuEIUejJIFEIIIYQQQgihIdNNhRBCCCGE
 EEJoyCBRCCGEEEIIIYSGDBKFEEIIIYQQQmjIIFEIIYQQQgghhIYMEoUQQgghhBBCaPwfQK/FBL15
 SbwAAAAASUVORK5CYII=
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Conditional-variance-and-confidence-intervals"&gt;Conditional variance and confidence intervals&lt;a class="anchor-link" href="#Conditional-variance-and-confidence-intervals"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Leave-one-out-errors"&gt;Leave-one-out errors&lt;a class="anchor-link" href="#Leave-one-out-errors"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[16]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ktype&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;ehat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -9424,18 +9613,26 @@ In&amp;nbsp;[16]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Estimate-variance"&gt;Estimate variance&lt;a class="anchor-link" href="#Estimate-variance"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[23]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;N&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt;
 &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;generate_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lmbd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -9453,18 +9650,26 @@ In&amp;nbsp;[23]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Plot-the-results"&gt;Plot the results&lt;a class="anchor-link" href="#Plot-the-results"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[24]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;fig&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -9500,15 +9705,16 @@ In&amp;nbsp;[24]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAsQAAALDCAYAAAASUBY7AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xl4jGf3wPHvZN9DRBBr1L7WWlttpfYWbRU/LV1QW+07
 IcFLW7W8SrXV5S2p1trSVrWWlBCqQRBLEkIESUQi+z7z++OWkdWWZbKcz3XNJWaeeeaezGTmPPdz
@@ -11348,34 +11554,54 @@ LV26VO9YAABCwCAGAJgHpqamqKSkhGKxGLW2tpLb7dY7EgCAMHAPMQDAPJCdnU02m43C4TDt3btX
 k8rLy/WOBgAgBAxiAADBVVVV0eLFi6m9vZ2IiC5evEitra30/PlzysjI0DkdAMDfD4MYAEBggUCA
 jhw5QpIkkcViSbzucDhow4YN1NLSomM6AAAxYBADAAAAQFrDh+oAAAAAIK1hEAMAAABAWsMgBgAA
 AIC0hkEMAAAAAGkNgxgAAAAA0hoGMQAAAACktX8AUIUi1OH5WZwAAAAASUVORK5CYII=
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Bandwidth-selection"&gt;Bandwidth selection&lt;a class="anchor-link" href="#Bandwidth-selection"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Cross-validation-criterion"&gt;Cross-validation criterion&lt;a class="anchor-link" href="#Cross-validation-criterion"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;span class="math"&gt;\[\tilde{e}_{i}\left(h\right)=Y_{i}-\tilde{m}_{-i}\left(X_{i},h\right)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="math"&gt;\[CV\left(h\right)=\frac{1}{n}\sum_{i=1}^{n}\tilde{e}_{i}\left(h\right)^{2}\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="math"&gt;\[\hat{h}=\arg\min_{h\geq h_{l}}CV\left(h\right)\]&lt;/span&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;$$\tilde{e}_{i}\left(h\right)=Y_{i}-\tilde{m}_{-i}\left(X_{i},h\right)$$&lt;/p&gt;
+&lt;p&gt;$$CV\left(h\right)=\frac{1}{n}\sum_{i=1}^{n}\tilde{e}_{i}\left(h\right)^{2}$$&lt;/p&gt;
+&lt;p&gt;$$\hat{h}=\arg\min_{h\geq h_{l}}CV\left(h\right)$$&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[56]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;N&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt;
 &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;generate_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -11407,15 +11633,16 @@ In&amp;nbsp;[56]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAn0AAAFGCAYAAAAfJik+AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XtcVVX+//EXioZyDnhHyJTMKMMgG0srL3gptZoKdUwx
 r0xOZjM1l/p15ZKMRpZ2MTNSs8yYycuUdpFCJDU1a0yaQIcvWkcxBRXkqiKwf3/s8RSCinEOBzjv
@@ -11768,25 +11995,33 @@ kJ6e7tR/8eLFUBTFMbmyv78/Fi1ahOjoaKd+4z/v378fVqsVRqMRmZmZyMzMdGq3WCzYtm0bAgMD
 8eGHH0Kj0Uwa46VLlxATE3Pd9qu3vdH+iMhzaIT/DSQimjESEhKwb98+LFmyZLpDIaIZhkUfERER
 kQfg410iIiIiD8Cij4iIiMgDsOgjIiIi8gAs+oiIiIg8AIs+IiIiIg/wP/iJz35y6qeeAAAAAElF
 TkSuQmCC
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Plot-the-(optimized)-fit"&gt;Plot the (optimized) fit&lt;a class="anchor-link" href="#Plot-the-(optimized)-fit"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[57]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="c"&gt;#plt.plot(U, doppler(U), lw = 2, color = &amp;#39;blue&amp;#39;, label = &amp;#39;True&amp;#39;)&lt;/span&gt;
 &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fill_between&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Yhat&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;shat&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Yhat&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;shat&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;red&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;+2s&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -11801,15 +12036,16 @@ In&amp;nbsp;[57]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAFECAYAAABI0mi7AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XlcVNX7wPHPDPsqoIIgICqKaIKaS2oqri1qJllZWpal
 ZZoauS8IuFu5a5bVL9fUvu6pbZrmQq4lihsqq4ooIPs2zP39cRlgYFBUYAY979eLF3DnztwzbPPw
@@ -13018,38 +13254,78 @@ y+3bt5kwYQJbtmyhTp061K9fnwEDBuDu7q7roQkhxANkJk4IIXIZM2YMvXr1ok2bNlSsWJG5c+cy
 fPhw0tLSUBSFlJQU0tPTURSF1NRU0tLSdD1kIcR/lOxOFUKILNu3b2fMmDH4+/tjaWmZc32HDh1o
 0aIFHTt2pF27dgBoNBoURaFt27b88ccfuhqyEOI/TII4IYQQQogSSJZThRBCCCFKIAnihBBCCCFK
 IAnihBBCCCFKIAnihBBCCCFKIAnihBBCCCFKoP8DB0R4Wip8f+4AAAAASUVORK5CYII=
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 16:30:00 +0400</pubDate><guid>tag:khrapovs.github.com/finmetrix,2014-04-21:blog/2014/04/21/doppler-nonparametrics/</guid><category>nonparametrics</category><category>kernel regression</category><category>bandwidth</category></item><item><title>Simple accelerating descend optimizer</title><link>http://khrapovs.github.com/finmetrix/blog/2014/04/21/kosenok-optimizer/</link><description>&lt;p&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;/div&gt;&lt;/p&gt;&lt;script type= "text/javascript"&gt;
+    if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+        var mathjaxscript = document.createElement('script');
+        mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+        mathjaxscript.type = 'text/javascript';
+        mathjaxscript.src = 'https:' == document.location.protocol
+                ? 'https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+                : 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+        mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+            "MathJax.Hub.Config({" +
+            "    config: ['MMLorHTML.js']," +
+            "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+            "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+            "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+            "    displayAlign: 'center'," +
+            "    displayIndent: '0em'," +
+            "    showMathMenu: true," +
+            "    tex2jax: { " +
+            "        inlineMath: [ ['$','$'] ], " +
+            "        displayMath: [ ['$$','$$'] ]," +
+            "        processEscapes: true," +
+            "        preview: 'TeX'," +
+            "    }, " +
+            "    'HTML-CSS': { " +
+            "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+            "    } " +
+            "}); ";
+        (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+    }
+&lt;/script&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 16:30:00 +0400</pubDate><guid>tag:khrapovs.github.io/finmetrix,2014-04-21:blog/2014/04/21/doppler-nonparametrics/</guid><category>nonparametrics</category><category>kernel regression</category><category>bandwidth</category></item><item><title>Simple accelerating descend optimizer</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/kosenok-optimizer/</link><description>&lt;p&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[1]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;matplotlib&lt;/span&gt; &lt;span class="n"&gt;inline&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Define-optimizer"&gt;Define optimizer&lt;a class="anchor-link" href="#Define-optimizer"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[2]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;kosenok_opt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; Optimizer function&lt;/span&gt;
 
@@ -13125,18 +13401,26 @@ In&amp;nbsp;[2]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Define-Rosenbrock-function"&gt;Define Rosenbrock function&lt;a class="anchor-link" href="#Define-Rosenbrock-function"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[3]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# Rosenbrock function&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;rosen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
@@ -13144,18 +13428,26 @@ In&amp;nbsp;[3]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Import-modules"&gt;Import modules&lt;a class="anchor-link" href="#Import-modules"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[4]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 
 &lt;span class="c"&gt;# Import for rosenbrock plot:&lt;/span&gt;
@@ -13173,18 +13465,26 @@ In&amp;nbsp;[4]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Search-for-the-minimum-of-the-function"&gt;Search for the minimum of the function&lt;a class="anchor-link" href="#Search-for-the-minimum-of-the-function"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[5]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;#Start location&lt;/span&gt;
 &lt;span class="n"&gt;x0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mf"&gt;2.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 
@@ -13204,13 +13504,14 @@ In&amp;nbsp;[5]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;
 Optimization terminated successfully.
          Current function value: 0.000000
@@ -13241,16 +13542,23 @@ Iter: 14 , x[i] = [ 0.78   0.609] , Delta = 6.1e-06
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Plot-surface-of-the-function-and-optimizer-path"&gt;Plot surface of the function and optimizer path&lt;a class="anchor-link" href="#Plot-surface-of-the-function-and-optimizer-path"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
-&lt;div class="input hbox"&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[6]:
 &lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;fig&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="c"&gt;#ax = Axes3D(fig, azim = -128, elev = 43)&lt;/span&gt;
 &lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Axes3D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;azim&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;115&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;elev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;35&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -13275,15 +13583,16 @@ In&amp;nbsp;[6]:
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="vbox output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
-
-
-&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_display_data"&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAk4AAAJOCAYAAABBWYj1AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvVmMHOd57v9U79s0RYrLkMNV4lAUtTKK6Rwc5eToL8vH
 dhJBiAMFDmTLgA0EMhDYcBzAkW8CBI6FBIiXxELOhS4EGYidA1uSz0V05IVaTFuURFEiRYqc4XBm
@@ -16413,12 +16722,13 @@ Ukt1iqIonci6det49tln+fDDD3E4HCGvSUpK4ujRo+Tm5uLz+Vi9ejWLFi0K80gV5eqkCidFUZRO
 ZMWKFVRVVTFnzhzGjx/PD3/4Q6BuAKfFYuGll15i3rx5jBw5kttuu43ExMT2HLaiXDVUjpOiKIqi
 KEozqRknRVEURVGUZlKFk6IoiqIoSjOpwklRFEVRFKWZVOGkKIqiKIrSTKpwUhRFURRFaSZVOCmK
 oiiKojSTKpwURVEURVGa6f8BgxNXnwXpMiAAAAAASUVORK5CYII=
-"&gt;
+"
+&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 16:00:00 +0400</pubDate><guid>tag:khrapovs.github.com/finmetrix,2014-04-21:blog/2014/04/21/kosenok-optimizer/</guid><category>optimization</category></item></channel></rss>
+&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 16:00:00 +0400</pubDate><guid>tag:khrapovs.github.io/finmetrix,2014-04-21:blog/2014/04/21/kosenok-optimizer/</guid><category>optimization</category></item></channel></rss>
