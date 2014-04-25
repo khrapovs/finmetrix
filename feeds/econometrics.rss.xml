@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pythonic FinMetrix</title><link>http://khrapovs.github.com/finmetrix/</link><description></description><atom:link href="http://khrapovs.github.com/finmetrix/feeds/econometrics.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 21 Apr 2014 16:30:00 +0400</lastBuildDate><item><title>Non-parametric Estimation of Doppler function</title><link>http://khrapovs.github.com/finmetrix/blog/2014/04/21/doppler-nonparametrics/</link><description>&lt;p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pythonic FinMetrix</title><link>http://khrapovs.github.io/finmetrix/</link><description></description><atom:link href="http://khrapovs.github.io/finmetrix/feeds/econometrics.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 21 Apr 2014 16:30:00 +0400</lastBuildDate><item><title>Non-parametric Estimation of Doppler function</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/doppler-nonparametrics/</link><description>&lt;p&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Import-libraries-and-set-defaults"&gt;Import libraries and set defaults&lt;a class="anchor-link" href="#Import-libraries-and-set-defaults"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
@@ -13026,7 +13026,7 @@ IAnihBBCCCFKIAnihBBCCCFKIAnihBBCCCFKoP8DB0R4Wip8f+4AAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 16:30:00 +0400</pubDate><guid>tag:khrapovs.github.com/finmetrix,2014-04-21:blog/2014/04/21/doppler-nonparametrics/</guid><category>nonparametrics</category><category>kernel regression</category><category>bandwidth</category></item><item><title>Simple accelerating descend optimizer</title><link>http://khrapovs.github.com/finmetrix/blog/2014/04/21/kosenok-optimizer/</link><description>&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 16:30:00 +0400</pubDate><guid>tag:khrapovs.github.io/finmetrix,2014-04-21:blog/2014/04/21/doppler-nonparametrics/</guid><category>nonparametrics</category><category>kernel regression</category><category>bandwidth</category></item><item><title>Simple accelerating descend optimizer</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/kosenok-optimizer/</link><description>&lt;p&gt;
 &lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
@@ -16421,4 +16421,4 @@ oiiKojSTKpwURVEURVGa6f8BgxNXnwXpMiAAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 16:00:00 +0400</pubDate><guid>tag:khrapovs.github.com/finmetrix,2014-04-21:blog/2014/04/21/kosenok-optimizer/</guid><category>optimization</category></item></channel></rss>
+&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 16:00:00 +0400</pubDate><guid>tag:khrapovs.github.io/finmetrix,2014-04-21:blog/2014/04/21/kosenok-optimizer/</guid><category>optimization</category></item></channel></rss>
