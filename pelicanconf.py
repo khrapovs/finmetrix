@@ -32,7 +32,7 @@ THEME = '../pelican-octopress-theme/'
 #THEME = '../pelican-themes/blueidea/'
 # Plugins
 PLUGIN_PATH = '../pelican-plugins/'
-PLUGINS = ['summary', 'sitemap', 'render_math',
+PLUGINS = ['summary', 'sitemap', #'render_math',
 		   'liquid_tags.img', 'liquid_tags.video',
            'liquid_tags.youtube', 'liquid_tags.vimeo',
            'liquid_tags.include_code', 'liquid_tags.notebook']
