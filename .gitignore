@@ -1,7 +1,13 @@
 *~
 *.pyc
 *.pid
+*.bak
+*.dat
+*.dir
 output
+cache
+themes
+content_old
 token.txt
 _build
 .ipynb_checkpoints
