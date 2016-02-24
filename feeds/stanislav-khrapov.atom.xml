@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pythonic FinMetrix</title><link>http://khrapovs.github.io/finmetrix/</link><description></description><atom:link href="http://khrapovs.github.io/finmetrix/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 21 Apr 2014 19:00:00 +0400</lastBuildDate><item><title>Particle Filter with Heston model</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/particle-filter-heston/</link><description>&lt;p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Pythonic FinMetrix</title><link href="http://khrapovs.github.io/finmetrix/" rel="alternate"></link><link href="http://khrapovs.github.io/finmetrix/feeds/stanislav-khrapov.atom.xml" rel="self"></link><id>http://khrapovs.github.io/finmetrix/</id><updated>2014-04-21T19:00:00+04:00</updated><entry><title>Particle Filter with Heston model</title><link href="http://khrapovs.github.io/finmetrix/blog/2014/04/21/particle-filter-heston/" rel="alternate"></link><updated>2014-04-21T19:00:00+04:00</updated><author><name>Stanislav Khrapov</name></author><id>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/particle-filter-heston/</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -2904,7 +2904,7 @@ RqPRaIaBVqA1Go1Go9FoNJphoBVojUaj0Wg0Go1mGGgFWqPRaDQajUajGQZagdZoNBqNRqPRaIbB
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 19:00:00 +0400</pubDate><guid>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/particle-filter-heston/</guid><category>diffusions</category><category>Heston</category><category>particle filter</category></item><item><title>Fitting term structure of interest rates</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/fitting-term-structure/</link><description>&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="diffusions"></category><category term="Heston"></category><category term="particle filter"></category></entry><entry><title>Fitting term structure of interest rates</title><link href="http://khrapovs.github.io/finmetrix/blog/2014/04/21/fitting-term-structure/" rel="alternate"></link><updated>2014-04-21T18:30:00+04:00</updated><author><name>Stanislav Khrapov</name></author><id>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/fitting-term-structure/</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -5291,7 +5291,7 @@ AAAAAElFTkSuQmCC
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 18:30:00 +0400</pubDate><guid>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/fitting-term-structure/</guid><category>diffusions</category><category>OLS</category><category>MLE</category><category>SML</category><category>GMM</category><category>Geometric Browninan Motion</category><category>Vasicek</category><category>Cox-Ingersoll-Ross</category><category>Realized Volatility</category></item><item><title>Estimation of Simple Diffusion Models with OLS, MLE, SML, GMM</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/diffusion-estimation/</link><description>&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="diffusions"></category><category term="OLS"></category><category term="MLE"></category><category term="SML"></category><category term="GMM"></category><category term="Geometric Browninan Motion"></category><category term="Vasicek"></category><category term="Cox-Ingersoll-Ross"></category><category term="Realized Volatility"></category></entry><entry><title>Estimation of Simple Diffusion Models with OLS, MLE, SML, GMM</title><link href="http://khrapovs.github.io/finmetrix/blog/2014/04/21/diffusion-estimation/" rel="alternate"></link><updated>2014-04-21T18:00:00+04:00</updated><author><name>Stanislav Khrapov</name></author><id>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/diffusion-estimation/</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -10249,7 +10249,7 @@ GMM           0.525    1.377    0.467   -0.480
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 18:00:00 +0400</pubDate><guid>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/diffusion-estimation/</guid><category>diffusions</category><category>OLS</category><category>MLE</category><category>SML</category><category>GMM</category><category>Geometric Browninan Motion</category><category>Vasicek</category><category>Cox-Ingersoll-Ross</category><category>Realized Volatility</category></item><item><title>Bond Pricing with Vasicek Model</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/vasicek-bond-pricing/</link><description>&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="diffusions"></category><category term="OLS"></category><category term="MLE"></category><category term="SML"></category><category term="GMM"></category><category term="Geometric Browninan Motion"></category><category term="Vasicek"></category><category term="Cox-Ingersoll-Ross"></category><category term="Realized Volatility"></category></entry><entry><title>Bond Pricing with Vasicek Model</title><link href="http://khrapovs.github.io/finmetrix/blog/2014/04/21/vasicek-bond-pricing/" rel="alternate"></link><updated>2014-04-21T17:30:00+04:00</updated><author><name>Stanislav Khrapov</name></author><id>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/vasicek-bond-pricing/</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -13118,7 +13118,7 @@ CCGE8HFSzIUQQggfJ8VcCCGE8HFSzIUQQggfJ8VcCCGE8HFSzIUQQggfJ8VcCCGE8HFSzIUQQggf
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 17:30:00 +0400</pubDate><guid>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/vasicek-bond-pricing/</guid><category>bonds</category><category>interest rates</category><category>diffusions</category><category>transforms</category></item><item><title>Replication of VIX</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/vix-replication/</link><description>&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="bonds"></category><category term="interest rates"></category><category term="diffusions"></category><category term="transforms"></category></entry><entry><title>Replication of VIX</title><link href="http://khrapovs.github.io/finmetrix/blog/2014/04/21/vix-replication/" rel="alternate"></link><updated>2014-04-21T17:00:00+04:00</updated><author><name>Stanislav Khrapov</name></author><id>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/vix-replication/</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -14072,7 +14072,7 @@ Date
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 17:00:00 +0400</pubDate><guid>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/vix-replication/</guid><category>options</category><category>VIX</category></item><item><title>Non-parametric Estimation of Doppler function</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/doppler-nonparametrics/</link><description>&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="options"></category><category term="VIX"></category></entry><entry><title>Non-parametric Estimation of Doppler function</title><link href="http://khrapovs.github.io/finmetrix/blog/2014/04/21/doppler-nonparametrics/" rel="alternate"></link><updated>2014-04-21T16:30:00+04:00</updated><author><name>Stanislav Khrapov</name></author><id>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/doppler-nonparametrics/</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -27277,7 +27277,7 @@ IAnihBBCCCFKIAnihBBCCCFKIAnihBBCCCFKoP8DB0R4Wip8f+4AAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 16:30:00 +0400</pubDate><guid>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/doppler-nonparametrics/</guid><category>nonparametrics</category><category>kernel regression</category><category>bandwidth</category></item><item><title>Simple accelerating descend optimizer</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/kosenok-optimizer/</link><description>&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="nonparametrics"></category><category term="kernel regression"></category><category term="bandwidth"></category></entry><entry><title>Simple accelerating descend optimizer</title><link href="http://khrapovs.github.io/finmetrix/blog/2014/04/21/kosenok-optimizer/" rel="alternate"></link><updated>2014-04-21T16:00:00+04:00</updated><author><name>Stanislav Khrapov</name></author><id>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/kosenok-optimizer/</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[1]:&lt;/div&gt;
@@ -30696,7 +30696,7 @@ oiiKojSTKpwURVEURVGa6f8BgxNXnwXpMiAAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 16:00:00 +0400</pubDate><guid>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/kosenok-optimizer/</guid><category>optimization</category></item><item><title>Descriptive analysis of the interest rate term structure</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/21/analyze-yields/</link><description>&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="optimization"></category></entry><entry><title>Descriptive analysis of the interest rate term structure</title><link href="http://khrapovs.github.io/finmetrix/blog/2014/04/21/analyze-yields/" rel="alternate"></link><updated>2014-04-21T15:00:00+04:00</updated><author><name>Stanislav Khrapov</name></author><id>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/analyze-yields/</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -36599,7 +36599,7 @@ VMASiUQikdQAUgFLJBKJRFIDSAUskUgkEkkN8P8EkyfjYCNrMwAAAABJRU5ErkJggg==
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Mon, 21 Apr 2014 15:00:00 +0400</pubDate><guid>tag:khrapovs.github.io,2014-04-21:finmetrix/blog/2014/04/21/analyze-yields/</guid><category>interest rates</category><category>term structure</category><category>bonds</category></item><item><title>Implied Volatility via Bisection method</title><link>http://khrapovs.github.io/finmetrix/blog/2014/04/18/imp-vol-bisection/</link><description>&lt;p&gt;
+&lt;/div&gt;&lt;/p&gt;</summary><category term="interest rates"></category><category term="term structure"></category><category term="bonds"></category></entry><entry><title>Implied Volatility via Bisection method</title><link href="http://khrapovs.github.io/finmetrix/blog/2014/04/18/imp-vol-bisection/" rel="alternate"></link><updated>2014-04-18T14:00:00+04:00</updated><author><name>Stanislav Khrapov</name></author><id>tag:khrapovs.github.io,2014-04-18:finmetrix/blog/2014/04/18/imp-vol-bisection/</id><summary type="html">&lt;p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -37374,4 +37374,4 @@ Numpy vectorize:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stanislav Khrapov</dc:creator><pubDate>Fri, 18 Apr 2014 14:00:00 +0400</pubDate><guid>tag:khrapovs.github.io,2014-04-18:finmetrix/blog/2014/04/18/imp-vol-bisection/</guid><category>Black-Scholes</category><category>implied volatility</category></item></channel></rss>
+&lt;/div&gt;&lt;/p&gt;</summary><category term="Black-Scholes"></category><category term="implied volatility"></category></entry></feed>
