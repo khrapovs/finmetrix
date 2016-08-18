@@ -1,4 +1,0 @@
-Pythonic FinMetrix
-==================
-
-My Blog
