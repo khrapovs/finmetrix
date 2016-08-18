@@ -1,4 +1,4 @@
-### FinMetrix Examples
+# FinMetrix Examples
 
 [Particle Filter with Heston model](https://github.com/khrapovs/finmetrix/blob/gh-pages/notebooks/Particle_filter_Heston.ipynb)
 
