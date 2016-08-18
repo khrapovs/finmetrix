@@ -1,6 +1,12 @@
 {
   "name": "Finmetrix",
   "tagline": "FinMetrix Examples",
-  "body": "[Particle Filter with Heston model](https://github.com/khrapovs/metrix/blob/master/notebooks/Particle_filter_Heston.ipynb)\r\n\r\n[Fitting term structure of interest rates](https://github.com/khrapovs/metrix/blob/master/notebooks/Fitting_term_structure.ipynb)\r\n\r\n[Estimation of Simple Diffusion Models with OLS, MLE, SML, GMM](https://github.com/khrapovs/metrix/blob/master/notebooks/Diffusion_estimation.ipynb)\r\n\r\n[Bond Pricing with Vasicek Model](https://github.com/khrapovs/metrix/blob/master/notebooks/Vasicek_Bond_Pricing.ipynb)\r\n\r\n[Replication of VIX](https://github.com/khrapovs/metrix/blob/master/notebooks/Replicate_VIX.ipynb)\r\n\r\n[Descriptive analysis of the interest rate term structure](https://github.com/khrapovs/metrix/blob/master/notebooks/Analyse_Yields.ipynb)\r\n\r\n[Implied Volatility via Bisection method](https://github.com/khrapovs/metrix/blob/master/notebooks/Implied_Volatility_Bisection.ipynb)",
+  "body": "[Particle Filter with Heston model](https://github.com/khrapovs/metrix/blob/gh-pages/notebooks/Particle_filter_Heston.ipynb)
+  \r\n\r\n[Fitting term structure of interest rates](https://github.com/khrapovs/metrix/blob/gh-pages/notebooks/Fitting_term_structure.ipynb)
+  \r\n\r\n[Estimation of Simple Diffusion Models with OLS, MLE, SML, GMM](https://github.com/khrapovs/metrix/blob/gh-pages/notebooks/Diffusion_estimation.ipynb)
+  \r\n\r\n[Bond Pricing with Vasicek Model](https://github.com/khrapovs/metrix/blob/gh-pages/notebooks/Vasicek_Bond_Pricing.ipynb)
+  \r\n\r\n[Replication of VIX](https://github.com/khrapovs/metrix/blob/gh-pages/notebooks/Replicate_VIX.ipynb)
+  \r\n\r\n[Descriptive analysis of the interest rate term structure](https://github.com/khrapovs/metrix/blob/gh-pages/notebooks/Analyse_Yields.ipynb)
+  \r\n\r\n[Implied Volatility via Bisection method](https://github.com/khrapovs/metrix/blob/gh-pages/notebooks/Implied_Volatility_Bisection.ipynb)",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
